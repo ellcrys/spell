@@ -1,24 +1,34 @@
 {
-  "name": "spell.js",
-  "version": "1.0.0",
-  "description": "Web3-like javascript package for Ellcrys protocol",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ellcrys/spell.js.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ellcrys/spell.js/issues"
-  },
-  "homepage": "https://github.com/ellcrys/spell.js#readme",
-  "dependencies": {
-    "eslint": "^5.12.0",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
-  }
+	"name": "spell.js",
+	"version": "1.0.0",
+	"description": "Web3-like javascript package for Ellcrys protocol",
+	"main": "lib/index.js",
+	"scripts": {
+		"ts-watch": "tsc -w",
+		"lint": "eslint ./src/**/*.js && tslint ./src/**/*.ts",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ellcrys/spell.js.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ellcrys/spell.js/issues"
+	},
+	"homepage": "https://github.com/ellcrys/spell.js#readme",
+	"dependencies": {
+		"@types/node": "^10.12.18",
+		"@types/random-number": "0.0.0",
+		"eslint": "^5.12.0",
+		"flaverr": "^1.9.2",
+		"mocha": "^5.2.0",
+		"node-json-rpc2": "^1.1.0",
+		"random-number": "0.0.9",
+		"tslint": "^5.12.0"
+	},
+	"devDependencies": {
+		"typescript": "^3.2.2"
+	}
 }
