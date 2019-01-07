@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/ellcrys/spell.js/issues"
   },
-  "homepage": "https://github.com/ellcrys/spell.js#readme"
+  "homepage": "https://github.com/ellcrys/spell.js#readme",
+  "dependencies": {
+    "eslint": "^5.12.0",
+    "tslint": "^5.12.0",
+    "typescript": "^3.2.2"
+  }
 }
