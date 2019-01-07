@@ -3,7 +3,16 @@
     "extends": [
         "tslint:recommended"
     ],
-    "jsRules": {},
-    "rules": {},
+    "jsRules": {
+
+    },
+    "rules": {
+        "max-line-length": [true, 90],
+        "object-literal-sort-keys": false,
+        "no-console": false,
+        "indent": [true, "tabs", 4],
+        "no-trailing-whitespace": false
+    },
+
     "rulesDirectory": []
 }
