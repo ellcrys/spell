@@ -12,7 +12,6 @@ import RPCClient from "./rpcclient";
  * @class Spell
  */
 export default class Spell {
-
 	public state: State;
 	private rpcClient: RPCClient;
 
@@ -31,21 +30,26 @@ export default class Spell {
 		return new Promise((resolve, reject) => {
 			const client = new jsonrpc.Client({
 				host: options.host,
-				protocol: (options.https) ? "https" : "http",
+				protocol: options.https ? "https" : "http",
 				path: "/rpc",
 				port: options.port,
 			});
 
-			client.call({
-				method: "rpc_echo",
-				params: "hi",
-				jsonrpc: "2.0",
-				id: rn({ integer: true, min: 10000, max: 999999999999 }),
-			}, (err: any, res: any) => {
-				if (err) { return reject(errors.ClientConnect); }
-				this.rpcClient.client = client;
-				return resolve(this.rpcClient);
-			});
+			client.call(
+				{
+					method: "rpc_echo",
+					params: "hi",
+					jsonrpc: "2.0",
+					id: rn({ integer: true, min: 10000, max: 999999999999 }),
+				},
+				(err: any, res: any) => {
+					if (err) {
+						return reject(errors.ClientConnect);
+					}
+					this.rpcClient.client = client;
+					return resolve(this.rpcClient);
+				},
+			);
 		});
 	}
 }

@@ -11,7 +11,6 @@ import errors, { wrapErr } from "./errors";
  * @class RPCClient
  */
 export default class RPCClient {
-
 	// client references the JSON-RPC 2.0 client
 	public client: any;
 
@@ -35,19 +34,22 @@ export default class RPCClient {
 	 */
 	public call(method: string, params: any): Promise<any> {
 		return new Promise((resolve, reject) => {
-			this.client.call({
-				method,
-				params,
-				jsonrpc: "2.0",
-				id: rn({ integer: true, min: 10000, max: 999999999999 }),
-			}, (err: any, res: any) => {
-				if (err) {
-					const customErr = wrapErr(errors.RPCCallError, err);
-					(customErr as any).data = JSON.parse(res);
-					return reject(customErr);
-				}
-				return resolve(res);
-			});
+			this.client.call(
+				{
+					method,
+					params,
+					jsonrpc: "2.0",
+					id: rn({ integer: true, min: 10000, max: 999999999999 }),
+				},
+				(err: any, res: any) => {
+					if (err) {
+						const customErr = wrapErr(errors.RPCCallError, err);
+						(customErr as any).data = JSON.parse(res);
+						return reject(customErr);
+					}
+					return resolve(res);
+				},
+			);
 		});
 	}
 }
