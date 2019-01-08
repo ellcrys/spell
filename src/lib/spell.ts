@@ -14,10 +14,10 @@ import RPCClient from "./rpcclient";
 export default class Spell {
 
 	public state: State;
-	private rpcClient: RPCClient;
+	public rpcClient: RPCClient;
 
 	constructor() {
-		this.rpcClient = new RPCClient(null);
+		this.rpcClient = new RPCClient();
 		this.state = new State(this.rpcClient);
 	}
 

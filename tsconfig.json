@@ -18,6 +18,8 @@
 		/* Enable all strict type-checking options. */
 		"strictPropertyInitialization": false,
 
+		"inlineSourceMap": true,
+
 
 		"lib": [
 			"es2015"
