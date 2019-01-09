@@ -1,5 +1,6 @@
 declare module 'flaverr';
 declare module 'node-json-rpc2';
+declare module 'yo-jsonrpc2';
 
 interface HttpCallOption {
 	method: string,
@@ -9,13 +10,14 @@ interface HttpCallOption {
 }
 
 interface JSONRPCCaller {
-	call(option: HttpCallOption, cb: (err: any, res: any) => {}): any;
+	call(method: string, params: any, option: HttpCallOption, cb: (err: any, res: any) => {}): any;
 }
 
 interface ConnectOptions {
 	host: string;
 	port: number;
 	https?: boolean;
+	path?: string
 }
 
 interface Block {
@@ -49,3 +51,31 @@ interface Transaction {
 	value: string
 }
 
+declare enum TxStatus {
+	Mined = "mined",
+	Pooled = "pooled",
+	Unknown = "unknown"
+}
+
+interface SyncState {
+	currentChainHeight: number
+	currentTotalDifficulty: number
+	progressPercent: number
+	targetChainHeight: number
+	targetTotalDifficulty: number
+}
+
+interface NodeInfo {
+	address: string
+	id: string
+	coinbase: string
+	coinbasePublicKey: string
+	listeningAddresses: string[]
+	mode: string
+	syncing: boolean
+	netVersion: string
+	buildVersion: string
+	buildDate: string
+	buildCommit: string
+	goVersion: string
+}

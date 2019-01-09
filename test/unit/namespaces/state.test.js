@@ -7,46 +7,83 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-const chai = require("chai");
-const sinon = require("sinon");
-const sinonChai = require("sinon-chai");
-const spell_1 = __importDefault(require("../../../lib/spell"));
-const expect = chai.expect;
+var chai = require("chai");
+var sinon = require("sinon");
+var sinonChai = require("sinon-chai");
+var spell_1 = __importDefault(require("../../../lib/spell"));
+var expect = chai.expect;
 chai.use(sinonChai);
-describe("#State", () => {
-    let spell;
-    let client;
+describe("#State", function () {
+    var spell;
+    var client;
     function makeClientStub(err, resp) {
-        return sinon.stub(client.client, "call").callsArgWith(1, err, resp);
+        return sinon.stub(client.client, "call").callsArgWith(3, err, resp);
     }
-    beforeEach((done) => {
+    beforeEach(function (done) {
         spell = new spell_1.default();
         client = spell.rpcClient;
         client.client = {
-            call: (option, cb) => {
+            call: function (method, params, option, cb) {
                 cb(null, null);
             },
         };
         done();
     });
-    it("should return result on successful call", () => __awaiter(this, void 0, void 0, function* () {
-        const expectedResult = { header: { number: 1 } };
-        const mock = makeClientStub("", { result: expectedResult });
-        const result = yield spell.state.getBlock(1);
-        expect(mock).to.have.been.callCount(1);
-        expect(result).to.be.deep.eq(expectedResult);
-    }));
-    it("should return error and data when call returns an error", (done) => {
-        const expectedResult = { header: { number: 1 } };
-        const mock = makeClientStub("block unknown", 1234);
-        spell.state.getBlock(1).catch((err) => {
-            expect(err.message).to.be.eq("method returned an error -> block unknown");
-            expect(err.data).to.eq(1234);
+    it("should return result on successful call", function () { return __awaiter(_this, void 0, void 0, function () {
+        var expectedResult, mock, result;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    expectedResult = { header: { number: 1 } };
+                    mock = makeClientStub("", expectedResult);
+                    return [4 /*yield*/, spell.state.getBlock(1)];
+                case 1:
+                    result = _a.sent();
+                    expect(mock).to.have.been.callCount(1);
+                    expect(result).to.be.deep.eq(expectedResult);
+                    return [2 /*return*/];
+            }
+        });
+    }); });
+    it("should return error and data when call returns an error", function (done) {
+        var expectedResult = { header: { number: 1 } };
+        var mock = makeClientStub(new Error("block unknown"), 1234);
+        spell.state.getBlock(1).catch(function (err) {
+            expect(err.message).to.be.eq("block unknown");
             done();
         });
     });
 });
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RhdGUudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3NyYy90ZXN0L3VuaXQvbmFtZXNwYWNlcy9zdGF0ZS50ZXN0LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLGlCQTZDQTs7QUE3Q0EsMkJBQThCO0FBQzlCLDZCQUFnQztBQUNoQyxzQ0FBeUM7QUFFekMsNkRBQXVDO0FBQ3ZDLElBQU0sTUFBTSxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUM7QUFDM0IsSUFBSSxDQUFDLEdBQUcsQ0FBQyxTQUFTLENBQUMsQ0FBQztBQUVwQixRQUFRLENBQUMsUUFBUSxFQUFFO0lBRWxCLElBQUksS0FBWSxDQUFDO0lBQ2pCLElBQUksTUFBaUIsQ0FBQztJQUV0QixTQUFTLGNBQWMsQ0FBQyxHQUFXLEVBQUUsSUFBUztRQUM3QyxPQUFPLEtBQUssQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLE1BQU0sRUFBRSxNQUFlLENBQUMsQ0FBQyxZQUFZLENBQUMsQ0FBQyxFQUFFLEdBQUcsRUFBRSxJQUFJLENBQUMsQ0FBQztJQUM5RSxDQUFDO0lBRUQsVUFBVSxDQUFDLFVBQUMsSUFBSTtRQUNmLEtBQUssR0FBRyxJQUFJLGVBQUssRUFBRSxDQUFDO1FBQ3BCLE1BQU0sR0FBRyxLQUFLLENBQUMsU0FBUyxDQUFBO1FBQ3hCLE1BQU0sQ0FBQyxNQUFNLEdBQUc7WUFDZixJQUFJLEVBQUUsVUFBQyxNQUFjLEVBQUUsTUFBVyxFQUFFLE1BQXNCLEVBQUUsRUFBOEI7Z0JBQ3pGLEVBQUUsQ0FBQyxJQUFJLEVBQUUsSUFBSSxDQUFDLENBQUM7WUFDaEIsQ0FBQztTQUNELENBQUE7UUFDRCxJQUFJLEVBQUUsQ0FBQztJQUNSLENBQUMsQ0FBQyxDQUFDO0lBRUgsRUFBRSxDQUFDLHlDQUF5QyxFQUFFOzs7OztvQkFDdkMsY0FBYyxHQUFHLEVBQUUsTUFBTSxFQUFFLEVBQUUsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUM7b0JBQzNDLElBQUksR0FBRyxjQUFjLENBQUMsRUFBRSxFQUFFLGNBQWMsQ0FBQyxDQUFDO29CQUNqQyxxQkFBTSxLQUFLLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxDQUFDLENBQUMsRUFBQTs7b0JBQXRDLE1BQU0sR0FBRyxTQUE2QjtvQkFDNUMsTUFBTSxDQUFDLElBQUksQ0FBQyxDQUFDLEVBQUUsQ0FBQyxJQUFJLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsQ0FBQztvQkFDdkMsTUFBTSxDQUFDLE1BQU0sQ0FBQyxDQUFDLEVBQUUsQ0FBQyxFQUFFLENBQUMsSUFBSSxDQUFDLEVBQUUsQ0FBQyxjQUFjLENBQUMsQ0FBQzs7OztTQUM3QyxDQUFDLENBQUM7SUFFSCxFQUFFLENBQUMseURBQXlELEVBQUUsVUFBQyxJQUFJO1FBQ2xFLElBQU0sY0FBYyxHQUFHLEVBQUUsTUFBTSxFQUFFLEVBQUUsTUFBTSxFQUFFLENBQUMsRUFBRSxFQUFFLENBQUM7UUFDakQsSUFBTSxJQUFJLEdBQUcsY0FBYyxDQUFDLElBQUksS0FBSyxDQUFDLGVBQWUsQ0FBQyxFQUFFLElBQUksQ0FBQyxDQUFDO1FBQzlELEtBQUssQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLENBQUMsQ0FBQyxDQUFDLEtBQUssQ0FBQyxVQUFDLEdBQUc7WUFDakMsTUFBTSxDQUFDLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQyxFQUFFLENBQUMsRUFBRSxDQUFDLEVBQUUsQ0FBQyxlQUFlLENBQUMsQ0FBQztZQUM5QyxJQUFJLEVBQUUsQ0FBQztRQUNSLENBQUMsQ0FBQyxDQUFDO0lBQ0osQ0FBQyxDQUFDLENBQUM7QUFDSixDQUFDLENBQUMsQ0FBQyJ9

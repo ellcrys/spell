@@ -12,8 +12,23 @@ import errors, { wrapErr } from "./errors";
  */
 export default class RPCClient {
 
-	// client references the JSON-RPC 2.0 client
+	/**
+	 * client references the JSON-RPC 2.0 client
+	 *
+	 * @type {JSONRPCCaller}
+	 * @memberof RPCClient
+	 */
 	public client?: JSONRPCCaller;
+
+	/**
+	 * clientOpts contains the options to pass
+	 * to the client call request
+	 *
+	 * @public
+	 * @type {*}
+	 * @memberof RPCClient
+	 */
+	public clientOpts: any
 
 	/**
 	 * Creates an instance of RPCClient.
@@ -40,16 +55,9 @@ export default class RPCClient {
 				return reject(errors.ClientNotInitialized);
 			}
 
-			this.client.call({
-				method,
-				params,
-				jsonrpc: "2.0",
-				id: rn({ integer: true, min: 10000, max: 999999999999 }),
-			}, (err: any, res: any): any => {
+			this.client.call(method, params, this.clientOpts, (err: any, res: any): any => {
 				if (err) {
-					const customErr = wrapErr(errors.RPCCallError, err);
-					(customErr as any).data = JSON.parse(res);
-					return reject(customErr);
+					return reject(err);
 				}
 				return resolve(res);
 			});

@@ -16,7 +16,7 @@ describe("#RPCClient", () => {
 
 		it("should set member:client to the client argument passed", () => {
 			const c = new RPCClient({
-				call: (option: HttpCallOption, cb: (err: any, res: any) => {}): any => {
+				call: (method: string, params: any, option: HttpCallOption, cb: (err: any, res: any) => {}): any => {
 					return null;
 				},
 			});
@@ -37,14 +37,14 @@ describe("#RPCClient", () => {
 		describe("with client", () => {
 			let client: RPCClient;
 
-			function makeClientStub(err: string, resp: any) {
-				return sinon.stub(client.client, "call" as never).callsArgWith(1, err, resp);
+			function makeClientStub(err: Error, resp: any) {
+				return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 			}
 
 			beforeEach((done) => {
 				client = new RPCClient();
 				client.client = {
-					call: (option: HttpCallOption, cb: (err: any, res: any) => {}) => {
+					call: (method: string, params: any, option: HttpCallOption, cb: (err: any, res: any) => {}): any => {
 						cb(null, null);
 					},
 				}
@@ -53,9 +53,9 @@ describe("#RPCClient", () => {
 
 
 			it("should return error when rpc method call fails", (done) => {
-				const mock = makeClientStub("bad thing", null);
+				const mock = makeClientStub(new Error("bad thing"), null);
 				client.call("", {}).catch((err) => {
-					expect(err.message).to.eq("method returned an error -> bad thing");
+					expect(err.message).to.eq("bad thing");
 					done();
 				})
 			})

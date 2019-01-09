@@ -34,7 +34,7 @@ export default class State extends Namespace {
 	public getBlock(num: number): Promise<Block> {
 		return new Promise((resolve, reject) => {
 			this.client.call("state_getBlock", num).then((res) => {
-				return resolve(res.result);
+				return resolve(res);
 			}).catch((err) => {
 				return reject(err);
 			});
