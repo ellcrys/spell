@@ -12,7 +12,6 @@ import Namespace from "./namespace";
  * @class State
  */
 export default class State extends Namespace {
-
 	/**
 	 * Creates an instance of State.
 	 *
@@ -33,11 +32,14 @@ export default class State extends Namespace {
 	 */
 	public getBlock(num: number): Promise<Block> {
 		return new Promise((resolve, reject) => {
-			this.client.call("state_getBlock", num).then((res) => {
-				return resolve(res);
-			}).catch((err) => {
-				return reject(err);
-			});
+			this.client
+				.call("state_getBlock", num)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
 		});
 	}
 }

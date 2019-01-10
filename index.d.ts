@@ -86,3 +86,34 @@ interface NodeInfo {
 	buildCommit: string;
 	goVersion: string;
 }
+
+interface NodeConfig {
+	peer: PeerInfo;
+	txPool: TxPoolInfo;
+	rpc: RPCInfo;
+}
+
+interface PeerInfo {
+	address: string;
+	mode: number;
+	getAddrInt: number;
+	pingInt: number;
+	selfAdvInt: number;
+	cleanUpInt: number;
+	maxAddrsExpected: number;
+	maxOutConnections: number;
+	maxInConnections: number;
+	conEstInt: number;
+	messageTimeout: number;
+}
+
+interface TxPoolInfo {
+	cap: number;
+}
+
+interface RPCInfo {
+	disableAuth: boolean;
+	username: string;
+	password: string;
+	sessionSecretKey: string;
+}

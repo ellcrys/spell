@@ -11,10 +11,11 @@ function e(msg: string) {
 }
 
 export default {
-	ClientConnect: flaverr("CLIENT_CONNECT_FAILED", e("failed to connect to client")),
-	AuthError: flaverr("AUTH_FAILED", e("session token request failed")),
-	SessionTokenExpired: flaverr("SESSION_TOKEN_EXPIRED", e("session token has expired")),
-	RPCCallError: flaverr("RPC_CALL_FAILED", e("method returned an error")),
+	ClientConnect: flaverr("CLIENT_CONNECT_FAILED", e("Failed to connect to client")),
+	AuthRequired: flaverr("AUTH_REQUIRED", e("Authorization is required")),
+	AuthError: flaverr("AUTH_FAILED", e("Session token request failed")),
+	SessionTokenExpired: flaverr("SESSION_TOKEN_EXPIRED", e("Session token has expired")),
+	RPCCallError: flaverr("RPC_CALL_FAILED", e("Method returned an error")),
 	ClientNotInitialized: flaverr(
 		"CLIENT_UNINITIALIZED",
 		e("RPC client not initialized"),

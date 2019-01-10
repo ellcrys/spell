@@ -54,7 +54,7 @@ describe("#RPCClient", function () {
                 client.clientOpts = {};
                 client.setToken(token);
                 client.call("", {}).catch(function (err) {
-                    expect(err.message).to.eq("session token has expired");
+                    expect(err.message).to.eq("Session token has expired");
                     done();
                 });
             });
