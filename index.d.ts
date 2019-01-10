@@ -155,3 +155,8 @@ interface RPCInfo {
 	password: string;
 	sessionSecretKey: string;
 }
+
+interface PoolSize {
+	byteSize: number;
+	numTxs: number;
+}

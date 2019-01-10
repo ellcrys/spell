@@ -1,6 +1,3 @@
-import jsonrpc from "node-json-rpc2";
-import rn from "random-number";
-import errors, { wrapErr } from "../errors";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 
@@ -35,7 +32,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getBlock", num)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -55,7 +52,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getBlockByHash", blockHash)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -75,7 +72,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getDifficulty", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -94,7 +91,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_listAccounts", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -113,7 +110,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getReOrgs", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -135,7 +132,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_listTopAccounts", topNumber)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -156,7 +153,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getAccount", address)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -177,7 +174,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getAccountNonce", address)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -197,7 +194,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getTransaction", txHash)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -216,7 +213,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getBranches", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -236,7 +233,7 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getOrphans", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);
@@ -255,7 +252,27 @@ export default class State extends Namespace {
 			this.client
 				.call("state_getBestChain", null)
 				.then((res) => {
-					return resolve(res.result);
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * getObjects returns the logs which is used for debugging on the Ellcrys network
+	 *
+	 * @param {JSON} jsonParameter is the parameter feed into the rpc method
+	 * @returns {Promise<any>}
+	 * @memberof State
+	 */
+	public getObjects(jsonParameter: JSON): Promise<any> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("state_getObjects", jsonParameter)
+				.then((res) => {
+					return resolve(res);
 				})
 				.catch((err) => {
 					return reject(err);

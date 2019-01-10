@@ -1,6 +1,3 @@
-import jsonrpc from "node-json-rpc2";
-import rn from "random-number";
-import errors, { wrapErr } from "../errors";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 
