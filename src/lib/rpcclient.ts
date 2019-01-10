@@ -2,6 +2,8 @@ import flaverr = require("flaverr");
 import jsonrpc from "node-json-rpc2";
 import rn from "random-number";
 import errors, { wrapErr } from "./errors";
+import jwt = require("jsonwebtoken");
+import moment = require("moment");
 
 /**
  * RPCClient connects to given host and port
@@ -11,7 +13,6 @@ import errors, { wrapErr } from "./errors";
  * @class RPCClient
  */
 export default class RPCClient {
-
 	/**
 	 * client references the JSON-RPC 2.0 client
 	 *
@@ -28,7 +29,17 @@ export default class RPCClient {
 	 * @type {*}
 	 * @memberof RPCClient
 	 */
-	public clientOpts: any
+	public clientOpts: any;
+
+	/**
+	 * The session token to access
+	 * private endpoints
+	 *
+	 * @private
+	 * @type {string}
+	 * @memberof Spell
+	 */
+	private token: string;
 
 	/**
 	 * Creates an instance of RPCClient.
@@ -50,17 +61,45 @@ export default class RPCClient {
 	 */
 	public call(method: string, params: any): Promise<any> {
 		return new Promise((resolve, reject) => {
-
+			// We can't make any call if client has not been initiated
 			if (!this.client) {
 				return reject(errors.ClientNotInitialized);
 			}
 
-			this.client.call(method, params, this.clientOpts, (err: any, res: any): any => {
-				if (err) {
-					return reject(err);
+			// Add bearer token to the client option if available
+			if (this.token && this.clientOpts) {
+				// Decode the token to check whether it has expired.
+				// If expired, return SessionTokenExpired error
+				const decoded = jwt.decode(this.token, { complete: true });
+				const expUtc = moment((decoded as any).payload.exp).utc();
+				if (expUtc.isBefore(moment().utc())) {
+					return reject(errors.SessionTokenExpired);
 				}
-				return resolve(res);
-			});
+
+				this.clientOpts.bearerToken = this.token;
+			}
+
+			this.client.call(
+				method,
+				params,
+				this.clientOpts,
+				(err: any, res: any): any => {
+					if (err) {
+						return reject(err);
+					}
+					return resolve(res);
+				},
+			);
 		});
+	}
+
+	/**
+	 * Set the session token
+	 *
+	 * @param {string} token
+	 * @memberof RPCClient
+	 */
+	setToken(token: string) {
+		this.token = token;
 	}
 }

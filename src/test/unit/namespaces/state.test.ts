@@ -11,7 +11,7 @@ describe("#State", () => {
 	let spell: Spell;
 	let client: RPCClient;
 
-	function makeClientStub(err: string, resp: any) {
+	function makeClientStub(err: Error | null, resp: any) {
 		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
@@ -28,7 +28,7 @@ describe("#State", () => {
 
 	it("should return result on successful call", async () => {
 		const expectedResult = { header: { number: 1 } };
-		const mock = makeClientStub("", expectedResult);
+		const mock = makeClientStub(null, expectedResult);
 		const result = await spell.state.getBlock(1);
 		expect(mock).to.have.been.callCount(1);
 		expect(result).to.be.deep.eq(expectedResult);
