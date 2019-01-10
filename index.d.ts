@@ -160,3 +160,29 @@ interface PoolSize {
 	byteSize: number;
 	numTxs: number;
 }
+
+interface ActivePeer {
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isHardcoded: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+interface Peer {
+	banEndTime: string;
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isBanned: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+interface NetStat {
+	inbound: number;
+	intros: number;
+	outbound: number;
+	total: number;
+}

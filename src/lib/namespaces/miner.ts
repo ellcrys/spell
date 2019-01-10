@@ -1,6 +1,5 @@
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
-import { resolve } from "path";
 
 /**
  * Manage the mining activities of an elld node
