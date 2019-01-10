@@ -104,7 +104,7 @@ export default class Spell {
 					this.rpcClient.setToken(token);
 					return resolve(token);
 				})
-				.catch((err) => {
+				.catch((err: Error) => {
 					return reject(wrapErr(errors.AuthError, err.message));
 				});
 		});

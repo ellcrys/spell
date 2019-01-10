@@ -85,6 +85,9 @@ export default class RPCClient {
 				this.clientOpts,
 				(err: any, res: any): any => {
 					if (err) {
+						if (err.statusCode == 401) {
+							return reject(errors.AuthRequired);
+						}
 						return reject(err);
 					}
 					return resolve(res);

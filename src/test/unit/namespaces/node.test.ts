@@ -92,4 +92,38 @@ describe("#Node", () => {
 			});
 		});
 	});
+
+	describe(".info", () => {
+		it("should call method", async () => {
+			const mock = makeClientStub(null, {});
+			const result = await spell.node.info();
+			expect(mock).to.have.been.callCount(1);
+			expect(result).to.be.deep.eq({});
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.info().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe(".config", () => {
+		it("should call method", async () => {
+			const mock = makeClientStub(null, {});
+			const result = await spell.node.config();
+			expect(mock).to.have.been.callCount(1);
+			expect(result).to.be.deep.eq({});
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.config().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
 });
