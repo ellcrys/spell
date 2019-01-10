@@ -1,11 +1,11 @@
 import jsonrpc = require("yo-jsonrpc2");
-import rn from "random-number";
 import errors, { wrapErr } from "./errors";
 import State from "./namespaces/state";
 import RPCClient from "./rpcclient";
 import Node from "./namespaces/node";
 import Auth from "./namespaces/auth";
 import Pool from "./namespaces/pool";
+import Miner from "./namespaces/miner";
 /**
  * Spell provides access to a client
  * RPC functionality.
@@ -55,6 +55,14 @@ export default class Spell {
 	public pool: Pool;
 
 	/**
+	 * Miner module
+	 *
+	 * @type {Miner}
+	 * @memberof Spell
+	 */
+	public miner: Miner;
+
+	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
 	 */
@@ -64,6 +72,7 @@ export default class Spell {
 		this.node = new Node(this.rpcClient);
 		this.auth = new Auth(this.rpcClient);
 		this.pool = new Pool(this.rpcClient);
+		this.miner = new Miner(this.rpcClient);
 	}
 
 	/**
