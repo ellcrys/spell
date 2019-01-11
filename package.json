@@ -20,11 +20,16 @@
 	},
 	"homepage": "https://github.com/ellcrys/spell.js#readme",
 	"dependencies": {
+		"@types/ed25519": "0.0.0",
+		"bs58check": "^2.1.2",
+		"ed25519": "0.0.4",
 		"flaverr": "^1.9.2",
 		"jsonwebtoken": "^8.4.0",
 		"moment": "^2.23.0",
 		"node-json-rpc2": "^1.1.0",
 		"random-number": "0.0.9",
+		"ripemd160": "^2.0.2",
+		"sha3": "^2.0.0",
 		"yo-jsonrpc2": "^1.0.4"
 	},
 	"devDependencies": {

@@ -1,6 +1,9 @@
 declare module "flaverr";
 declare module "node-json-rpc2";
 declare module "yo-jsonrpc2";
+declare module "sha3";
+declare module "ripemd160";
+declare module "bs58check";
 
 interface HttpCallOption {
 	method: string;
@@ -116,4 +119,8 @@ interface RPCInfo {
 	username: string;
 	password: string;
 	sessionSecretKey: string;
+}
+
+interface TxResult {
+	id: string;
 }

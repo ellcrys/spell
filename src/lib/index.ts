@@ -1,4 +1,5 @@
-require('source-map-support').install();
+require("source-map-support").install();
 import Spell from "./spell";
-export { Spell };
+import { PrivateKey, PublicKey, Address } from "./key";
+export { Spell, PrivateKey, PublicKey, Address };
 export default new Spell();

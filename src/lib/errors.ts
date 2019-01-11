@@ -20,4 +20,38 @@ export default {
 		"CLIENT_UNINITIALIZED",
 		e("RPC client not initialized"),
 	),
+	InvalidAddress: flaverr("INVALID_ADDRESS", e("Address is not valid")),
+	InvalidAddressVersion: flaverr(
+		"INVALID_ADDR_VERSION",
+		e("Address's version is invalid"),
+	),
+	InvalidAddressSize: flaverr(
+		"INVALID_ADDR_SIZE",
+		e("Address size is invalid. Expected 21 bytes"),
+	),
+	InvalidAddressFormat: flaverr("INVALID_FORMAT", e("Failed to decode address")),
+	InvalidPrivateKeyChecksum: flaverr(
+		"INVALID_PRIVATE_KEY_CHECKSUM",
+		e("Private key checksum is not valid"),
+	),
+	InvalidPrivateKeyVersion: flaverr(
+		"INVALID_PRIVATE_KEY_VERSION",
+		e("Private key version is invalid"),
+	),
+	InvalidPrivateKeySize: flaverr(
+		"INVALID_PRIVATE_KEY_SIZE",
+		e("Private key has unexpected size"),
+	),
+	InvalidPublicKeyChecksum: flaverr(
+		"INVALID_PUBLIC_KEY_CHECKSUM",
+		e("Public key checksum is not valid"),
+	),
+	InvalidPublicKeyVersion: flaverr(
+		"INVALID_PUBLIC_KEY_VERSION",
+		e("Public key version is invalid"),
+	),
+	InvalidPublicKeySize: flaverr(
+		"INVALID_PUBLIC_KEY_SIZE",
+		e("Public key has unexpected size"),
+	),
 };

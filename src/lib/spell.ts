@@ -5,6 +5,7 @@ import State from "./namespaces/state";
 import RPCClient from "./rpcclient";
 import Node from "./namespaces/node";
 import Auth from "./namespaces/auth";
+import Ell from "./namespaces/ell";
 
 /**
  * Spell provides access to a client
@@ -47,6 +48,14 @@ export default class Spell {
 	public auth: Auth;
 
 	/**
+	 * Ell module
+	 *
+	 * @type {Ell}
+	 * @memberof Spell
+	 */
+	public ell: Ell;
+
+	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
 	 */
@@ -55,6 +64,7 @@ export default class Spell {
 		this.state = new State(this.rpcClient);
 		this.node = new Node(this.rpcClient);
 		this.auth = new Auth(this.rpcClient);
+		this.ell = new Ell(this.rpcClient);
 	}
 
 	/**
