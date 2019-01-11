@@ -7,6 +7,8 @@ import Auth from "./namespaces/auth";
 import Pool from "./namespaces/pool";
 import Miner from "./namespaces/miner";
 import Net from "./namespaces/net";
+import Logger from "./namespaces/logger";
+
 /**
  * Spell provides access to a client
  * RPC functionality.
@@ -64,13 +66,20 @@ export default class Spell {
 	public miner: Miner;
 
 	/**
-	 *
+	 * Net Module
 	 *
 	 * @type {Net}
 	 * @memberof Spell
 	 */
 	public net: Net;
 
+	/**
+	 * Logger Module
+	 *
+	 * @type {Logger}
+	 * @memberof Spell
+	 */
+	public logger: Logger;
 	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
@@ -83,6 +92,7 @@ export default class Spell {
 		this.pool = new Pool(this.rpcClient);
 		this.miner = new Miner(this.rpcClient);
 		this.net = new Net(this.rpcClient);
+		this.logger = new Logger(this.rpcClient);
 	}
 
 	/**
