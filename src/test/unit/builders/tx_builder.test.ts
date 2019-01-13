@@ -30,7 +30,7 @@ describe("#TransactionBuilder", () => {
 		constructor(client?: RPCClient) {
 			super(client);
 		}
-		public getClient(): RPCClient {
+		public getClient(): RPCClient | undefined {
 			return this.client;
 		}
 		getData(): Transaction {
@@ -39,7 +39,7 @@ describe("#TransactionBuilder", () => {
 		setData(tx: Transaction) {
 			this.data = tx;
 		}
-		public finalize(sk: PrivateKey): Promise<string> {
+		public finalize(sk?: PrivateKey): Promise<string> {
 			return super.finalize(sk);
 		}
 	}
@@ -175,7 +175,7 @@ describe("#TransactionBuilder", () => {
 		describe(".finalize", () => {
 			it("should throw RequirePrivateKey error when private key is not provided", () => {
 				let b = new WrappedTxBalanceBuilder(client);
-				b.finalize(null).catch((e) => {
+				b.finalize().catch((e) => {
 					expect(e).to.eq(errors.RequirePrivateKey);
 				});
 			});
@@ -201,7 +201,7 @@ describe("#TransactionBuilder", () => {
 							{
 								data: `{ "error": { "code": 30001 }}`,
 								statusCode: 400,
-							},
+							} as any,
 							null,
 						);
 

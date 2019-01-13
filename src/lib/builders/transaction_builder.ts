@@ -160,7 +160,7 @@ export class TxBalanceBuilder extends TxUtility {
 	 * @returns {Promise<string>} Returns the transaction hash
 	 * @memberof TxBalanceBuilder
 	 */
-	protected finalize(sk: PrivateKey): Promise<string> {
+	protected finalize(sk?: PrivateKey): Promise<string> {
 		return new Promise(async (resolve, reject) => {
 			if (!sk) {
 				return reject(errors.RequirePrivateKey);
