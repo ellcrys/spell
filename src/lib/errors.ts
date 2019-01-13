@@ -54,4 +54,6 @@ export default {
 		"INVALID_PUBLIC_KEY_SIZE",
 		e("Public key has unexpected size"),
 	),
+	RequirePrivateKey: flaverr("PRIVATE_KEY_REQUIRED", e("Private key is required")),
+	UnknownSenderAccount: flaverr("UNKNOWN_SENDER_ACCOUNT", e("Sender account not found")),
 };

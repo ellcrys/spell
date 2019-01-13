@@ -12,7 +12,7 @@ import b58 = require("bs58check");
 import errors from "../../lib/errors";
 const expect = chai.expect;
 
-describe.only("key.js", () => {
+describe("key.js", () => {
 	const seed = Buffer.from(
 		"88d77c155018020e13d206f5f31c22d096e64a6a75c2498fec4d64e927c017e0",
 		"hex",

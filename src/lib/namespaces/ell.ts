@@ -3,6 +3,8 @@ import rn from "random-number";
 import errors, { wrapErr } from "../errors";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
+import Decimal from "decimal.js";
+import TxBuilder, { TxBalanceBuilder } from "../builders/transaction_builder";
 
 /**
  * Ell accesses information about an Elld client
@@ -40,5 +42,37 @@ export default class Ell extends Namespace {
 					return reject(err);
 				});
 		});
+	}
+
+	/**
+	 * Returns the balance of an account
+	 * using the given address
+	 *
+	 * @param {string} address
+	 * @returns {Promise<string>}
+	 * @memberof Ell
+	 */
+	getBalance(address: string): Promise<Decimal> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("ell_getBalance", address)
+				.then((balance) => {
+					return resolve(new Decimal(balance));
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Returns a balance transaction builder for
+	 * creating and executing balance transactions.
+	 *
+	 * @returns {TxBalanceBuilder}
+	 * @memberof Ell
+	 */
+	balance(): TxBalanceBuilder {
+		return new TxBuilder(this.client).balance;
 	}
 }

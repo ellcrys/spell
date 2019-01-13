@@ -48,17 +48,23 @@ interface Header {
 	transactionRoot: string;
 }
 
+interface InvokeArgs {
+	func: string;
+	param: { [key: string]: Buffer };
+}
+
 interface Transaction {
-	fee: string;
-	from: string;
-	hash: string;
-	nonce: string;
-	senderPubKey: string;
-	sig: string;
-	timestamp: string;
-	to: string;
-	type: string;
-	value: string;
+	fee?: string;
+	from?: string;
+	hash?: string;
+	nonce?: number;
+	senderPubKey?: string;
+	sig?: string;
+	timestamp?: number;
+	to?: string;
+	type?: number;
+	value?: string;
+	invokeArgs?: InvokeArgs;
 }
 
 declare enum TxStatus {
@@ -123,4 +129,9 @@ interface RPCInfo {
 
 interface TxResult {
 	id: string;
+}
+
+declare enum TxType {
+	Balance = 0x1,
+	Alloc = 0x2,
 }
