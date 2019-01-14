@@ -67,6 +67,44 @@ interface Transaction {
 	invokeArgs?: InvokeArgs;
 }
 
+interface Difficulty {
+	difficulty: string;
+	totalDifficulty: string;
+}
+
+interface Account {
+	address: string;
+	balance: string;
+	nonce: number;
+	type: number;
+}
+
+interface ReOrgInfo {
+	branchID: string;
+	branchLen: number;
+	mainChainID: string;
+	reOrgLen: 2;
+	timestamp: number;
+}
+
+interface Branches {
+	height: string;
+	id: string;
+	isBranch: boolean;
+	length: string;
+	parentBlockHash: string;
+	parentBlockNumber: string;
+	timestamp: string;
+	totalDifficulty: string;
+}
+
+interface Chain {
+	height: string;
+	id: string;
+	timestamp: string;
+	totalDifficulty: string;
+}
+
 declare enum TxStatus {
 	Mined = "mined",
 	Pooled = "pooled",
@@ -125,6 +163,37 @@ interface RPCInfo {
 	username: string;
 	password: string;
 	sessionSecretKey: string;
+}
+
+interface PoolSize {
+	byteSize: number;
+	numTxs: number;
+}
+
+interface ActivePeer {
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isHardcoded: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+interface Peer {
+	banEndTime: string;
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isBanned: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+interface NetStat {
+	inbound: number;
+	intros: number;
+	outbound: number;
+	total: number;
 }
 
 interface TxResult {

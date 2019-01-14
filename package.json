@@ -1,6 +1,6 @@
 {
-	"name": "spell.js",
-	"version": "1.0.0",
+	"name": "@ellcrys/spell",
+	"version": "0.1.1",
 	"description": "Web3-like javascript package for Ellcrys protocol",
 	"main": "lib/index.js",
 	"scripts": {
@@ -14,14 +14,13 @@
 		"url": "git+https://github.com/ellcrys/spell.js.git"
 	},
 	"author": "",
-	"license": "ISC",
+	"license": "GPL-3.0",
 	"bugs": {
 		"url": "https://github.com/ellcrys/spell.js/issues"
 	},
 	"homepage": "https://github.com/ellcrys/spell.js#readme",
 	"dependencies": {
 		"@types/bignum": "0.0.29",
-		"@types/decimal.js": "^7.4.0",
 		"@types/ed25519": "0.0.0",
 		"@types/sha256": "^0.2.0",
 		"bignum": "^0.13.0",
@@ -37,6 +36,7 @@
 		"ripemd160": "^2.0.2",
 		"sha256": "^0.2.0",
 		"sha3": "^2.0.0",
+		"source-map-support": "^0.5.9",
 		"yo-jsonrpc2": "^1.0.4"
 	},
 	"devDependencies": {
@@ -52,7 +52,6 @@
 		"nyc": "^13.1.0",
 		"sinon": "^7.2.2",
 		"sinon-chai": "^3.3.0",
-		"source-map-support": "^0.5.9",
 		"ts-node": "^7.0.1",
 		"tslint": "^5.12.0",
 		"typescript": "^3.2.2"
@@ -64,5 +63,14 @@
 			"**/index.js"
 		],
 		"all": true
-	}
+	},
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"keywords": [
+		"Ellcrys",
+		"Blockchain",
+		"Cryptocurrency"
+	]
 }

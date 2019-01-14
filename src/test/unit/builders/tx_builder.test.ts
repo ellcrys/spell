@@ -203,7 +203,7 @@ describe("#TransactionBuilder", () => {
 								statusCode: 400,
 							} as any,
 							null,
-						);
+						)
 
 						b.finalize(pk).catch((e) => {
 							expect(e).to.eq(errors.UnknownSenderAccount);

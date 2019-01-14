@@ -1,6 +1,3 @@
-import jsonrpc from "node-json-rpc2";
-import rn from "random-number";
-import errors, { wrapErr } from "../errors";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 
@@ -109,7 +106,7 @@ export default class Node extends Namespace {
 	}
 
 	/**
-	 * Get information about the node
+	 * Get the node's configurations
 	 *
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node

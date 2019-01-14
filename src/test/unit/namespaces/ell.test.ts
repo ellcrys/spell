@@ -53,14 +53,14 @@ describe("#Auth", () => {
 	describe(".send", () => {
 		it("should call method ell_send", async () => {
 			const mock = makeClientStub(null, {});
-			const result = await spell.ell.send(testTx);
+			await spell.ell.send(testTx);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("ell_send", testTx);
 		});
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell.send(testTx).catch((err) => {
+			spell.ell.send(testTx).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("ell_send", testTx);
 				expect(err.message).to.be.eq("bad method");
@@ -82,7 +82,7 @@ describe("#Auth", () => {
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell.getBalance(pk.toAddress().toString()).catch((err) => {
+			spell.ell.getBalance(pk.toAddress().toString()).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith(
 					"ell_getBalance",

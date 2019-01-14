@@ -1,6 +1,3 @@
-import jsonrpc from "node-json-rpc2";
-import rn from "random-number";
-import errors, { wrapErr } from "../errors";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 import Decimal from "decimal.js";
@@ -31,7 +28,7 @@ export default class Ell extends Namespace {
 	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	send(txData: Transaction): Promise<TxResult> {
+	public send(txData: Transaction): Promise<TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_send", txData)
