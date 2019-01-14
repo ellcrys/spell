@@ -45,7 +45,7 @@ export default class Pool extends Namespace {
 	 * @returns {Promise<any>}
 	 * @memberof Pool
 	 */
-	public getgetAll(): Promise<any> {
+	public getAll(): Promise<any> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("pool_getAll", null)
