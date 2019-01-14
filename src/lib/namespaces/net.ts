@@ -1,6 +1,5 @@
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
-import { resolve } from "url";
 
 /**
  * Manage the network related activities of a Node

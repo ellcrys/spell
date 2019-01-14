@@ -15,7 +15,7 @@
 		"strict": true,
 		/* Enable all strict type-checking options. */
 		"strictPropertyInitialization": false,
-
+		"noUnusedLocals": true,
 		"inlineSourceMap": true,
 
 		"downlevelIteration": true,

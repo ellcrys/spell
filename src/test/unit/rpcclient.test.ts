@@ -3,7 +3,6 @@ import sinon = require("sinon");
 import jwt = require("jsonwebtoken");
 import sinonChai = require("sinon-chai");
 import RPCClient from "../../lib/rpcclient";
-import Spell from "../../lib/spell";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -73,7 +72,7 @@ describe("#RPCClient", () => {
 			});
 
 			it("should return error when rpc method call fails", (done) => {
-				const mock = makeClientStub(new Error("bad thing"), null);
+				makeClientStub(new Error("bad thing"), null);
 				client.call("", {}).catch((err) => {
 					expect(err.message).to.eq("bad thing");
 					done();
@@ -81,7 +80,7 @@ describe("#RPCClient", () => {
 			});
 
 			it("should return successfully when rpc method call succeeds", (done) => {
-				const mock = makeClientStub(null, { result: 2 });
+				makeClientStub(null, { result: 2 });
 				client.call("", {}).then((res) => {
 					expect(res).to.deep.eq({ result: 2 });
 					done();
