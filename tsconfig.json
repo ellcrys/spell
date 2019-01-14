@@ -18,6 +18,8 @@
 
 		"inlineSourceMap": true,
 
+		"downlevelIteration": true,
+
 
 		"lib": [
 			"es2015"

@@ -1,0 +1,101 @@
+import chai = require("chai");
+import sinon = require("sinon");
+import sinonChai = require("sinon-chai");
+import RPCClient from "../../../lib/rpcclient";
+import Spell from "../../../lib/spell";
+import { PrivateKey } from "../../../lib";
+import Decimal from "decimal.js";
+import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
+const expect = chai.expect;
+chai.use(sinonChai);
+
+describe("#Auth", () => {
+	let spell: Spell;
+	let client: RPCClient;
+	let pk: PrivateKey;
+	let testTx: Transaction;
+
+	function makeClientStub(err: Error | null, resp: any) {
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+	}
+
+	beforeEach((done) => {
+		spell = new Spell();
+		client = spell.rpcClient;
+		client.client = {
+			call: (
+				method: string,
+				params: any,
+				option: HttpCallOption,
+				cb: (err: any, res: any) => {},
+			): any => {
+				cb(null, null);
+			},
+		};
+
+		pk = PrivateKey.from(
+			"wntaQsep5UAL3WAsThJx3jtJ2Ge79fjuzVvisKBhBrA4ps24ostkmKA9egwH3o7nUYxB37Kn9Ac23UEym8u81AmgUn6Zuq",
+		);
+		testTx = {
+			from: "e4hbAT45QeddPj3XpJiSHxb9APhuQHcMUW",
+			to: "e4hbAT45QeddPj3XpJiSHxb9APhuQHcMUW",
+			type: 1,
+			senderPubKey: pk.publicKey().toBase58(),
+			value: "1",
+			fee: "1",
+			timestamp: 1547285790,
+			nonce: 1,
+		};
+
+		done();
+	});
+
+	describe(".send", () => {
+		it("should call method ell_send", async () => {
+			const mock = makeClientStub(null, {});
+			const result = await spell.ell.send(testTx);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("ell_send", testTx);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.ell.send(testTx).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("ell_send", testTx);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe(".send", () => {
+		it("should call method ell_getBalance and return Decimal", async () => {
+			const mock = makeClientStub(null, "10.20");
+			const result = await spell.ell.getBalance(pk.toAddress().toString());
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"ell_getBalance",
+				pk.toAddress().toString(),
+			);
+			expect(result).to.be.an.instanceOf(Decimal);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.ell.getBalance(pk.toAddress().toString()).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"ell_getBalance",
+					pk.toAddress().toString(),
+				);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe(".balance", () => {
+		it("should return an instance of TxBalanceBuilder", () => {
+			expect(spell.ell.balance()).to.be.an.instanceOf(TxBalanceBuilder);
+		});
+	});
+});

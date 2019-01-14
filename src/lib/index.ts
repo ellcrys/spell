@@ -1,4 +1,17 @@
-require('source-map-support').install();
+require("source-map-support").install();
 import Spell from "./spell";
-export { Spell };
+import { PrivateKey, PublicKey, Address } from "./key";
+import TxUtility from "./builders/tx_util";
+import { NumDecimals, TxPayloadVersion } from "./builders/transaction_builder";
+
+export {
+	Spell,
+	PrivateKey,
+	PublicKey,
+	Address,
+	TxUtility,
+	NumDecimals,
+	TxPayloadVersion,
+};
+
 export default new Spell();

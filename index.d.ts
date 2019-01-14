@@ -1,6 +1,9 @@
 declare module "flaverr";
 declare module "node-json-rpc2";
 declare module "yo-jsonrpc2";
+declare module "sha3";
+declare module "ripemd160";
+declare module "bs58check";
 
 interface HttpCallOption {
 	method: string;
@@ -45,17 +48,23 @@ interface Header {
 	transactionRoot: string;
 }
 
+interface InvokeArgs {
+	func: string;
+	param: { [key: string]: Buffer };
+}
+
 interface Transaction {
-	fee: string;
-	from: string;
-	hash: string;
-	nonce: string;
-	senderPubKey: string;
-	sig: string;
-	timestamp: string;
-	to: string;
-	type: string;
-	value: string;
+	fee?: string;
+	from?: string;
+	hash?: string;
+	nonce?: number;
+	senderPubKey?: string;
+	sig?: string;
+	timestamp?: number;
+	to?: string;
+	type?: number;
+	value?: string;
+	invokeArgs?: InvokeArgs;
 }
 
 interface Difficulty {
@@ -185,4 +194,13 @@ interface NetStat {
 	intros: number;
 	outbound: number;
 	total: number;
+}
+
+interface TxResult {
+	id: string;
+}
+
+declare enum TxType {
+	Balance = 0x1,
+	Alloc = 0x2,
 }
