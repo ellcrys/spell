@@ -4,6 +4,7 @@ import sinonChai = require("sinon-chai");
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
 import { describe } from "mocha";
+import { Address } from "../../../lib";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -33,36 +34,28 @@ describe("#State", () => {
 		done();
 	});
 
-	// it("should return result on successful call", async () => {
-	// 	const expectedResult = { header: { number: 1 } };
-	// 	const mock = makeClientStub(null, expectedResult);
-	// 	const result = await spell.state.getBlock(1);
-	// 	expect(mock).to.have.been.callCount(1);
-	// 	expect(result).to.be.deep.eq(expectedResult);
-	// });
-
-	// it("should return error and data when call returns an error", (done) => {
-	// 	const expectedResult = { header: { number: 1 } };
-	// 	const mock = makeClientStub(new Error("block unknown"), 1234);
-	// 	spell.state.getBlock(1).catch((err) => {
-	// 		expect(err.message).to.be.eq("block unknown");
-	// 		done();
-	// 	});
-	// });
-
 	describe("#getBlock", () => {
 		it("should return result on successful call", async () => {
+			const blockNumber = 1;
 			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(null, expectedResult);
-			const result = await spell.state.getBlock(1);
+			const result = await spell.state.getBlock(blockNumber);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getBlock", blockNumber);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = { header: { number: 1 } };
+			const blockNumber = 1;
 			const mock = makeClientStub(new Error("block unknown"), 1234);
-			spell.state.getBlock(1).catch((err) => {
+
+			spell.state.getBlock(blockNumber).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getBlock",
+					blockNumber,
+				);
+
 				expect(err.message).to.be.eq("block unknown");
 				done();
 			});
@@ -70,56 +63,70 @@ describe("#State", () => {
 	});
 
 	describe("#getBlockByHash", () => {
+		const blockHash =
+			"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977be3970c2599c7a";
+
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(null, expectedResult);
-			const result = await spell.state.getBlockByHash(
-				"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977be3970c2599c7a",
-			);
+			const result = await spell.state.getBlockByHash(blockHash);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"state_getBlockByHash",
+				blockHash,
+			);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = "block unknown";
-			makeClientStub(new Error("block unknown"), 1234);
-			spell.state
-				.getBlockByHash(
-					"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977b",
-				)
-				.catch((err) => {
-					expect(err.message).to.be.eq(expectedResult);
-					done();
-				});
+			const mock = makeClientStub(new Error("block unknown"), 1234);
+
+			spell.state.getBlockByHash(blockHash).catch((err) => {
+				expect(err.message).to.be.eq("block unknown");
+
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getBlockByHash",
+					blockHash,
+				);
+				done();
+			});
 		});
 	});
 
 	describe("#getAccountNonce", () => {
+		const address = "e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61";
+
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 789 } };
 			const mock = makeClientStub(null, expectedResult);
-			const result = await spell.state.getAccountNonce(
-				"e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61",
-			);
+			const result = await spell.state.getAccountNonce(address);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"state_getAccountNonce",
+				address,
+			);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
 			const expectedResult = "account not found";
-			makeClientStub(new Error("account not found"), 1234);
-			spell.state
-				.getAccountNonce(
-					"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977b",
-				)
-				.catch((err) => {
-					expect(err.message).to.be.eq(expectedResult);
-					done();
-				});
+			const mock = makeClientStub(new Error("account not found"), 1234);
+
+			spell.state.getAccountNonce(address).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getAccountNonce",
+					address,
+				);
+				expect(err.message).to.be.eq(expectedResult);
+				done();
+			});
 		});
 	});
 
 	describe("#getAccount", () => {
+		const address = "e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61";
 		it("should return result on successful call", async () => {
 			const expectedResult = {
 				header: {
@@ -130,24 +137,23 @@ describe("#State", () => {
 				},
 			};
 			const mock = makeClientStub(null, expectedResult);
-			const result = await spell.state.getAccount(
-				"e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61",
-			);
+			const result = await spell.state.getAccount(address);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getAccount", address);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = "account not found";
-			makeClientStub(new Error("account not found"), 1234);
-			spell.state
-				.getAccount(
-					"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977b",
-				)
-				.catch((err) => {
-					expect(err.message).to.be.eq("account not found");
-					done();
-				});
+			const mock = makeClientStub(new Error("account not found"), 1234);
+			spell.state.getAccount(address).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getAccount",
+					address,
+				);
+				expect(err.message).to.be.eq("account not found");
+				done();
+			});
 		});
 	});
 
@@ -164,6 +170,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.state.getBestChain();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getBestChain", null);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
@@ -177,9 +184,14 @@ describe("#State", () => {
 				},
 			};
 
-			makeClientStub(null, expectedResult);
+			const mock = makeClientStub(null, expectedResult);
 
 			spell.state.getBestChain().then((res: any) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getBestChain",
+					null,
+				);
 				expect(res.header.height).to.be.eq("0x000");
 				expect(res.header.timestamp).to.be.eq("0x0000");
 				expect(res.header.totalDifficulty).to.be.eq("0x0000");
@@ -205,6 +217,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.getBranches();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getBranches", null);
 			expect(result.header.length).to.eq(2);
 		});
 
@@ -213,9 +226,11 @@ describe("#State", () => {
 				header: [],
 			};
 
-			makeClientStub(null, expectedResult);
+			const mock = makeClientStub(null, expectedResult);
 
 			spell.state.getBranches().then((res: any) => {
+				expect(mock).to.have.been.calledWith("state_getBranches", null);
+				expect(mock).to.have.been.callCount(1);
 				expect(res.header.length).to.eq(0);
 				done();
 			});
@@ -233,13 +248,19 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.getDifficulty();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getDifficulty", null);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(new Error("invalid request"), 1234);
 			spell.state.getDifficulty().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getDifficulty",
+					null,
+				);
+
 				expect(err.message).to.be.eq("invalid request");
 				done();
 			});
@@ -253,13 +274,15 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.getOrphans();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getOrphans", null);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(new Error("error encountered"), 1234);
 			spell.state.getOrphans().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("state_getOrphans", null);
 				expect(err.message).to.be.eq("error encountered");
 				done();
 			});
@@ -272,13 +295,15 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.getReOrgs();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getReOrgs", null);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(new Error("error encountered"), 1234);
 			spell.state.getReOrgs().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("state_getReOrgs", null);
 				expect(err.message).to.be.eq("error encountered");
 				done();
 			});
@@ -286,18 +311,79 @@ describe("#State", () => {
 	});
 
 	describe("#getTransaction", () => {
+		const txHash = "eoxjdjdjdnd";
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(null, expectedResult);
-			const result: any = await spell.state.getTransaction("eoxjdjdjdnd");
+			const result: any = await spell.state.getTransaction(txHash);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"state_getTransaction",
+				txHash,
+			);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const expectedResult = { header: { number: 1 } };
 			const mock = makeClientStub(new Error("error encountered"), 1234);
-			spell.state.getTransaction("oxjdjdjdnd").catch((err) => {
+			spell.state.getTransaction(txHash).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_getTransaction",
+					txHash,
+				);
+				expect(err.message).to.be.eq("error encountered");
+				done();
+			});
+		});
+	});
+
+	describe("#listAccounts", () => {
+		it("should return result on successful call", async () => {
+			const expectedResult = { header: { number: 1 } };
+			const mock = makeClientStub(null, expectedResult);
+			const result: any = await spell.state.listAccounts();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_listAccounts", null);
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const mock = makeClientStub(new Error("error encountered"), 1234);
+			spell.state.listAccounts().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_listAccounts",
+					null,
+				);
+				expect(err.message).to.be.eq("error encountered");
+				done();
+			});
+		});
+	});
+
+	describe("#listTopAccounts", () => {
+		const numOfResult = 2;
+		it("should return result on successful call", async () => {
+			const expectedResult = { header: { number: 1 } };
+			const mock = makeClientStub(null, expectedResult);
+			const result: any = await spell.state.listTopAccounts(numOfResult);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"state_listTopAccounts",
+				numOfResult,
+			);
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const mock = makeClientStub(new Error("error encountered"), 1234);
+			spell.state.listTopAccounts(2).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"state_listTopAccounts",
+					numOfResult,
+				);
 				expect(err.message).to.be.eq("error encountered");
 				done();
 			});

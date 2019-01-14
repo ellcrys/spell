@@ -11,7 +11,9 @@ describe("#Node", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+		return sinon
+			.stub(client.client, "call" as never)
+			.callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -37,6 +39,10 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, { status: "unknown" });
 			const result = await spell.node.getTransactionStatus(hash);
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"node_getTransactionStatus",
+				hash,
+			);
 			expect(result).to.be.eq("unknown");
 		});
 
@@ -46,6 +52,10 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad hash"), null);
 			spell.node.getTransactionStatus(hash).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"node_getTransactionStatus",
+					hash,
+				);
 				expect(err.message).to.be.eq("bad hash");
 			});
 		});
@@ -63,6 +73,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, expected);
 			const result = await spell.node.getSyncState();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_getSyncState", null);
 			expect(result).to.be.deep.eq(expected);
 		});
 
@@ -70,6 +81,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad method"), null);
 			spell.node.getSyncState().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_getSyncState", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
@@ -81,6 +93,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, expected);
 			const result = await spell.node.isSyncing();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_isSyncing", null);
 			expect(result).to.be.deep.eq(expected);
 		});
 
@@ -88,6 +101,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad method"), null);
 			spell.node.isSyncing().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_isSyncing", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
@@ -98,6 +112,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, {});
 			const result = await spell.node.info();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_info", null);
 			expect(result).to.be.deep.eq({});
 		});
 
@@ -105,6 +120,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad method"), null);
 			spell.node.info().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_info", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
@@ -115,6 +131,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, {});
 			const result = await spell.node.config();
 			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_config", null);
 			expect(result).to.be.deep.eq({});
 		});
 
@@ -122,6 +139,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad method"), null);
 			spell.node.config().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_config", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
