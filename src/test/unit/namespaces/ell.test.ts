@@ -16,7 +16,9 @@ describe("#Auth", () => {
 	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+		return sinon
+			.stub(client.client, "call" as never)
+			.callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -60,7 +62,7 @@ describe("#Auth", () => {
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell.send(testTx).catch((err) => {
+			spell.ell.send(testTx).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("ell_send", testTx);
 				expect(err.message).to.be.eq("bad method");
@@ -71,7 +73,9 @@ describe("#Auth", () => {
 	describe(".send", () => {
 		it("should call method ell_getBalance and return Decimal", async () => {
 			const mock = makeClientStub(null, "10.20");
-			const result = await spell.ell.getBalance(pk.toAddress().toString());
+			const result = await spell.ell.getBalance(
+				pk.toAddress().toString(),
+			);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith(
 				"ell_getBalance",
@@ -82,14 +86,16 @@ describe("#Auth", () => {
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell.getBalance(pk.toAddress().toString()).catch((err) => {
-				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"ell_getBalance",
-					pk.toAddress().toString(),
-				);
-				expect(err.message).to.be.eq("bad method");
-			});
+			spell.ell
+				.getBalance(pk.toAddress().toString())
+				.catch((err: Error) => {
+					expect(mock).to.have.been.callCount(1);
+					expect(mock).to.have.been.calledWith(
+						"ell_getBalance",
+						pk.toAddress().toString(),
+					);
+					expect(err.message).to.be.eq("bad method");
+				});
 		});
 	});
 
