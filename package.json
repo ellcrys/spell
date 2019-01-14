@@ -1,24 +1,76 @@
 {
-  "name": "spell.js",
-  "version": "1.0.0",
-  "description": "Web3-like javascript package for Ellcrys protocol ",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ellcrys/spell.js.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ellcrys/spell.js/issues"
-  },
-  "homepage": "https://github.com/ellcrys/spell.js#readme",
-  "dependencies": {
-    "eslint": "^5.12.0",
-    "tslint": "^5.12.0",
-    "typescript": "^3.2.2"
-  }
+	"name": "@ellcrys/spell",
+	"version": "0.1.1",
+	"description": "Web3-like javascript package for Ellcrys protocol",
+	"main": "lib/index.js",
+	"scripts": {
+		"ts-watch": "tsc -w",
+		"lint": "eslint ./src/**/*.js && tslint ./src/**/*.ts",
+		"test": "mocha test",
+		"cover": "nyc mocha test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ellcrys/spell.js.git"
+	},
+	"author": "",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/ellcrys/spell.js/issues"
+	},
+	"homepage": "https://github.com/ellcrys/spell.js#readme",
+	"dependencies": {
+		"@types/bignum": "0.0.29",
+		"@types/ed25519": "0.0.0",
+		"@types/sha256": "^0.2.0",
+		"bignum": "^0.13.0",
+		"bs58check": "^2.1.2",
+		"decimal.js": "^10.0.2",
+		"ed25519": "0.0.4",
+		"flaverr": "^1.9.2",
+		"jsonwebtoken": "^8.4.0",
+		"moment": "^2.23.0",
+		"msgpack5": "^4.2.1",
+		"node-json-rpc2": "^1.1.0",
+		"random-number": "0.0.9",
+		"ripemd160": "^2.0.2",
+		"sha256": "^0.2.0",
+		"sha3": "^2.0.0",
+		"source-map-support": "^0.5.9",
+		"yo-jsonrpc2": "^1.0.4"
+	},
+	"devDependencies": {
+		"@types/jsonwebtoken": "^8.3.0",
+		"@types/mocha": "^5.2.5",
+		"@types/msgpack5": "^3.4.1",
+		"@types/node": "^10.12.18",
+		"@types/random-number": "0.0.0",
+		"@types/sinon-chai": "^3.2.2",
+		"chai": "^4.2.0",
+		"eslint": "^5.12.0",
+		"mocha": "^5.2.0",
+		"nyc": "^13.1.0",
+		"sinon": "^7.2.2",
+		"sinon-chai": "^3.3.0",
+		"ts-node": "^7.0.1",
+		"tslint": "^5.12.0",
+		"typescript": "^3.2.2"
+	},
+	"nyc": {
+		"include": "lib/**/*js",
+		"exclude": [
+			"**/spell.js",
+			"**/index.js"
+		],
+		"all": true
+	},
+	"directories": {
+		"lib": "lib",
+		"test": "test"
+	},
+	"keywords": [
+		"Ellcrys",
+		"Blockchain",
+		"Cryptocurrency"
+	]
 }
