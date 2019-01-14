@@ -61,8 +61,8 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get the difficulty & totalDifficulty
-	 * of the Ellcrys blockchain protocol.
+	 * Get the current difficulty and total difficulty
+	 * of the network.
 	 *
 	 * @returns
 	 * @memberof State
@@ -81,7 +81,7 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get all the account on the Ellcrys blockchain
+	 * Get all the account on the network
 	 *
 	 * @returns {Promise<Account[]>}
 	 * @memberof State
@@ -100,12 +100,14 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get the ReOrg chains available on the Ellcrys protocol
+	 * Get a list of re-organization events
+	 * that have occurred from the node's
+	 * perspective
 	 *
-	 * @returns {Promise<Chain[]>}
+	 * @returns {Promise<ReOrgInfo[]>}
 	 * @memberof State
 	 */
-	public getReOrgs(): Promise<Chain[]> {
+	public getReOrgs(): Promise<ReOrgInfo[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getReOrgs", null)
@@ -119,18 +121,16 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get the Top n account on the Ellcrys Blockchain protocol
+	 * Get a list of top accounts on the network.
 	 *
-	 * @param {number} topNumber the total number of accounts to be
-	 * returned from the Ellcrys blockchain protocol
-	 *
+	 * @param {number} limit The maximum number of top accounts to return
 	 * @returns {Promise<Account[]>}
 	 * @memberof State
 	 */
-	public listTopAccounts(topNumber: number): Promise<Account[]> {
+	public listTopAccounts(limit: number): Promise<Account[]> {
 		return new Promise((resolve, reject) => {
 			this.client
-				.call("state_listTopAccounts", topNumber)
+				.call("state_listTopAccounts", limit)
 				.then((res) => {
 					return resolve(res);
 				})
@@ -141,10 +141,9 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get a specific account on the Ellcrys Blockchain Protocol
-	 * based on the address specified
+	 * Get a specific account on the network
 	 *
-	 * @param {string} address is the address of an account to be returned
+	 * @param {string} address The address of the accounts
 	 * @returns {Promise<Account>}
 	 * @memberof State
 	 */
@@ -162,10 +161,9 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get the nonce of a specific address on the
-	 * Ellcrys Blockchain protocol
+	 * Get the nonce of a given address
 	 *
-	 * @param {string} address is the address of an account to be returned
+	 * @param {string} address The address whose nonce will be fetched
 	 * @returns {Promise<number>}
 	 * @memberof State
 	 */
@@ -183,9 +181,9 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get a specific transaction on the Ellcrys Blockchain protocol
+	 * Get a transaction by its hash
 	 *
-	 * @param {string} txHash is the hash of the transaction we want to get
+	 * @param {string} txHash The transaction's hash
 	 * @returns {Promise<Transaction>}
 	 * @memberof State
 	 */
@@ -203,7 +201,7 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get all the branches available on the Ellcrys Blockchain protocol
+	 * Get all the known branches on the node
 	 *
 	 * @returns {Promise<Branches[]>}
 	 * @memberof State
@@ -222,8 +220,7 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * gets the blocks that are considered as
-	 * orphan blocks on the Ellcrys network
+	 * Get orphan blocks on the node
 	 *
 	 * @returns {Promise<Block>}
 	 * @memberof State
@@ -242,12 +239,12 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * get the best chain on the Ellcrys Blockchain protocol
+	 * Get the best chain on the node
 	 *
-	 * @returns {Promise<BestChain>}
+	 * @returns {Promise<Chain>}
 	 * @memberof State
 	 */
-	public getBestChain(): Promise<BestChain> {
+	public getBestChain(): Promise<Chain> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getBestChain", null)
@@ -261,16 +258,16 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * getObjects returns the logs which is used for debugging on the Ellcrys network
+	 * Returns raw db objects (Debug only)
 	 *
-	 * @param {JSON} jsonParameter is the parameter feed into the rpc method
+	 * @param {JSON} filter Filter parameters
 	 * @returns {Promise<any>}
 	 * @memberof State
 	 */
-	public getObjects(jsonParameter: JSON): Promise<any> {
+	public getObjects(filter: JSON): Promise<any> {
 		return new Promise((resolve, reject) => {
 			this.client
-				.call("state_getObjects", jsonParameter)
+				.call("state_getObjects", filter)
 				.then((res) => {
 					return resolve(res);
 				})

@@ -106,7 +106,7 @@ export default class Node extends Namespace {
 	}
 
 	/**
-	 * Get information about the node
+	 * Get the node's configurations
 	 *
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node

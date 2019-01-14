@@ -10,7 +10,7 @@ import RPCClient from "../rpcclient";
  */
 export default class Pool extends Namespace {
 	/**
-	 *Creates an instance of Pool.
+	 * Creates an instance of Pool.
 	 * @param {RPCClient} client
 	 * @memberof Pool
 	 */
@@ -20,7 +20,8 @@ export default class Pool extends Namespace {
 	}
 
 	/**
-	 * get the size of the mempool
+	 * Get the size of the transaction
+	 * pool
 	 *
 	 * @export
 	 * @class Pool
@@ -40,7 +41,7 @@ export default class Pool extends Namespace {
 	}
 
 	/**
-	 * Get all transaction in the pool
+	 * Get all transactions in the pool
 	 *
 	 * @returns {Promise<any>}
 	 * @memberof Pool

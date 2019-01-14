@@ -10,7 +10,7 @@ import RPCClient from "../rpcclient";
  */
 export default class Logger extends Namespace {
 	/**
-	 *Creates an instance of Logger.
+	 * Creates an instance of Logger.
 	 * @param {RPCClient} client
 	 * @memberof Logger
 	 */
@@ -22,6 +22,7 @@ export default class Logger extends Namespace {
 	/**
 	 * Set the log level to DEBUG.
 	 *
+	 * @public
 	 * @returns {Promise<boolean>}
 	 * @memberof Logger
 	 */
@@ -41,6 +42,7 @@ export default class Logger extends Namespace {
 	/**
 	 * Set the logger to default logger
 	 *
+	 * @public
 	 * @returns {Promise<boolean>}
 	 * @memberof Logger
 	 */

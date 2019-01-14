@@ -79,7 +79,7 @@ interface Account {
 	type: number;
 }
 
-interface Chain {
+interface ReOrgInfo {
 	branchID: string;
 	branchLen: number;
 	mainChainID: string;
@@ -98,7 +98,7 @@ interface Branches {
 	totalDifficulty: string;
 }
 
-interface BestChain {
+interface Chain {
 	height: string;
 	id: string;
 	timestamp: string;

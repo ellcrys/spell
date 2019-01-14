@@ -28,7 +28,7 @@ export default class Ell extends Namespace {
 	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	send(txData: Transaction): Promise<TxResult> {
+	public send(txData: Transaction): Promise<TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_send", txData)

@@ -10,7 +10,8 @@ import RPCClient from "../rpcclient";
  */
 export default class Net extends Namespace {
 	/**
-	 *Creates an instance of Net.
+	 * Creates an instance of Net.
+	 *
 	 * @param {RPCClient} client
 	 * @memberof Net
 	 */
@@ -20,7 +21,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * getActivePeers get all the active peers connected to a node
+	 * getActivePeers get all the peers
+	 * that are connected to the node
 	 *
 	 * @returns {Promise<Peer[]>}
 	 * @memberof Net
@@ -39,7 +41,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Get all the peers that the node synced.
+	 * Get all the peers that the peers
+	 * that is known to the node.
 	 *
 	 * @returns {Promise<Peer[]>}
 	 * @memberof Net
@@ -58,7 +61,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Get broadcast peers on the ellcrys network
+	 * Get the peers that the node will
+	 * regularly broadcast messages to.
 	 *
 	 * @returns {Promise<any>}
 	 * @memberof Net
@@ -77,7 +81,7 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Get number connections and network nodes
+	 * Get the node's connection stats
 	 *
 	 * @returns {Promise<any>}
 	 * @memberof Net
@@ -96,7 +100,10 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * add a peer address to a node
+	 * Add a peer address to a node.
+	 * The node will attempt to connect
+	 * to this address when it needs more
+	 * connections.
 	 *
 	 * @param {string} peerAddress
 	 * @returns {Promise<boolean>}
@@ -135,9 +142,10 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Connect to one or more address
+	 * Connect to one or more addresses
+	 * immediately
 	 *
-	 * @param {Array<string>} peerAddress array of address to be connected to
+	 * @param {Array<string>} peerAddress array of addresses to be connected to
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */

@@ -2,7 +2,8 @@ import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 
 /**
- * Manage the mining activities of an elld node
+ * Miner handles mining operations
+ * on a node.
  *
  * @export
  * @class Miner
@@ -20,7 +21,7 @@ export default class Miner extends Namespace {
 	}
 
 	/**
-	 * Start the elld miner on the specified ellcrys node
+	 * Start the miner on the node
 	 *
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
@@ -39,7 +40,7 @@ export default class Miner extends Namespace {
 	}
 
 	/**
-	 * Stop the elld miner on the specified ellcrys node
+	 * Stop the miner on the node
 	 *
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
@@ -58,7 +59,7 @@ export default class Miner extends Namespace {
 	}
 
 	/**
-	 * get the mining status of an elld node on the Ellcrys network
+	 * Check whether the miner has is running
 	 *
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
@@ -77,7 +78,7 @@ export default class Miner extends Namespace {
 	}
 
 	/**
-	 * Get the hashrate of the ell node
+	 * Get the hashrate of the miner
 	 *
 	 * @returns {Promise<number>}
 	 * @memberof Miner
@@ -115,7 +116,8 @@ export default class Miner extends Namespace {
 	}
 
 	/**
-	 * Set the number of miner threads for an elld node.
+	 * Set the number of miner threads
+	 * to run.
 	 *
 	 * @param {number} num
 	 * @returns {Promise<number>}
