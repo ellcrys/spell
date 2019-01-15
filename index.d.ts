@@ -200,6 +200,12 @@ interface TxResult {
 	id: string;
 }
 
+interface RpcMethod {
+	description: string;
+	name: string;
+	private: boolean;
+}
+
 declare enum TxType {
 	Balance = 0x1,
 	Alloc = 0x2,
