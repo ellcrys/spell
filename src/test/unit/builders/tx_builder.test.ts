@@ -197,13 +197,13 @@ describe("#TransactionBuilder", () => {
 						delete testTx.nonce;
 						b.setData(testTx);
 
-						const mock = makeClientStub(
+						makeClientStub(
 							{
 								data: `{ "error": { "code": 30001 }}`,
 								statusCode: 400,
 							} as any,
 							null,
-						)
+						);
 
 						b.finalize(pk).catch((e) => {
 							expect(e).to.eq(errors.UnknownSenderAccount);
@@ -211,7 +211,7 @@ describe("#TransactionBuilder", () => {
 					});
 
 					it("should successfully call finalize()", async () => {
-						const mock = makeClientStub(null, {
+						makeClientStub(null, {
 							nonce: 2,
 						});
 
