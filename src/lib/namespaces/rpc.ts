@@ -2,17 +2,19 @@ import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 
 /**
- * Rpc gets the information about the Rpc operations
+ * RPC is responsible for calling
+ * JSON-RPC 2.0 methods supported by
+ * a remote node.
  *
  * @export
- * @class Rpc
+ * @class RPC
  * @extends {Namespace}
  */
-export default class Rpc extends Namespace {
+export default class RPC extends Namespace {
 	/**
-	 * Creates an instance of Rpc.
+	 * Creates an instance of RPC.
 	 * @param {RPCClient} client
-	 * @memberof Rpc
+	 * @memberof RPC
 	 */
 	constructor(client: RPCClient) {
 		super();
@@ -20,30 +22,10 @@ export default class Rpc extends Namespace {
 	}
 
 	/**
-	 * Start the JSON-RPC service
+	 * Stop the JSON-RPC 2.0 service
 	 *
 	 * @export
-	 * @class Rpc
-	 * @extends {Namespace}
-	 */
-	public start(): Promise<boolean> {
-		return new Promise((resolve, reject) => {
-			this.client
-				.call("rpc_start", null)
-				.then((res) => {
-					return resolve(res);
-				})
-				.catch((err) => {
-					return reject(err);
-				});
-		});
-	}
-
-	/**
-	 * Stop the JSON-RPC service
-	 *
-	 * @export
-	 * @class Rpc
+	 * @class RPC
 	 * @extends {Namespace}
 	 */
 	public stop(): Promise<boolean> {
@@ -60,10 +42,11 @@ export default class Rpc extends Namespace {
 	}
 
 	/**
-	 * Test JSON-RPC service for echo reply
+	 * Test JSON-RPC 2.0 service by sending
+	 * messages that are echoed back.
 	 *
 	 * @export
-	 * @class Rpc
+	 * @class RPC
 	 * @extends {Namespace}
 	 */
 	public echo(params?: any | null): Promise<any> {
@@ -80,10 +63,11 @@ export default class Rpc extends Namespace {
 	}
 
 	/**
-	 * Get all JSON-RPC methods
+	 * Get all JSON-RPC 2.0 methods
+	 * supported by the service
 	 *
 	 * @export
-	 * @class Rpc
+	 * @class RPC
 	 * @extends {Namespace}
 	 */
 	public methods(): Promise<RpcMethod[]> {

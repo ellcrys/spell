@@ -12,9 +12,7 @@ describe("#Rpc", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -31,27 +29,6 @@ describe("#Rpc", () => {
 			},
 		};
 		done();
-	});
-
-	describe("#start", () => {
-		it("should return result on successful call", async () => {
-			const expectedResult: boolean = true;
-			const mock = makeClientStub(null, expectedResult);
-			const result = await spell.rpc.start();
-			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith("rpc_start", null);
-			expect(result).to.be.deep.eq(expectedResult);
-		});
-
-		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error starting rpc"), 1234);
-			spell.rpc.start().catch((err) => {
-				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith("rpc_start", null);
-				expect(err.message).to.be.eq("error starting rpc");
-				done();
-			});
-		});
 	});
 
 	describe("#stop", () => {
@@ -87,10 +64,7 @@ describe("#Rpc", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error testing echoing"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error testing echoing"), 1234);
 			spell.rpc.echo(echoMessage).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("rpc_echo", echoMessage);
@@ -111,10 +85,7 @@ describe("#Rpc", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting rpc methods"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting rpc methods"), 1234);
 			spell.rpc.methods().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("rpc_methods", null);

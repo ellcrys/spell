@@ -9,7 +9,7 @@ import Miner from "./namespaces/miner";
 import Net from "./namespaces/net";
 import Logger from "./namespaces/logger";
 import Ell from "./namespaces/ell";
-import Rpc from "./namespaces/rpc";
+import RPC from "./namespaces/rpc";
 
 /**
  * Spell provides access to a client
@@ -90,7 +90,7 @@ export default class Spell {
 	 */
 	public logger: Logger;
 
-	public rpc: Rpc;
+	public rpc: RPC;
 	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
@@ -105,7 +105,7 @@ export default class Spell {
 		this.net = new Net(this.rpcClient);
 		this.logger = new Logger(this.rpcClient);
 		this.ell = new Ell(this.rpcClient);
-		this.rpc = new Rpc(this.rpcClient);
+		this.rpc = new RPC(this.rpcClient);
 	}
 
 	/**
