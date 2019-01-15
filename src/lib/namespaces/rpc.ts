@@ -86,7 +86,7 @@ export default class Rpc extends Namespace {
 	 * @class Rpc
 	 * @extends {Namespace}
 	 */
-	public methods(): Promise<RpcMethod> {
+	public methods(): Promise<RpcMethod[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("rpc_methods", null)
