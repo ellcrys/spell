@@ -50,13 +50,13 @@ export default class Node extends Namespace {
 	 * block synchronization session. Returns
 	 * null when the node is not syncing.
 	 *
-	 * @returns {Promise<SyncState | null>}
+	 * @returns {Promise<SyncStat | null>}
 	 * @memberof Node
 	 */
-	getSyncState(): Promise<SyncState | null> {
+	getSyncStat(): Promise<SyncStat | null> {
 		return new Promise((resolve, reject) => {
 			this.client
-				.call("node_getSyncState", null)
+				.call("node_getSyncStat", null)
 				.then((res) => {
 					return resolve(res);
 				})

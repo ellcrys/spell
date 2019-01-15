@@ -4,6 +4,7 @@ declare module "yo-jsonrpc2";
 declare module "sha3";
 declare module "ripemd160";
 declare module "bs58check";
+declare module "blake2";
 
 interface HttpCallOption {
 	method: string;
@@ -111,7 +112,7 @@ declare enum TxStatus {
 	Unknown = "unknown",
 }
 
-interface SyncState {
+interface SyncStat {
 	currentChainHeight: number;
 	currentTotalDifficulty: number;
 	progressPercent: number;
