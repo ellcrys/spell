@@ -49,7 +49,7 @@ export default class Ell extends Namespace {
 	 * @returns {Promise<string>}
 	 * @memberof Ell
 	 */
-	getBalance(address: string): Promise<Decimal> {
+	public getBalance(address: string): Promise<Decimal> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_getBalance", address)
@@ -69,7 +69,28 @@ export default class Ell extends Namespace {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof Ell
 	 */
-	balance(): TxBalanceBuilder {
+	public balance(): TxBalanceBuilder {
 		return new TxBuilder(this.client).balance;
+	}
+
+	/**
+	 * This send an encoded transaction in Base58 as input
+	 * to a node for processing.
+	 *
+	 * @param {string} encodedTx
+	 * @returns {Promise<TxResult>}
+	 * @memberof Ell
+	 */
+	public sendRaw(encodedTx: string): Promise<TxResult> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("ell_sendRaw", encodedTx)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
 	}
 }
