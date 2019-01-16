@@ -161,4 +161,24 @@ export default class Net extends Namespace {
 				});
 		});
 	}
+
+	/**
+	 * Close/stop the connection on the node
+	 * to prevent connections from and to the node.
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Net
+	 */
+	public noNet(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("net_noNet", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
 }
