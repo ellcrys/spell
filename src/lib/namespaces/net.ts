@@ -163,9 +163,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Close/stop the connection on the node
-	 * to prevent connections from and to the node.
-	 *
+	 * Prevents inbound or outbound connections by
+	 * shutting down the client's network function.
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
