@@ -32,7 +32,7 @@ export default class Node extends Namespace {
 	 * @returns {Promise<TxStatus>}
 	 * @memberof Node
 	 */
-	getTransactionStatus(hash: string): Promise<TxStatus> {
+	public getTransactionStatus(hash: string): Promise<TxStatus> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getTransactionStatus", hash)
@@ -53,7 +53,7 @@ export default class Node extends Namespace {
 	 * @returns {Promise<SyncStat | null>}
 	 * @memberof Node
 	 */
-	getSyncStat(): Promise<SyncStat | null> {
+	public getSyncStat(): Promise<SyncStat | null> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getSyncStat", null)
@@ -73,7 +73,7 @@ export default class Node extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Node
 	 */
-	isSyncing(): Promise<boolean> {
+	public isSyncing(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_isSyncing", null)
@@ -92,7 +92,7 @@ export default class Node extends Namespace {
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node
 	 */
-	info(): Promise<NodeInfo> {
+	public info(): Promise<NodeInfo> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_info", null)
@@ -111,10 +111,31 @@ export default class Node extends Namespace {
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node
 	 */
-	config(): Promise<NodeConfig> {
+	public config(): Promise<NodeConfig> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_config", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Get basic information about the node
+	 * This will give you a lesser but descriptive information
+	 * about the node compare to node.info() method
+	 *
+	 * @returns {Promise<BasicNodeInfo>}
+	 * @memberof Node
+	 */
+	public basic(): Promise<BasicNodeInfo> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_basic", null)
 				.then((res) => {
 					return resolve(res);
 				})
