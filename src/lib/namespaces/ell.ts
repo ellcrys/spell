@@ -74,8 +74,8 @@ export default class Ell extends Namespace {
 	}
 
 	/**
-	 * This send an encoded transaction in Base58
-	 * to a node for processing.
+	 * Send a Base58 encoded transaction
+	 * to the node.
 	 *
 	 * @param {string} encodedTx
 	 * @returns {Promise<TxResult>}

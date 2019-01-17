@@ -125,8 +125,8 @@ export default class Node extends Namespace {
 	}
 
 	/**
-	 * This return non-sensitive information about
-	 * a node without the need for authorization.
+	 * Returns non-sensitive information about
+	 * a node. 
 	 *
 	 * @returns {Promise<BasicNodeInfo>}
 	 * @memberof Node
