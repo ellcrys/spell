@@ -135,6 +135,18 @@ interface NodeInfo {
 	goVersion: string;
 }
 
+interface BasicNodeInfo {
+	buildCommit: string;
+	buildDate: string;
+	buildVersion: string;
+	goVersion: string;
+	id: string;
+	mode: string;
+	name: string;
+	netVersion: string;
+	syncing: boolean;
+}
+
 interface NodeConfig {
 	peer: PeerInfo;
 	txPool: TxPoolInfo;

@@ -9,14 +9,16 @@ import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
 const expect = chai.expect;
 chai.use(sinonChai);
 
-describe("#Auth", () => {
+describe("#Ell", () => {
 	let spell: Spell;
 	let client: RPCClient;
 	let pk: PrivateKey;
 	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+		return sinon
+			.stub(client.client, "call" as never)
+			.callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -71,7 +73,9 @@ describe("#Auth", () => {
 	describe(".send", () => {
 		it("should call method ell_getBalance and return Decimal", async () => {
 			const mock = makeClientStub(null, "10.20");
-			const result = await spell.ell.getBalance(pk.toAddress().toString());
+			const result = await spell.ell.getBalance(
+				pk.toAddress().toString(),
+			);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith(
 				"ell_getBalance",
@@ -82,20 +86,41 @@ describe("#Auth", () => {
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell.getBalance(pk.toAddress().toString()).catch((err: Error) => {
-				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"ell_getBalance",
-					pk.toAddress().toString(),
-				);
-				expect(err.message).to.be.eq("bad method");
-			});
+			spell.ell
+				.getBalance(pk.toAddress().toString())
+				.catch((err: Error) => {
+					expect(mock).to.have.been.callCount(1);
+					expect(mock).to.have.been.calledWith(
+						"ell_getBalance",
+						pk.toAddress().toString(),
+					);
+					expect(err.message).to.be.eq("bad method");
+				});
 		});
 	});
 
 	describe(".balance", () => {
 		it("should return an instance of TxBalanceBuilder", () => {
 			expect(spell.ell.balance()).to.be.an.instanceOf(TxBalanceBuilder);
+		});
+	});
+
+	describe(".sendRaw", () => {
+		const encodedTx: string = "0xdsdhdjd";
+		it("should call method ell_send", async () => {
+			const mock = makeClientStub(null, "111");
+			await spell.ell.sendRaw(encodedTx);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("ell_sendRaw", encodedTx);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.ell.sendRaw(encodedTx).catch((err: Error) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("ell_sendRaw", encodedTx);
+				expect(err.message).to.be.eq("bad method");
+			});
 		});
 	});
 });
