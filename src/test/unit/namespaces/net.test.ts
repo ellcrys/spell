@@ -193,4 +193,24 @@ describe("#Net", () => {
 			});
 		});
 	});
+
+	describe("#noNet", () => {
+		it("should return result on successful call", async () => {
+			const mock = makeClientStub(null, true);
+			const result = await spell.net.noNet();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("net_noNet", null);
+			expect(result).to.be.deep.eq(true);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const mock = makeClientStub(new Error("bad method"), 1234);
+			spell.net.noNet().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("net_noNet", null);
+				expect(err.message).to.be.eq("bad method");
+				done();
+			});
+		});
+	});
 });

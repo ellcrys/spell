@@ -161,4 +161,23 @@ export default class Net extends Namespace {
 				});
 		});
 	}
+
+	/**
+	 * Prevents inbound or outbound connections by
+	 * shutting down the client's network function.
+	 * @returns {Promise<boolean>}
+	 * @memberof Net
+	 */
+	public noNet(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("net_noNet", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
 }
