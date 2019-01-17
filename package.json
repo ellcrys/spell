@@ -3,6 +3,7 @@
 	"version": "0.1.2",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
+	"types": "index.d.ts",
 	"scripts": {
 		"ts-watch": "tsc -w",
 		"lint": "eslint ./src/**/*.js && tslint ./src/**/*.ts",
@@ -24,6 +25,7 @@
 		"@types/ed25519": "0.0.0",
 		"@types/sha256": "^0.2.0",
 		"bignum": "^0.13.0",
+		"blake2": "^2.0.1",
 		"bs58check": "^2.1.2",
 		"decimal.js": "^10.0.2",
 		"ed25519": "0.0.4",

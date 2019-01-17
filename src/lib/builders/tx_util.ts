@@ -1,6 +1,6 @@
 import msgpack = require("msgpack5");
-import sha256 = require("sha256");
 import { PrivateKey } from "..";
+import blake2 = require("blake2");
 
 /**
  * TxUtility provides transaction
@@ -22,15 +22,15 @@ export default class TxUtility {
 	 */
 	getBytesNoHashAndSig(tx: Transaction): Buffer {
 		const data = [
-			tx.type,
-			tx.nonce,
-			tx.to,
-			tx.senderPubKey,
-			tx.from,
-			tx.value,
 			tx.fee,
+			tx.from,
+			null, // reserved for invoke args
+			tx.nonce,
+			tx.senderPubKey,
 			tx.timestamp,
-			null,
+			tx.to,
+			tx.type,
+			tx.value,
 		];
 		return msgpack()
 			.encode(data)
@@ -47,7 +47,9 @@ export default class TxUtility {
 	 */
 	hash(tx: Transaction, prefix = "0x"): string {
 		const data = this.getBytesNoHashAndSig(tx);
-		return prefix + sha256(data);
+		var h = blake2.createHash("blake2b", { digestLength: 32 });
+		h.update(data);
+		return prefix + h.digest("hex");
 	}
 
 	/**

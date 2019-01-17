@@ -24,28 +24,28 @@ describe("#TxUtility", function () {
     describe(".getBytesNoHashAndSig", function () {
         it("should return expected bytes", function () {
             var buf = txUtil.getBytesNoHashAndSig(testTx);
-            var expected = Buffer.from("990101d922653468624154343551656464506a3358704a695348786239415068755148634d5557d93334384733434c3367477142453259686e426a5651746e514d554845424e4468774e41786f4e4c5258437256544e657a7a33436ad922653468624154343551656464506a3358704a695348786239415068755148634d5557a131a131ce5c39b51ec0", "hex");
+            var expected = Buffer.from("99a131d922653468624154343551656464506a3358704a695348786239415068755148634d5557c001d93334384733434c3367477142453259686e426a5651746e514d554845424e4468774e41786f4e4c5258437256544e657a7a33436ace5c39b51ed922653468624154343551656464506a3358704a695348786239415068755148634d555701a131", "hex");
             expect(buf.equals(expected)).to.be.true;
         });
     });
     describe(".hash", function () {
         it("should return expected hash prefixed with 0x", function () {
             var hash = txUtil.hash(testTx);
-            expect(hash).to.eql("0x0ff41542e5fa70e518a36e27a0a6c1d259a661eda7876fe598d9f917b0f44a14");
+            expect(hash).to.eql("0x2ff55967884145c271caea9cca0b1fd23e0aed0847eafc89e95d0956602e045b");
         });
         specify("that when prefix='', it should return expected hash without 0x prefix", function () {
             var hash = txUtil.hash(testTx, "");
-            expect(hash).to.eql("0ff41542e5fa70e518a36e27a0a6c1d259a661eda7876fe598d9f917b0f44a14");
+            expect(hash).to.eql("2ff55967884145c271caea9cca0b1fd23e0aed0847eafc89e95d0956602e045b");
         });
     });
     describe(".sign", function () {
         it("should return expected signature prefixed with 0x", function () {
             var sig = txUtil.sign(testTx, pk);
-            expect(sig).to.eq("0x7c51efa63c5cabc6081c1a3d6044885e673252f5c7fdb3c2f075edddef3040ad62ebc2814ad15a97ebe637a967287432a22e94796d23fe176bf5568d2a88cd08");
+            expect(sig).to.eq("0xa3a72abd606d03804d959cf5c6899b2e785bbf228dbc8e1943a188c8b36f69505a95323820c1261e693ac8689bfa55eb47c55b9b8b5491d9b992ed6cc1913a02");
         });
         specify("that when prefix='', it should return expected signature without 0x prefix", function () {
             var sig = txUtil.sign(testTx, pk, "");
-            expect(sig).to.eq("7c51efa63c5cabc6081c1a3d6044885e673252f5c7fdb3c2f075edddef3040ad62ebc2814ad15a97ebe637a967287432a22e94796d23fe176bf5568d2a88cd08");
+            expect(sig).to.eq("a3a72abd606d03804d959cf5c6899b2e785bbf228dbc8e1943a188c8b36f69505a95323820c1261e693ac8689bfa55eb47c55b9b8b5491d9b992ed6cc1913a02");
         });
     });
 });

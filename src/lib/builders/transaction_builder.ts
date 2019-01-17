@@ -262,8 +262,6 @@ export class TxBalanceBuilder extends TxUtility {
 		this.data.timestamp = moment().unix();
 		await this.finalize(sk);
 		const txBytes = Buffer.from(JSON.stringify(this.data));
-		return Promise.resolve(
-			b58.encode(Buffer.concat([TxPayloadVersion, txBytes])),
-		);
+		return Promise.resolve(b58.encode(Buffer.concat([TxPayloadVersion, txBytes])));
 	}
 }

@@ -32,7 +32,7 @@ describe("#Node", () => {
 		done();
 	});
 
-	describe(".getTransactionStatus", () => {
+	describe("#getTransactionStatus", () => {
 		it("should return 'unknown' when transaction hash is not known", async () => {
 			const hash =
 				"0xe89d14674e80cd612c597b486279ba1c5599db5acce327305b2b73c4565440fd";
@@ -61,7 +61,7 @@ describe("#Node", () => {
 		});
 	});
 
-	describe(".getSyncState", () => {
+	describe("#getSyncStat", () => {
 		it("should return sync state", async () => {
 			let expected = {
 				currentChainHeight: 100,
@@ -71,23 +71,23 @@ describe("#Node", () => {
 				targetTotalDifficulty: 22999999,
 			};
 			const mock = makeClientStub(null, expected);
-			const result = await spell.node.getSyncState();
+			const result = await spell.node.getSyncStat();
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith("node_getSyncState", null);
+			expect(mock).to.have.been.calledWith("node_getSyncStat", null);
 			expect(result).to.be.deep.eq(expected);
 		});
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.node.getSyncState().catch((err) => {
+			spell.node.getSyncStat().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith("node_getSyncState", null);
+				expect(mock).to.have.been.calledWith("node_getSyncStat", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
 	});
 
-	describe(".isSyncing", () => {
+	describe("#isSyncing", () => {
 		it("should return sync status", async () => {
 			let expected = false;
 			const mock = makeClientStub(null, expected);
@@ -107,7 +107,7 @@ describe("#Node", () => {
 		});
 	});
 
-	describe(".info", () => {
+	describe("#info", () => {
 		it("should call method", async () => {
 			const mock = makeClientStub(null, {});
 			const result = await spell.node.info();
@@ -126,7 +126,7 @@ describe("#Node", () => {
 		});
 	});
 
-	describe(".config", () => {
+	describe("#config", () => {
 		it("should call method", async () => {
 			const mock = makeClientStub(null, {});
 			const result = await spell.node.config();
@@ -140,6 +140,25 @@ describe("#Node", () => {
 			spell.node.config().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("node_config", null);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe("#basic", () => {
+		it("should call method", async () => {
+			const mock = makeClientStub(null, {});
+			const result = await spell.node.basic();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_basic", null);
+			expect(result).to.be.deep.eq({});
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.basic().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_basic", null);
 				expect(err.message).to.be.eq("bad method");
 			});
 		});
