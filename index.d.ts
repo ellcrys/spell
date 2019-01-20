@@ -133,6 +133,10 @@ interface NodeInfo {
 	buildDate: string;
 	buildCommit: string;
 	goVersion: string;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 interface BasicNodeInfo {
@@ -145,6 +149,10 @@ interface BasicNodeInfo {
 	name: string;
 	netVersion: string;
 	syncing: boolean;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 interface NodeConfig {
