@@ -276,4 +276,23 @@ export default class State extends Namespace {
 				});
 		});
 	}
+
+	/**
+	 * Get Tip of the Block on the node.
+	 *
+	 * @returns {Promise<Block>}
+	 * @memberof State
+	 */
+	public getTipBlock(): Promise<Block> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("state_getTipBlock", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
 }
