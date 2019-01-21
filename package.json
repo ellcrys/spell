@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@types/bignum": "0.0.29",
 		"@types/ed25519": "0.0.0",
+		"@types/msgpack-lite": "^0.1.6",
 		"@types/sha256": "^0.2.0",
 		"bignum": "^0.13.0",
 		"blake2": "^2.0.1",
@@ -32,6 +33,7 @@
 		"flaverr": "^1.9.2",
 		"jsonwebtoken": "^8.4.0",
 		"moment": "^2.23.0",
+		"msgpack-lite": "^0.1.26",
 		"msgpack5": "^4.2.1",
 		"node-json-rpc2": "^1.1.0",
 		"random-number": "0.0.9",

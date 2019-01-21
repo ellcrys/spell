@@ -10,7 +10,7 @@ import Net from "./namespaces/net";
 import Logger from "./namespaces/logger";
 import Ell from "./namespaces/ell";
 import RPC from "./namespaces/rpc";
-
+import BlockUtil from "./namespaces/util/blockUtil";
 /**
  * Spell provides access to a client
  * RPC functionality.
@@ -90,7 +90,22 @@ export default class Spell {
 	 */
 	public logger: Logger;
 
+	/**
+	 * RPC Module
+	 *
+	 * @type {RPC}
+	 * @memberof Spell
+	 */
 	public rpc: RPC;
+
+	/**
+	 * Block utility module
+	 *
+	 * @type {BlockUtility}
+	 * @memberof Spell
+	 */
+	public blockUtil: BlockUtil;
+
 	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
@@ -106,6 +121,7 @@ export default class Spell {
 		this.logger = new Logger(this.rpcClient);
 		this.ell = new Ell(this.rpcClient);
 		this.rpc = new RPC(this.rpcClient);
+		this.blockUtil = new BlockUtil(this.rpcClient);
 	}
 
 	/**

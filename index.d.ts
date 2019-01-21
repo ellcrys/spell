@@ -42,6 +42,8 @@ interface Header {
 	creatorPubKey: string;
 	difficulty: string;
 	extra: string;
+	nonce: string;
+	number: string;
 	parentHash: string;
 	stateRoot: string;
 	timestamp: string;
