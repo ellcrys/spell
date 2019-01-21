@@ -14,6 +14,14 @@ export default class BlockUtil extends Namespace {
 		super();
 		this.client = client;
 	}
+
+	/**
+	 * Get the size of a block
+	 *
+	 * @param {Block} block
+	 * @returns {number}
+	 * @memberof BlockUtil
+	 */
 	public getSize(block: Block): number {
 		var buffer = msgpack.encode(block);
 
