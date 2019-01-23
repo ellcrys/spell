@@ -13,10 +13,10 @@ export default class RPCClient {
 	/**
 	 * client references the JSON-RPC 2.0 client
 	 *
-	 * @type {JSONRPCCaller}
+	 * @type {Spell.JSONRPCCaller}
 	 * @memberof RPCClient
 	 */
-	public client?: JSONRPCCaller;
+	public client?: Spell.JSONRPCCaller;
 
 	/**
 	 * clientOpts contains the options to pass
@@ -41,10 +41,10 @@ export default class RPCClient {
 	/**
 	 * Creates an instance of RPCClient.
 	 *
-	 * @param {*} client The underlying JSON-RPC 2.0 client
+	 * @param {Spell.JSONRPCCaller} [client] The underlying JSON-RPC 2.0 client
 	 * @memberof RPCClient
 	 */
-	constructor(client?: JSONRPCCaller) {
+	constructor(client?: Spell.JSONRPCCaller) {
 		this.client = client;
 	}
 

@@ -24,11 +24,11 @@ export default class Ell extends Namespace {
 	/**
 	 * Send a transaction
 	 *
-	 * @param {Transaction} txData The transaction's data
-	 * @returns {Promise<TxResult>}
+	 * @param {Spell.Transaction} txData The transaction's data
+	 * @returns {Promise<Spell.TxResult>}
 	 * @memberof Ell
 	 */
-	public send(txData: Transaction): Promise<TxResult> {
+	public send(txData: Spell.Transaction): Promise<Spell.TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_send", txData)
@@ -78,10 +78,10 @@ export default class Ell extends Namespace {
 	 * to the node.
 	 *
 	 * @param {string} encodedTx
-	 * @returns {Promise<TxResult>}
+	 * @returns {Promise<Spell.TxResult>}
 	 * @memberof Ell
 	 */
-	public sendRaw(encodedTx: string): Promise<TxResult> {
+	public sendRaw(encodedTx: string): Promise<Spell.TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_sendRaw", encodedTx)

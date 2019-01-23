@@ -29,10 +29,10 @@ export default class Node extends Namespace {
 	 * is returned.
 	 *
 	 * @param {string} hash The transaction hash
-	 * @returns {Promise<TxStatus>}
+	 * @returns {Promise<Spell.TxStatus>}
 	 * @memberof Node
 	 */
-	public getTransactionStatus(hash: string): Promise<TxStatus> {
+	public getTransactionStatus(hash: string): Promise<Spell.TxStatus> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getTransactionStatus", hash)
@@ -50,10 +50,10 @@ export default class Node extends Namespace {
 	 * block synchronization session. Returns
 	 * null when the node is not syncing.
 	 *
-	 * @returns {Promise<SyncStat | null>}
+	 * @returns {Promise<Spell.SyncStat | null>}
 	 * @memberof Node
 	 */
-	public getSyncStat(): Promise<SyncStat | null> {
+	public getSyncStat(): Promise<Spell.SyncStat | null> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getSyncStat", null)
@@ -89,10 +89,10 @@ export default class Node extends Namespace {
 	/**
 	 * Get information about the node
 	 *
-	 * @returns {Promise<NodeInfo>}
+	 * @returns {Promise<Spell.NodeInfo>}
 	 * @memberof Node
 	 */
-	public info(): Promise<NodeInfo> {
+	public info(): Promise<Spell.NodeInfo> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_info", null)
@@ -108,10 +108,10 @@ export default class Node extends Namespace {
 	/**
 	 * Get the node's configurations
 	 *
-	 * @returns {Promise<NodeInfo>}
+	 * @returns {Promise<Spell.NodeConfig>}
 	 * @memberof Node
 	 */
-	public config(): Promise<NodeConfig> {
+	public config(): Promise<Spell.NodeConfig> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_config", null)
@@ -126,12 +126,12 @@ export default class Node extends Namespace {
 
 	/**
 	 * Returns non-sensitive information about
-	 * a node. 
+	 * a node.
 	 *
-	 * @returns {Promise<BasicNodeInfo>}
+	 * @returns {Promise<Spell.BasicNodeInfo>}
 	 * @memberof Node
 	 */
-	public basic(): Promise<BasicNodeInfo> {
+	public basic(): Promise<Spell.BasicNodeInfo> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_basic", null)

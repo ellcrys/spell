@@ -5,7 +5,7 @@ const expect = chai.expect;
 describe("#TxUtility", () => {
 	let txUtil: TxUtility;
 	let pk: PrivateKey;
-	let testTx: Transaction;
+	let testTx: Spell.Transaction;
 
 	beforeEach(() => {
 		txUtil = new TxUtility();

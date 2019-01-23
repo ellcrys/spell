@@ -23,11 +23,10 @@ export default class Pool extends Namespace {
 	 * Get the size of the transaction
 	 * pool
 	 *
-	 * @export
-	 * @class Pool
-	 * @extends {Namespace}
+	 * @returns {Promise<Spell.PoolSize>}
+	 * @memberof Pool
 	 */
-	public getSize(): Promise<PoolSize> {
+	public getSize(): Promise<Spell.PoolSize> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("pool_getSize", null)

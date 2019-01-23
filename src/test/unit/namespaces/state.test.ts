@@ -23,7 +23,7 @@ describe("#State", () => {
 			call: (
 				method: string,
 				params: any,
-				option: HttpCallOption,
+				option: Spell.HttpCallOption,
 				cb: (err: any, res: any) => {},
 			): any => {
 				cb(null, null);

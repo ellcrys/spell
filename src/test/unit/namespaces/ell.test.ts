@@ -13,7 +13,7 @@ describe("#Ell", () => {
 	let spell: Spell;
 	let client: RPCClient;
 	let pk: PrivateKey;
-	let testTx: Transaction;
+	let testTx: Spell.Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
 		return sinon
@@ -28,7 +28,7 @@ describe("#Ell", () => {
 			call: (
 				method: string,
 				params: any,
-				option: HttpCallOption,
+				option: Spell.HttpCallOption,
 				cb: (err: any, res: any) => {},
 			): any => {
 				cb(null, null);

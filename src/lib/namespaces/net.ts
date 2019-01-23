@@ -24,10 +24,10 @@ export default class Net extends Namespace {
 	 * getActivePeers get all the peers
 	 * that are connected to the node
 	 *
-	 * @returns {Promise<Peer[]>}
+	 * @returns {Promise<Spell.ActivePeer[]>}
 	 * @memberof Net
 	 */
-	public getActivePeers(): Promise<ActivePeer[]> {
+	public getActivePeers(): Promise<Spell.ActivePeer[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_getActivePeers", null)
@@ -44,10 +44,10 @@ export default class Net extends Namespace {
 	 * Get all the peers that the peers
 	 * that is known to the node.
 	 *
-	 * @returns {Promise<Peer[]>}
+	 * @returns {Promise<Spell.Peer[]>}
 	 * @memberof Net
 	 */
-	public getPeers(): Promise<Peer[]> {
+	public getPeers(): Promise<Spell.Peer[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_getPeers", null)
@@ -83,10 +83,10 @@ export default class Net extends Namespace {
 	/**
 	 * Get the node's connection stats
 	 *
-	 * @returns {Promise<any>}
+	 * @returns {Promise<Spell.NetStat>}
 	 * @memberof Net
 	 */
-	public getStats(): Promise<NetStat> {
+	public getStats(): Promise<Spell.NetStat> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_stats", null)

@@ -5,7 +5,6 @@ import TxUtility from "./builders/tx_util";
 import { NumDecimals, TxPayloadVersion } from "./builders/transaction_builder";
 
 export {
-	Spell,
 	PrivateKey,
 	PublicKey,
 	Address,
@@ -14,4 +13,4 @@ export {
 	TxPayloadVersion,
 };
 
-export default new Spell();
+export default Spell;

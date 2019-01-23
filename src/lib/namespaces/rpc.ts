@@ -26,7 +26,6 @@ export default class RPC extends Namespace {
 	 *
 	 * @export
 	 * @class RPC
-	 * @extends {Namespace}
 	 */
 	public stop(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
@@ -47,7 +46,6 @@ export default class RPC extends Namespace {
 	 *
 	 * @export
 	 * @class RPC
-	 * @extends {Namespace}
 	 */
 	public echo(params?: any | null): Promise<any> {
 		return new Promise((resolve, reject) => {
@@ -66,11 +64,10 @@ export default class RPC extends Namespace {
 	 * Get all JSON-RPC 2.0 methods
 	 * supported by the service
 	 *
-	 * @export
-	 * @class RPC
-	 * @extends {Namespace}
+	 * @returns {Promise<Spell.RpcMethod[]>}
+	 * @memberof RPC
 	 */
-	public methods(): Promise<RpcMethod[]> {
+	public methods(): Promise<Spell.RpcMethod[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("rpc_methods", null)

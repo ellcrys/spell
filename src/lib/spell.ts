@@ -1,4 +1,4 @@
-import jsonrpc = require("yo-jsonrpc2");
+const jsonrpc = require("yo-jsonrpc2");
 import errors, { wrapErr } from "./errors";
 import State from "./namespaces/state";
 import RPCClient from "./rpcclient";
@@ -114,7 +114,7 @@ export default class Spell {
 	 * it will use the connection in future RPC
 	 * method calls.
 	 */
-	public provideClient(options: ConnectOptions) {
+	public provideClient(options: Spell.ConnectOptions) {
 		return new Promise((resolve, reject) => {
 			const client = jsonrpc.Client.$create(options.port, options.host);
 			client.call("rpc_echo", "hi", options, (err: any, res: any) => {
