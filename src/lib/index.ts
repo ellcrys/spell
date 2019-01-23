@@ -14,7 +14,6 @@ export {
 	TxUtility,
 	NumDecimals,
 	TxPayloadVersion,
-	Spell,
 };
 
 export default Spell;
