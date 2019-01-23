@@ -72,14 +72,14 @@ export default class Spell {
      * it will use the connection in future RPC
      * method calls.
      */
-    provideClient(options: ConnectOptions): Promise<{}>;
+    provideClient(options: ConnectOptions): Promise<RPCClient>;
     /**
      * Request for a session token from the node.
      *
      * @returns
      * @memberof Spell
      */
-    authenticate(username: string, password: string): Promise<{}>;
+    authenticate(username: string, password: string): Promise<string>;
 }
 
 export  const NumDecimals = 18;

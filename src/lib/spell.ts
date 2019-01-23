@@ -114,8 +114,12 @@ export default class Spell {
 	 * Ellcrys JSON-RPC server. If it succeeds,
 	 * it will use the connection in future RPC
 	 * method calls.
+	 *
+	 * @param {ConnectOptions} options The connection options
+	 * @returns {Promise<RPCClient>} An initialized client
+	 * @memberof Spell
 	 */
-	public provideClient(options: ConnectOptions) {
+	public provideClient(options: ConnectOptions): Promise<RPCClient> {
 		return new Promise((resolve, reject) => {
 			const client = jsonrpc.Client.$create(options.port, options.host);
 			client.call("rpc_echo", "hi", options, (err: any, res: any) => {
@@ -145,10 +149,13 @@ export default class Spell {
 	/**
 	 * Request for a session token from the node.
 	 *
-	 * @returns
+	 *
+	 * @param {string} username The node's RPC username
+	 * @param {string} password The node's RPC password
+	 * @returns {Promise<string>} A session token
 	 * @memberof Spell
 	 */
-	authenticate(username: string, password: string) {
+	authenticate(username: string, password: string): Promise<string> {
 		return new Promise((resolve, reject) => {
 			this.auth
 				.authenticate(username, password)
