@@ -1,6 +1,6 @@
 import crypto = require("crypto");
 import ed25519 = require("ed25519");
-const SHA3 = require("sha3");
+const {SHA3} = require("sha3");
 const RIPEMD160 = require("ripemd160");
 const b58 = require("bs58check");
 import errors from "./errors";
