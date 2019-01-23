@@ -1,10 +1,8 @@
 import Decimal from "decimal.js";
 
-export as namespace Spell
 
-export = Spell;
 
-declare class Spell {
+export default class Spell {
 	/**
      * The RPC client
      *
@@ -64,7 +62,7 @@ declare class Spell {
     logger: Logger;
     rpc: RPC;
     /**
-     * Creates an instance of Spell.
+     * Creates an instance of Spell
      * @memberof Spell
      */
     constructor();
@@ -74,7 +72,7 @@ declare class Spell {
      * it will use the connection in future RPC
      * method calls.
      */
-    provideClient(options: Spell.ConnectOptions): Promise<{}>;
+    provideClient(options: ConnectOptions): Promise<{}>;
     /**
      * Request for a session token from the node.
      *
@@ -84,236 +82,233 @@ declare class Spell {
     authenticate(username: string, password: string): Promise<{}>;
 }
 
-declare namespace Spell {
+export  const NumDecimals = 18;
 
-	export  const NumDecimals = 18;
+export  const TxPayloadVersion: Buffer;
 
-	export  const TxPayloadVersion: Buffer;
+export  const AddressVersion: Buffer;
+export  const PublicKeyVersion: Buffer;
+export  const PrivateKeyVersion: Buffer;
 
-	export  const AddressVersion: Buffer;
-	export  const PublicKeyVersion: Buffer;
-	export  const PrivateKeyVersion: Buffer;
-
-	export interface HttpCallOption {
-		method: string;
-		params: any;
-		jsonrpc: string;
-		id: number;
-	}
-
-	export interface JSONRPCCaller {
-		call(
-			method: string,
-			params: any,
-			option: Spell.HttpCallOption,
-			cb: (err: any, res: any) => {},
-		): any;
-	}
-
-	export interface ConnectOptions {
-		username?: string;
-		password?: string;
-		host: string;
-		port: number;
-		https?: boolean;
-		path?: string;
-	}
-
-	export interface Block {
-		hash: string;
-		header: Header;
-		sig: string;
-		transactions: Array<Spell.Transaction>;
-	}
-
-	export interface Header {
-		creatorPubKey: string;
-		difficulty: string;
-		extra: string;
-		parentHash: string;
-		stateRoot: string;
-		timestamp: string;
-		totalDifficulty: string;
-		transactionRoot: string;
-	}
-
-	export interface InvokeArgs {
-		func: string;
-		param: { [key: string]: Buffer };
-	}
-
-	export interface Transaction {
-		fee?: string;
-		from?: string;
-		hash?: string;
-		nonce?: number;
-		senderPubKey?: string;
-		sig?: string;
-		timestamp?: number;
-		to?: string;
-		type?: number;
-		value?: string;
-		invokeArgs?: InvokeArgs;
-	}
-
-	export interface Difficulty {
-		difficulty: string;
-		totalDifficulty: string;
-	}
-
-	export interface Account {
-		address: string;
-		balance: string;
-		nonce: number;
-		type: number;
-	}
-
-	export interface ReOrgInfo {
-		branchID: string;
-		branchLen: number;
-		mainChainID: string;
-		reOrgLen: 2;
-		timestamp: number;
-	}
-
-	export interface Branches {
-		height: string;
-		id: string;
-		isBranch: boolean;
-		length: string;
-		parentBlockHash: string;
-		parentBlockNumber: string;
-		timestamp: string;
-		totalDifficulty: string;
-	}
-
-	export interface Chain {
-		height: string;
-		id: string;
-		timestamp: string;
-		totalDifficulty: string;
-	}
-
-	enum TxStatus {
-		Mined = "mined",
-		Pooled = "pooled",
-		Unknown = "unknown",
-	}
-
-	export interface SyncStat {
-		currentChainHeight: number;
-		currentTotalDifficulty: number;
-		progressPercent: number;
-		targetChainHeight: number;
-		targetTotalDifficulty: number;
-	}
-
-	export interface NodeInfo {
-		address: string;
-		id: string;
-		coinbase: string;
-		coinbasePublicKey: string;
-		listeningAddresses: string[];
-		mode: string;
-		syncing: boolean;
-		netVersion: string;
-		buildVersion: string;
-		buildDate: string;
-		buildCommit: string;
-		goVersion: string;
-	}
-
-	export interface BasicNodeInfo {
-		buildCommit: string;
-		buildDate: string;
-		buildVersion: string;
-		goVersion: string;
-		id: string;
-		mode: string;
-		name: string;
-		netVersion: string;
-		syncing: boolean;
-	}
-
-	export interface NodeConfig {
-		peer: PeerInfo;
-		txPool: TxPoolInfo;
-		rpc: RPCInfo;
-	}
-
-	export interface PeerInfo {
-		address: string;
-		mode: number;
-		getAddrInt: number;
-		pingInt: number;
-		selfAdvInt: number;
-		cleanUpInt: number;
-		maxAddrsExpected: number;
-		maxOutConnections: number;
-		maxInConnections: number;
-		conEstInt: number;
-		messageTimeout: number;
-	}
-
-	export interface TxPoolInfo {
-		cap: number;
-	}
-
-	export interface RPCInfo {
-		disableAuth: boolean;
-		username: string;
-		password: string;
-		sessionSecretKey: string;
-	}
-
-	export interface PoolSize {
-		byteSize: number;
-		numTxs: number;
-	}
-
-	export interface ActivePeer {
-		connected: boolean;
-		id: string;
-		isAcquainted: boolean;
-		isHardcoded: boolean;
-		isInbound: boolean;
-		lastSeen: string;
-	}
-
-	export interface Peer {
-		banEndTime: string;
-		connected: boolean;
-		id: string;
-		isAcquainted: boolean;
-		isBanned: boolean;
-		isInbound: boolean;
-		lastSeen: string;
-	}
-
-	export interface NetStat {
-		inbound: number;
-		intros: number;
-		outbound: number;
-		total: number;
-	}
-
-	export interface TxResult {
-		id: string;
-	}
-
-	export interface RpcMethod {
-		description: string;
-		name: string;
-		private: boolean;
-	}
-
-    enum TxType {
-		Balance = 0x1,
-		Alloc = 0x2,
-	}
+export interface HttpCallOption {
+	method: string;
+	params: any;
+	jsonrpc: string;
+	id: number;
 }
 
-declare class PrivateKey {
+export interface JSONRPCCaller {
+	call(
+		method: string,
+		params: any,
+		option: HttpCallOption,
+		cb: (err: any, res: any) => {},
+	): any;
+}
+
+export interface ConnectOptions {
+	username?: string;
+	password?: string;
+	host: string;
+	port: number;
+	https?: boolean;
+	path?: string;
+}
+
+export interface Block {
+	hash: string;
+	header: Header;
+	sig: string;
+	transactions: Array<Transaction>;
+}
+
+export interface Header {
+	creatorPubKey: string;
+	difficulty: string;
+	extra: string;
+	parentHash: string;
+	stateRoot: string;
+	timestamp: string;
+	totalDifficulty: string;
+	transactionRoot: string;
+}
+
+export interface InvokeArgs {
+	func: string;
+	param: { [key: string]: Buffer };
+}
+
+export interface Transaction {
+	fee?: string;
+	from?: string;
+	hash?: string;
+	nonce?: number;
+	senderPubKey?: string;
+	sig?: string;
+	timestamp?: number;
+	to?: string;
+	type?: number;
+	value?: string;
+	invokeArgs?: InvokeArgs;
+}
+
+export interface Difficulty {
+	difficulty: string;
+	totalDifficulty: string;
+}
+
+export interface Account {
+	address: string;
+	balance: string;
+	nonce: number;
+	type: number;
+}
+
+export interface ReOrgInfo {
+	branchID: string;
+	branchLen: number;
+	mainChainID: string;
+	reOrgLen: 2;
+	timestamp: number;
+}
+
+export interface Branches {
+	height: string;
+	id: string;
+	isBranch: boolean;
+	length: string;
+	parentBlockHash: string;
+	parentBlockNumber: string;
+	timestamp: string;
+	totalDifficulty: string;
+}
+
+export interface Chain {
+	height: string;
+	id: string;
+	timestamp: string;
+	totalDifficulty: string;
+}
+
+export enum TxStatus {
+	Mined = "mined",
+	Pooled = "pooled",
+	Unknown = "unknown",
+}
+
+export interface SyncStat {
+	currentChainHeight: number;
+	currentTotalDifficulty: number;
+	progressPercent: number;
+	targetChainHeight: number;
+	targetTotalDifficulty: number;
+}
+
+export interface NodeInfo {
+	address: string;
+	id: string;
+	coinbase: string;
+	coinbasePublicKey: string;
+	listeningAddresses: string[];
+	mode: string;
+	syncing: boolean;
+	netVersion: string;
+	buildVersion: string;
+	buildDate: string;
+	buildCommit: string;
+	goVersion: string;
+}
+
+export interface BasicNodeInfo {
+	buildCommit: string;
+	buildDate: string;
+	buildVersion: string;
+	goVersion: string;
+	id: string;
+	mode: string;
+	name: string;
+	netVersion: string;
+	syncing: boolean;
+}
+
+export interface NodeConfig {
+	peer: PeerInfo;
+	txPool: TxPoolInfo;
+	rpc: RPCInfo;
+}
+
+export interface PeerInfo {
+	address: string;
+	mode: number;
+	getAddrInt: number;
+	pingInt: number;
+	selfAdvInt: number;
+	cleanUpInt: number;
+	maxAddrsExpected: number;
+	maxOutConnections: number;
+	maxInConnections: number;
+	conEstInt: number;
+	messageTimeout: number;
+}
+
+export interface TxPoolInfo {
+	cap: number;
+}
+
+export interface RPCInfo {
+	disableAuth: boolean;
+	username: string;
+	password: string;
+	sessionSecretKey: string;
+}
+
+export interface PoolSize {
+	byteSize: number;
+	numTxs: number;
+}
+
+export interface ActivePeer {
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isHardcoded: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+export interface Peer {
+	banEndTime: string;
+	connected: boolean;
+	id: string;
+	isAcquainted: boolean;
+	isBanned: boolean;
+	isInbound: boolean;
+	lastSeen: string;
+}
+
+export interface NetStat {
+	inbound: number;
+	intros: number;
+	outbound: number;
+	total: number;
+}
+
+export interface TxResult {
+	id: string;
+}
+
+export interface RpcMethod {
+	description: string;
+	name: string;
+	private: boolean;
+}
+
+export enum TxType {
+	Balance = 0x1,
+	Alloc = 0x2,
+}
+
+export declare class PrivateKey {
     /**
      * The ED25519 key material
      *
@@ -391,7 +386,7 @@ declare class PrivateKey {
     static fromBuffer(buf: Buffer): PrivateKey;
 }
 
-declare class PublicKey {
+export declare class PublicKey {
     private pk;
     /**
      * Returns base58 encode string of the public key
@@ -450,7 +445,7 @@ declare class PublicKey {
     static from(str: string): PublicKey;
 }
 
-declare class Address {
+export declare class Address {
     /**
      * The loaded address
      *
@@ -501,46 +496,46 @@ declare class Address {
 }
 
 
-declare class TxBuilder {
+export declare class TxBuilder {
     balance: TxBalanceBuilder;
     constructor(client: RPCClient);
 }
 
-declare class TxUtility {
+export declare class TxUtility {
     /**
      * Returns the byte equivalent of
      * a given transaction but does not
      * include the transaction `hash` and
      * `sig` fields
      *
-     * @param {Spell.Transaction} tx The transaction
+     * @param {Transaction} tx The transaction
      * @returns {Buffer}
      * @memberof TxUtility
      */
-    getBytesNoHashAndSig(tx: Spell.Transaction): Buffer;
+    getBytesNoHashAndSig(tx: Transaction): Buffer;
     /**
      * Compute and return the hash of a transaction
      *
-     * @param {Spell.Transaction} tx The transaction
+     * @param {Transaction} tx The transaction
      * @param {string} [prefix="0x"] Add a prefix to the hash
      * @returns {string}
      * @memberof TxUtility
      */
-    hash(tx: Spell.Transaction, prefix?: string): string;
+    hash(tx: Transaction, prefix?: string): string;
     /**
      * Sign and return a signature of the
      * transaction.
      *
-     * @param {Spell.Transaction} tx The transaction
+     * @param {Transaction} tx The transaction
      * @param {PrivateKey} sk The private key to use for signing
      * @param {string} [prefix="0x"] A prefix to add to the signature
      * @returns {string} An hex string
      * @memberof TxUtility
      */
-    sign(tx: Spell.Transaction, sk: PrivateKey, prefix?: string): string;
+    sign(tx: Transaction, sk: PrivateKey, prefix?: string): string;
 }
 
-declare class TxBalanceBuilder extends TxUtility {
+export declare class TxBalanceBuilder extends TxUtility {
     /**
      * The transaction data
      *
@@ -548,7 +543,7 @@ declare class TxBalanceBuilder extends TxUtility {
      * @type {Transaction}
      * @memberof TxBalanceBuilder
      */
-    protected data: Spell.Transaction;
+    protected data: Transaction;
     /**
      * The RPC client
      *
@@ -631,15 +626,15 @@ declare class TxBalanceBuilder extends TxUtility {
      * @param {PrivateKey} [sk] The senders private key
      * @memberof TxBalanceBuilder
      */
-    payload(sk?: PrivateKey): Promise<Spell.Transaction>;
+    payload(sk?: PrivateKey): Promise<Transaction>;
     /**
      * Send the transaction to the network
      *
      * @param {PrivateKey} sk The sender's private key
-     * @returns {Promise<Spell.TxResult>}
+     * @returns {Promise<TxResult>}
      * @memberof TxBalanceBuilder
      */
-    send(sk: PrivateKey): Promise<Spell.TxResult>;
+    send(sk: PrivateKey): Promise<TxResult>;
     /**
      * Returns a base58 serialized version of the
      * transaction.
@@ -652,18 +647,18 @@ declare class TxBalanceBuilder extends TxUtility {
 }
 
 
-declare class Namespace {
+export declare class Namespace {
     protected client: RPCClient;
 }
 
-declare class RPCClient {
+export declare class RPCClient {
     /**
      * client references the JSON-RPC 2.0 client
      *
      * @type {JSONRPCCaller}
      * @memberof RPCClient
      */
-    client?: Spell.JSONRPCCaller;
+    client?: JSONRPCCaller;
     /**
      * clientOpts contains the options to pass
      * to the client call request
@@ -688,7 +683,7 @@ declare class RPCClient {
      * @param {*} client The underlying JSON-RPC 2.0 client
      * @memberof RPCClient
      */
-    constructor(client?: Spell.JSONRPCCaller);
+    constructor(client?: JSONRPCCaller);
     /**
      * Call a RPC method
      *
@@ -707,7 +702,7 @@ declare class RPCClient {
     setToken(token: string): void;
 }
 
-declare class State extends Namespace {
+export declare class State extends Namespace {
     /**
      * Creates an instance of State.
      *
@@ -719,34 +714,34 @@ declare class State extends Namespace {
      * Get a block by number
      *
      * @param {number} num The block number/height
-     * @returns {Promise<Spell.Block>}
+     * @returns {Promise<Block>}
      * @memberof State
      */
-    getBlock(num: number): Promise<Spell.Block>;
+    getBlock(num: number): Promise<Block>;
     /**
      * Get a block by block Hash
      *
      * @param {string} blockHash The hash of the block.
-     * @returns {Promise<Spell.Block>}
+     * @returns {Promise<Block>}
      * @memberof State
      */
-    getBlockByHash(blockHash: string): Promise<Spell.Block>;
+    getBlockByHash(blockHash: string): Promise<Block>;
     /**
      * Get the current difficulty and total difficulty
      * of the network.
      *
      * @returns
-	 * @returns {Promise<Spell.Difficulty>}
+	 * @returns {Promise<Difficulty>}
      * @memberof State
      */
-	getDifficulty(): Promise<Spell.Difficulty>;
+	getDifficulty(): Promise<Difficulty>;
     /**
      * Get all the account on the network
      *
-     * @returns {Promise<Spell.Account[]>}
+     * @returns {Promise<Account[]>}
      * @memberof State
      */
-    listAccounts(): Promise<Spell.Account[]>;
+    listAccounts(): Promise<Account[]>;
     /**
      * Get a list of re-organization events
      * that have occurred from the node's
@@ -755,23 +750,23 @@ declare class State extends Namespace {
      * @returns {Promise<ReOrgInfo[]>}
      * @memberof State
      */
-    getReOrgs(): Promise<Spell.ReOrgInfo[]>;
+    getReOrgs(): Promise<ReOrgInfo[]>;
     /**
      * Get a list of top accounts on the network.
      *
      * @param {number} limit The maximum number of top accounts to return
-     * @returns {Promise<Spell.Account[]>}
+     * @returns {Promise<Account[]>}
      * @memberof State
      */
-    listTopAccounts(limit: number): Promise<Spell.Account[]>;
+    listTopAccounts(limit: number): Promise<Account[]>;
     /**
      * Get a specific account on the network
      *
      * @param {string} address The address of the accounts
-     * @returns {Promise<Spell.Account>}
+     * @returns {Promise<Account>}
      * @memberof State
      */
-    getAccount(address: string): Promise<Spell.Account>;
+    getAccount(address: string): Promise<Account>;
     /**
      * Get the nonce of a given address
      *
@@ -784,31 +779,31 @@ declare class State extends Namespace {
      * Get a transaction by its hash
      *
      * @param {string} txHash The transaction's hash
-     * @returns {Promise<Spell.Transaction>}
+     * @returns {Promise<Transaction>}
      * @memberof State
      */
-    getTransaction(txHash: string): Promise<Spell.Transaction>;
+    getTransaction(txHash: string): Promise<Transaction>;
     /**
      * Get all the known branches on the node
      *
-     * @returns {Promise<Spell.Branches[]>}
+     * @returns {Promise<Branches[]>}
      * @memberof State
      */
-    getBranches(): Promise<Spell.Branches[]>;
+    getBranches(): Promise<Branches[]>;
     /**
      * Get orphan blocks on the node
      *
-     * @returns {Promise<Spell.Block>}
+     * @returns {Promise<Block>}
      * @memberof State
      */
-    getOrphans(): Promise<Spell.Block>;
+    getOrphans(): Promise<Block>;
     /**
      * Get the best chain on the node
      *
-     * @returns {Promise<Spell.Chain>}
+     * @returns {Promise<Chain>}
      * @memberof State
      */
-    getBestChain(): Promise<Spell.Chain>;
+    getBestChain(): Promise<Chain>;
     /**
      * Returns raw db objects (Debug only)
      *
@@ -819,7 +814,7 @@ declare class State extends Namespace {
     getObjects(filter: JSON): Promise<any>;
 }
 
-declare class Node extends Namespace {
+export declare class Node extends Namespace {
     /**
      * Creates an instance of Node.
      *
@@ -837,19 +832,19 @@ declare class Node extends Namespace {
      * is returned.
      *
      * @param {string} hash The transaction hash
-     * @returns {Promise<Spell.TxStatus>}
+     * @returns {Promise<TxStatus>}
      * @memberof Node
      */
-    getTransactionStatus(hash: string): Promise<Spell.TxStatus>;
+    getTransactionStatus(hash: string): Promise<TxStatus>;
     /**
      * Get the current status of the node
      * block synchronization session. Returns
      * null when the node is not syncing.
      *
-     * @returns {Promise<Spell.SyncStat | null>}
+     * @returns {Promise<SyncStat | null>}
      * @memberof Node
      */
-    getSyncStat(): Promise<Spell.SyncStat | null>;
+    getSyncStat(): Promise<SyncStat | null>;
     /**
      * Check whether the node is currently
      * syncing blocks with a peer.
@@ -861,28 +856,28 @@ declare class Node extends Namespace {
     /**
      * Get information about the node
      *
-     * @returns {Promise<Spell.NodeInfo>}
+     * @returns {Promise<NodeInfo>}
      * @memberof Node
      */
-    info(): Promise<Spell.NodeInfo>;
+    info(): Promise<NodeInfo>;
     /**
      * Get the node's configurations
      *
-     * @returns {Promise<Spell.NodeInfo>}
+     * @returns {Promise<NodeInfo>}
      * @memberof Node
      */
-    config(): Promise<Spell.NodeConfig>;
+    config(): Promise<NodeConfig>;
     /**
      * Returns non-sensitive information about
      * a node.
      *
-     * @returns {Promise<Spell.BasicNodeInfo>}
+     * @returns {Promise<BasicNodeInfo>}
      * @memberof Node
      */
-    basic(): Promise<Spell.BasicNodeInfo>;
+    basic(): Promise<BasicNodeInfo>;
 }
 
-declare class Auth extends Namespace {
+export declare class Auth extends Namespace {
     /**
      * Creates an instance of Auth.
      *
@@ -902,7 +897,7 @@ declare class Auth extends Namespace {
     authenticate(username: string, password: string): Promise<string>;
 }
 
-declare class Pool extends Namespace {
+export declare class Pool extends Namespace {
     /**
      * Creates an instance of Pool.
      * @param {RPCClient} client
@@ -915,10 +910,10 @@ declare class Pool extends Namespace {
      *
      * @export
      * @class Pool
-	 * @returns {Promise<Spell.PoolSize>}
+	 * @returns {Promise<PoolSize>}
      * @extends {Namespace}
      */
-	getSize(): Promise<Spell.PoolSize>;
+	getSize(): Promise<PoolSize>;
     /**
      * Get all transactions in the pool
      *
@@ -928,7 +923,7 @@ declare class Pool extends Namespace {
     getAll(): Promise<any>;
 }
 
-declare class Miner extends Namespace {
+export declare class Miner extends Namespace {
     /**
      *Creates an instance of Miner.
      * @param {RPCClient} client
@@ -981,7 +976,7 @@ declare class Miner extends Namespace {
     setThreads(num: number): Promise<number>;
 }
 
-declare class Net extends Namespace {
+export declare class Net extends Namespace {
     /**
      * Creates an instance of Net.
      *
@@ -994,18 +989,18 @@ declare class Net extends Namespace {
      * that are connected to the node
      *
      * @returns {Promise<Peer[]>}
-	 * @returns {Promise<Spell.ActivePeer[]>}
+	 * @returns {Promise<ActivePeer[]>}
      * @memberof Net
      */
-	getActivePeers(): Promise<Spell.ActivePeer[]>;
+	getActivePeers(): Promise<ActivePeer[]>;
     /**
      * Get all the peers that the peers
      * that is known to the node.
      *
-	 * @returns {Promise<Spell.Peer[]>}
+	 * @returns {Promise<Peer[]>}
      * @memberof Net
      */
-	getPeers(): Promise<Spell.Peer[]>;
+	getPeers(): Promise<Peer[]>;
     /**
      * Get the peers that the node will
      * regularly broadcast messages to.
@@ -1017,10 +1012,10 @@ declare class Net extends Namespace {
     /**
      * Get the node's connection stats
      *
-     * @returns {Promise<Spell.NetStat>}
+     * @returns {Promise<NetStat>}
      * @memberof Net
      */
-    getStats(): Promise<Spell.NetStat>;
+    getStats(): Promise<NetStat>;
     /**
      * Add a peer address to a node.
      * The node will attempt to connect
@@ -1058,7 +1053,7 @@ declare class Net extends Namespace {
     noNet(): Promise<boolean>;
 }
 
-declare class Ell extends Namespace {
+export declare class Ell extends Namespace {
     /**
      * Creates an instance of Ell.
      *
@@ -1069,11 +1064,11 @@ declare class Ell extends Namespace {
     /**
      * Send a transaction
      *
-     * @param {Spell.Transaction} txData The transaction's data
-     * @returns {Promise<Spell.TxResult>}
+     * @param {Transaction} txData The transaction's data
+     * @returns {Promise<TxResult>}
      * @memberof Ell
      */
-    send(txData: Spell.Transaction): Promise<Spell.TxResult>;
+    send(txData: Transaction): Promise<TxResult>;
     /**
      * Returns the balance of an account
      * using the given address
@@ -1096,13 +1091,13 @@ declare class Ell extends Namespace {
      * to the node.
      *
      * @param {string} encodedTx
-     * @returns {Promise<Spell.TxResult>}
+     * @returns {Promise<TxResult>}
      * @memberof Ell
      */
-	sendRaw(encodedTx: string): Promise<Spell.TxResult>;
+	sendRaw(encodedTx: string): Promise<TxResult>;
 }
 
-declare class Logger extends Namespace {
+export declare class Logger extends Namespace {
     /**
      * Creates an instance of Logger.
      * @param {RPCClient} client
@@ -1128,7 +1123,7 @@ declare class Logger extends Namespace {
 }
 
 
-declare class RPC extends Namespace {
+export declare class RPC extends Namespace {
     /**
      * Creates an instance of RPC.
      * @param {RPCClient} client
@@ -1160,7 +1155,7 @@ declare class RPC extends Namespace {
      * @class RPC
      * @extends {Namespace}
      */
-    methods(): Promise<Spell.RpcMethod[]>;
+    methods(): Promise<RpcMethod[]>;
 }
 
 

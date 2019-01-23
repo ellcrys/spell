@@ -1,5 +1,6 @@
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import { ActivePeer, Peer, NetStat } from "../../..";
 
 /**
  * Manage the network related activities of a Node
@@ -24,10 +25,10 @@ export default class Net extends Namespace {
 	 * getActivePeers get all the peers
 	 * that are connected to the node
 	 *
-	 * @returns {Promise<Spell.ActivePeer[]>}
+	 * @returns {Promise<ActivePeer[]>}
 	 * @memberof Net
 	 */
-	public getActivePeers(): Promise<Spell.ActivePeer[]> {
+	public getActivePeers(): Promise<ActivePeer[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_getActivePeers", null)
@@ -44,10 +45,10 @@ export default class Net extends Namespace {
 	 * Get all the peers that the peers
 	 * that is known to the node.
 	 *
-	 * @returns {Promise<Spell.Peer[]>}
+	 * @returns {Promise<Peer[]>}
 	 * @memberof Net
 	 */
-	public getPeers(): Promise<Spell.Peer[]> {
+	public getPeers(): Promise<Peer[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_getPeers", null)
@@ -83,10 +84,10 @@ export default class Net extends Namespace {
 	/**
 	 * Get the node's connection stats
 	 *
-	 * @returns {Promise<Spell.NetStat>}
+	 * @returns {Promise<NetStat>}
 	 * @memberof Net
 	 */
-	public getStats(): Promise<Spell.NetStat> {
+	public getStats(): Promise<NetStat> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_stats", null)

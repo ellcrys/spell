@@ -11,6 +11,7 @@ import {
 import { Address, PrivateKey } from "../../../lib";
 import Decimal from "decimal.js";
 import errors from "../../../lib/errors";
+import { Transaction, HttpCallOption } from "../../../..";
 const b58 = require("bs58check");
 
 const expect = chai.expect;
@@ -20,7 +21,7 @@ describe("#TransactionBuilder", () => {
 	let spell: Spell;
 	let client: RPCClient;
 	let pk: PrivateKey;
-	let testTx: Spell.Transaction;
+	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
 		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
@@ -33,10 +34,10 @@ describe("#TransactionBuilder", () => {
 		public getClient(): RPCClient | undefined {
 			return this.client;
 		}
-		getData(): Spell.Transaction {
+		getData(): Transaction {
 			return this.data;
 		}
-		setData(tx: Spell.Transaction) {
+		setData(tx: Transaction) {
 			this.data = tx;
 		}
 		public finalize(sk?: PrivateKey): Promise<string> {
@@ -51,7 +52,7 @@ describe("#TransactionBuilder", () => {
 			call: (
 				method: string,
 				params: any,
-				option: Spell.HttpCallOption,
+				option: HttpCallOption,
 				cb: (err: any, res: any) => {},
 			): any => {
 				cb(null, null);

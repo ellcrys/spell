@@ -1,5 +1,6 @@
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import { RpcMethod } from "../../..";
 
 /**
  * RPC is responsible for calling
@@ -64,10 +65,10 @@ export default class RPC extends Namespace {
 	 * Get all JSON-RPC 2.0 methods
 	 * supported by the service
 	 *
-	 * @returns {Promise<Spell.RpcMethod[]>}
+	 * @returns {Promise<RpcMethod[]>}
 	 * @memberof RPC
 	 */
-	public methods(): Promise<Spell.RpcMethod[]> {
+	public methods(): Promise<RpcMethod[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("rpc_methods", null)

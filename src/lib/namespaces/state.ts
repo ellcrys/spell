@@ -1,5 +1,6 @@
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
+import { Block, Difficulty, Account, ReOrgInfo, Transaction, Branches, Chain } from "../../..";
 
 /**
  * Read the state of the Ellcrys blockchain
@@ -27,7 +28,7 @@ export default class State extends Namespace {
 	 * @returns {Promise<Block>}
 	 * @memberof State
 	 */
-	public getBlock(num: number): Promise<Spell.Block> {
+	public getBlock(num: number): Promise<Block> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getBlock", num)
@@ -47,7 +48,7 @@ export default class State extends Namespace {
 	 * @returns {Promise<Block>}
 	 * @memberof State
 	 */
-	public getBlockByHash(blockHash: string): Promise<Spell.Block> {
+	public getBlockByHash(blockHash: string): Promise<Block> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getBlockByHash", blockHash)
@@ -64,10 +65,10 @@ export default class State extends Namespace {
 	 * Get the current difficulty and total difficulty
 	 * of the network.
 	 *
-	 * @returns {Promise<Spell.Difficulty>}
+	 * @returns {Promise<Difficulty>}
 	 * @memberof State
 	 */
-	public getDifficulty(): Promise<Spell.Difficulty> {
+	public getDifficulty(): Promise<Difficulty> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getDifficulty", null)
@@ -83,10 +84,10 @@ export default class State extends Namespace {
 	/**
 	 * Get all the account on the network
 	 *
-	 * @returns {Promise<Spell.Account[]>}
+	 * @returns {Promise<Account[]>}
 	 * @memberof State
 	 */
-	public listAccounts(): Promise<Spell.Account[]> {
+	public listAccounts(): Promise<Account[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_listAccounts", null)
@@ -104,10 +105,10 @@ export default class State extends Namespace {
 	 * that have occurred from the node's
 	 * perspective
 	 *
-	 * @returns {Promise<Spell.ReOrgInfo[]>}
+	 * @returns {Promise<ReOrgInfo[]>}
 	 * @memberof State
 	 */
-	public getReOrgs(): Promise<Spell.ReOrgInfo[]> {
+	public getReOrgs(): Promise<ReOrgInfo[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getReOrgs", null)
@@ -124,10 +125,10 @@ export default class State extends Namespace {
 	 * Get a list of top accounts on the network.
 	 *
 	 * @param {number} limit The maximum number of top accounts to return
-	 * @returns {Promise<Spell.Account[]>}
+	 * @returns {Promise<Account[]>}
 	 * @memberof State
 	 */
-	public listTopAccounts(limit: number): Promise<Spell.Account[]> {
+	public listTopAccounts(limit: number): Promise<Account[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_listTopAccounts", limit)
@@ -144,10 +145,10 @@ export default class State extends Namespace {
 	 * Get a specific account on the network
 	 *
 	 * @param {string} address The address of the accounts
-	 * @returns {Promise<Spell.Account>}
+	 * @returns {Promise<Account>}
 	 * @memberof State
 	 */
-	public getAccount(address: string): Promise<Spell.Account> {
+	public getAccount(address: string): Promise<Account> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getAccount", address)
@@ -184,10 +185,10 @@ export default class State extends Namespace {
 	 * Get a transaction by its hash
 	 *
 	 * @param {string} txHash The transaction's hash
-	 * @returns {Promise<Spell.Transaction>}
+	 * @returns {Promise<Transaction>}
 	 * @memberof State
 	 */
-	public getTransaction(txHash: string): Promise<Spell.Transaction> {
+	public getTransaction(txHash: string): Promise<Transaction> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getTransaction", txHash)
@@ -203,10 +204,10 @@ export default class State extends Namespace {
 	/**
 	 * Get all the known branches on the node
 	 *
-	 * @returns {Promise<Spell.Branches[]>}
+	 * @returns {Promise<Branches[]>}
 	 * @memberof State
 	 */
-	public getBranches(): Promise<Spell.Branches[]> {
+	public getBranches(): Promise<Branches[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getBranches", null)
@@ -222,10 +223,10 @@ export default class State extends Namespace {
 	/**
 	 * Get orphan blocks on the node
 	 *
-	 * @returns {Promise<Spell.Block[]>}
+	 * @returns {Promise<Block[]>}
 	 * @memberof State
 	 */
-	public getOrphans(): Promise<Spell.Block[]> {
+	public getOrphans(): Promise<Block[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getOrphans", null)
@@ -241,10 +242,10 @@ export default class State extends Namespace {
 	/**
 	 * Get the best chain on the node
 	 *
-	 * @returns {Promise<Spell.Chain>}
+	 * @returns {Promise<Chain>}
 	 * @memberof State
 	 */
-	public getBestChain(): Promise<Spell.Chain> {
+	public getBestChain(): Promise<Chain> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getBestChain", null)

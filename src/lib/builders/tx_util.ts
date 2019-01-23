@@ -1,5 +1,6 @@
 import msgpack = require("msgpack5");
 import { PrivateKey } from "..";
+import { Transaction } from "../../..";
 const blake2 = require("blake2");
 
 /**
@@ -16,11 +17,11 @@ export default class TxUtility {
 	 * include the transaction `hash` and
 	 * `sig` fields
 	 *
-	 * @param {Spell.Transaction} tx The transaction
+	 * @param {Transaction} tx The transaction
 	 * @returns {Buffer}
 	 * @memberof TxUtility
 	 */
-	getBytesNoHashAndSig(tx: Spell.Transaction): Buffer {
+	getBytesNoHashAndSig(tx: Transaction): Buffer {
 		const data = [
 			tx.fee,
 			tx.from,
@@ -40,12 +41,12 @@ export default class TxUtility {
 	/**
 	 * Compute and return the hash of a transaction
 	 *
-	 * @param {Spell.Transaction} tx The transaction
+	 * @param {Transaction} tx The transaction
 	 * @param {string} [prefix="0x"] Add a prefix to the hash
 	 * @returns {string}
 	 * @memberof TxUtility
 	 */
-	hash(tx: Spell.Transaction, prefix = "0x"): string {
+	hash(tx: Transaction, prefix = "0x"): string {
 		const data = this.getBytesNoHashAndSig(tx);
 		var h = blake2.createHash("blake2b", { digestLength: 32 });
 		h.update(data);
@@ -56,13 +57,13 @@ export default class TxUtility {
 	 * Sign and return a signature of the
 	 * transaction.
 	 *
-	 * @param {Spell.Transaction} tx The transaction
+	 * @param {Transaction} tx The transaction
 	 * @param {PrivateKey} sk The private key to use for signing
 	 * @param {string} [prefix="0x"] A prefix to add to the signature
 	 * @returns {string} An hex string
 	 * @memberof TxUtility
 	 */
-	sign(tx: Spell.Transaction, sk: PrivateKey, prefix = "0x"): string {
+	sign(tx: Transaction, sk: PrivateKey, prefix = "0x"): string {
 		const data = this.getBytesNoHashAndSig(tx);
 		return prefix + sk.sign(data).toString("hex");
 	}

@@ -1,11 +1,12 @@
 import chai = require("chai");
 import { TxUtility, PrivateKey } from "../../../lib";
+import { Transaction } from "../../../..";
 const expect = chai.expect;
 
 describe("#TxUtility", () => {
 	let txUtil: TxUtility;
 	let pk: PrivateKey;
-	let testTx: Spell.Transaction;
+	let testTx: Transaction;
 
 	beforeEach(() => {
 		txUtil = new TxUtility();

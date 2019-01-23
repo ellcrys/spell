@@ -1,6 +1,7 @@
 import errors from "./errors";
 import jwt = require("jsonwebtoken");
 import moment = require("moment");
+import { JSONRPCCaller } from "../..";
 
 /**
  * RPCClient connects to given host and port
@@ -13,10 +14,10 @@ export default class RPCClient {
 	/**
 	 * client references the JSON-RPC 2.0 client
 	 *
-	 * @type {Spell.JSONRPCCaller}
+	 * @type {JSONRPCCaller}
 	 * @memberof RPCClient
 	 */
-	public client?: Spell.JSONRPCCaller;
+	public client?: JSONRPCCaller;
 
 	/**
 	 * clientOpts contains the options to pass
@@ -41,10 +42,10 @@ export default class RPCClient {
 	/**
 	 * Creates an instance of RPCClient.
 	 *
-	 * @param {Spell.JSONRPCCaller} [client] The underlying JSON-RPC 2.0 client
+	 * @param {JSONRPCCaller} [client] The underlying JSON-RPC 2.0 client
 	 * @memberof RPCClient
 	 */
-	constructor(client?: Spell.JSONRPCCaller) {
+	constructor(client?: JSONRPCCaller) {
 		this.client = client;
 	}
 

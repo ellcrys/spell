@@ -3,6 +3,7 @@ import sinon = require("sinon");
 import jwt = require("jsonwebtoken");
 import sinonChai = require("sinon-chai");
 import RPCClient from "../../lib/rpcclient";
+import { HttpCallOption } from "../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -18,7 +19,7 @@ describe("#RPCClient", () => {
 				call: (
 					method: string,
 					params: any,
-					option: Spell.HttpCallOption,
+					option: HttpCallOption,
 					cb: (err: any, res: any) => {},
 				): any => {
 					return null;
@@ -52,7 +53,7 @@ describe("#RPCClient", () => {
 					call: (
 						method: string,
 						params: any,
-						option: Spell.HttpCallOption,
+						option: HttpCallOption,
 						cb: (err: any, res: any) => {},
 					): any => {
 						cb(null, null);

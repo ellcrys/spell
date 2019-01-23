@@ -2,6 +2,7 @@ import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 import Decimal from "decimal.js";
 import TxBuilder, { TxBalanceBuilder } from "../builders/transaction_builder";
+import { Transaction, TxResult } from "../../..";
 
 /**
  * Ell accesses information about an Elld client
@@ -24,11 +25,11 @@ export default class Ell extends Namespace {
 	/**
 	 * Send a transaction
 	 *
-	 * @param {Spell.Transaction} txData The transaction's data
-	 * @returns {Promise<Spell.TxResult>}
+	 * @param {Transaction} txData The transaction's data
+	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	public send(txData: Spell.Transaction): Promise<Spell.TxResult> {
+	public send(txData: Transaction): Promise<TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_send", txData)
@@ -78,10 +79,10 @@ export default class Ell extends Namespace {
 	 * to the node.
 	 *
 	 * @param {string} encodedTx
-	 * @returns {Promise<Spell.TxResult>}
+	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	public sendRaw(encodedTx: string): Promise<Spell.TxResult> {
+	public sendRaw(encodedTx: string): Promise<TxResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("ell_sendRaw", encodedTx)

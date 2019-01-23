@@ -6,6 +6,7 @@ import Spell from "../../../lib/spell";
 import { PrivateKey } from "../../../lib";
 import Decimal from "decimal.js";
 import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
+import { Transaction, HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -13,7 +14,7 @@ describe("#Ell", () => {
 	let spell: Spell;
 	let client: RPCClient;
 	let pk: PrivateKey;
-	let testTx: Spell.Transaction;
+	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
 		return sinon
@@ -28,7 +29,7 @@ describe("#Ell", () => {
 			call: (
 				method: string,
 				params: any,
-				option: Spell.HttpCallOption,
+				option: HttpCallOption,
 				cb: (err: any, res: any) => {},
 			): any => {
 				cb(null, null);

@@ -5,6 +5,7 @@ import errors from "../errors";
 import moment = require("moment");
 import TxUtility from "./tx_util";
 import { PrivateKey } from "..";
+import { Transaction, TxResult } from "../../..";
 const b58 = require("bs58check");
 
 export const NumDecimals = 18;
@@ -35,10 +36,10 @@ export class TxBalanceBuilder extends TxUtility {
 	 * The transaction data
 	 *
 	 * @protected
-	 * @type {Spell.Transaction}
+	 * @type {Transaction}
 	 * @memberof TxBalanceBuilder
 	 */
-	protected data: Spell.Transaction;
+	protected data: Transaction;
 
 	/**
 	 * The RPC client
@@ -227,10 +228,10 @@ export class TxBalanceBuilder extends TxUtility {
 	 * Send the transaction to the network
 	 *
 	 * @param {PrivateKey} sk The sender's private key
-	 * @returns {Promise<Spell.TxResult>}
+	 * @returns {Promise<TxResult>}
 	 * @memberof TxBalanceBuilder
 	 */
-	public async send(sk: PrivateKey): Promise<Spell.TxResult> {
+	public async send(sk: PrivateKey): Promise<TxResult> {
 		return new Promise(async (resolve, reject) => {
 			this.data.timestamp = moment().unix();
 			await this.finalize(sk);

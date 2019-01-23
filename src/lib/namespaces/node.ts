@@ -1,5 +1,6 @@
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
+import { TxStatus, SyncStat, NodeInfo, NodeConfig, BasicNodeInfo } from "../../..";
 
 /**
  * Node accesses information about an Elld client
@@ -29,10 +30,10 @@ export default class Node extends Namespace {
 	 * is returned.
 	 *
 	 * @param {string} hash The transaction hash
-	 * @returns {Promise<Spell.TxStatus>}
+	 * @returns {Promise<TxStatus>}
 	 * @memberof Node
 	 */
-	public getTransactionStatus(hash: string): Promise<Spell.TxStatus> {
+	public getTransactionStatus(hash: string): Promise<TxStatus> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getTransactionStatus", hash)
@@ -50,10 +51,10 @@ export default class Node extends Namespace {
 	 * block synchronization session. Returns
 	 * null when the node is not syncing.
 	 *
-	 * @returns {Promise<Spell.SyncStat | null>}
+	 * @returns {Promise<SyncStat | null>}
 	 * @memberof Node
 	 */
-	public getSyncStat(): Promise<Spell.SyncStat | null> {
+	public getSyncStat(): Promise<SyncStat | null> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_getSyncStat", null)
@@ -89,10 +90,10 @@ export default class Node extends Namespace {
 	/**
 	 * Get information about the node
 	 *
-	 * @returns {Promise<Spell.NodeInfo>}
+	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node
 	 */
-	public info(): Promise<Spell.NodeInfo> {
+	public info(): Promise<NodeInfo> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_info", null)
@@ -108,10 +109,10 @@ export default class Node extends Namespace {
 	/**
 	 * Get the node's configurations
 	 *
-	 * @returns {Promise<Spell.NodeConfig>}
+	 * @returns {Promise<NodeConfig>}
 	 * @memberof Node
 	 */
-	public config(): Promise<Spell.NodeConfig> {
+	public config(): Promise<NodeConfig> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_config", null)
@@ -128,10 +129,10 @@ export default class Node extends Namespace {
 	 * Returns non-sensitive information about
 	 * a node.
 	 *
-	 * @returns {Promise<Spell.BasicNodeInfo>}
+	 * @returns {Promise<BasicNodeInfo>}
 	 * @memberof Node
 	 */
-	public basic(): Promise<Spell.BasicNodeInfo> {
+	public basic(): Promise<BasicNodeInfo> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_basic", null)

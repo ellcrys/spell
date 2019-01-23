@@ -3,6 +3,7 @@ import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
+import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -21,7 +22,7 @@ describe("#Auth", () => {
 			call: (
 				method: string,
 				params: any,
-				option: Spell.HttpCallOption,
+				option: HttpCallOption,
 				cb: (err: any, res: any) => {},
 			): any => {
 				cb(null, null);

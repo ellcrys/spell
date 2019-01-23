@@ -10,6 +10,7 @@ import Net from "./namespaces/net";
 import Logger from "./namespaces/logger";
 import Ell from "./namespaces/ell";
 import RPC from "./namespaces/rpc";
+import { ConnectOptions } from "../..";
 
 /**
  * Spell provides access to a client
@@ -114,7 +115,7 @@ export default class Spell {
 	 * it will use the connection in future RPC
 	 * method calls.
 	 */
-	public provideClient(options: Spell.ConnectOptions) {
+	public provideClient(options: ConnectOptions) {
 		return new Promise((resolve, reject) => {
 			const client = jsonrpc.Client.$create(options.port, options.host);
 			client.call("rpc_echo", "hi", options, (err: any, res: any) => {

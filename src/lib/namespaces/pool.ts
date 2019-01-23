@@ -1,5 +1,6 @@
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import { PoolSize } from "../../..";
 
 /**
  * Pool gets the information of transaction in the mempool
@@ -23,10 +24,10 @@ export default class Pool extends Namespace {
 	 * Get the size of the transaction
 	 * pool
 	 *
-	 * @returns {Promise<Spell.PoolSize>}
+	 * @returns {Promise<PoolSize>}
 	 * @memberof Pool
 	 */
-	public getSize(): Promise<Spell.PoolSize> {
+	public getSize(): Promise<PoolSize> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("pool_getSize", null)
