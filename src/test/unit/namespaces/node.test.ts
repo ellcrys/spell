@@ -181,10 +181,8 @@ describe("#Node", () => {
 
 		it("should return error and data when call returns an error", (done) => {
 			const mock = makeClientStub(new Error("unknown transaction"), 1234);
-
 			spell.node.getTransactionFromPool(txHash).catch((err) => {
 				expect(err.message).to.be.eq("unknown transaction");
-
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith(
 					"node_getPoolTransaction",
