@@ -126,7 +126,7 @@ export default class Node extends Namespace {
 
 	/**
 	 * Returns non-sensitive information about
-	 * a node. 
+	 * a node.
 	 *
 	 * @returns {Promise<BasicNodeInfo>}
 	 * @memberof Node
@@ -135,6 +135,26 @@ export default class Node extends Namespace {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_basic", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Get transaction from the transaction pool
+	 *
+	 * @param {string} txHash hash of the tx to fetch from pool
+	 * @returns {Promise<Transaction>}
+	 * @memberof Node
+	 */
+	public getTransactionFromPool(txHash: string): Promise<Transaction> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_getPoolTransaction", txHash)
 				.then((res) => {
 					return resolve(res);
 				})
