@@ -163,4 +163,35 @@ describe("#Node", () => {
 			});
 		});
 	});
+
+	describe("#getTransactionFromPool", () => {
+		const txHash = "0x48b9bff17fffe090e707bd90910f58bd";
+
+		it("should return result on successful call", async () => {
+			const expectedResult = { header: { number: 1 } };
+			const mock = makeClientStub(null, expectedResult);
+			const result = await spell.node.getTransactionFromPool(txHash);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith(
+				"node_getPoolTransaction",
+				txHash,
+			);
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const mock = makeClientStub(new Error("unknown transaction"), 1234);
+
+			spell.node.getTransactionFromPool(txHash).catch((err) => {
+				expect(err.message).to.be.eq("unknown transaction");
+
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"node_getPoolTransaction",
+					txHash,
+				);
+				done();
+			});
+		});
+	});
 });
