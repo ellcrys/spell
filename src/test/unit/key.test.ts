@@ -8,7 +8,7 @@ import {
 	AddressVersion,
 } from "../../lib/key";
 import crypto = require("crypto");
-import b58 = require("bs58check");
+const b58 = require("bs58check");
 import errors from "../../lib/errors";
 const expect = chai.expect;
 

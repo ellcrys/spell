@@ -1,4 +1,8 @@
-import flaverr = require("flaverr");
+/**
+ * @module Errors
+ */
+
+const flaverr = require("flaverr");
 
 export function wrapErr(err: { message: string; code?: string }, msg: string) {
 	const e = flaverr(err.code, new Error(err.message));

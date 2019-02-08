@@ -1,3 +1,6 @@
+/**
+ * @module Namespace
+ */
 import RPCClient from "../rpcclient";
 
 /**

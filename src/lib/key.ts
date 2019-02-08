@@ -1,8 +1,12 @@
+/**
+ * @module Key
+ */
+
 import crypto = require("crypto");
 import ed25519 = require("ed25519");
-import { SHA3 } from "sha3";
-import RIPEMD160 = require("ripemd160");
-import b58 = require("bs58check");
+const {SHA3} = require("sha3");
+const RIPEMD160 = require("ripemd160");
+const b58 = require("bs58check");
 import errors from "./errors";
 
 export const AddressVersion = Buffer.from([92]);

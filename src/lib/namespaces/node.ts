@@ -1,5 +1,9 @@
+/**
+ * @module Node
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
+import { TxStatus, SyncStat, NodeInfo, NodeConfig, BasicNodeInfo } from "../../..";
 
 /**
  * Node accesses information about an Elld client
@@ -108,7 +112,7 @@ export default class Node extends Namespace {
 	/**
 	 * Get the node's configurations
 	 *
-	 * @returns {Promise<NodeInfo>}
+	 * @returns {Promise<NodeConfig>}
 	 * @memberof Node
 	 */
 	public config(): Promise<NodeConfig> {
@@ -126,7 +130,7 @@ export default class Node extends Namespace {
 
 	/**
 	 * Returns non-sensitive information about
-	 * a node. 
+	 * a node.
 	 *
 	 * @returns {Promise<BasicNodeInfo>}
 	 * @memberof Node

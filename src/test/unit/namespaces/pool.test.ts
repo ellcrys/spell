@@ -4,6 +4,7 @@ import sinonChai = require("sinon-chai");
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
 import { describe } from "mocha";
+import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 

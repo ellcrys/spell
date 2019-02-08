@@ -11,7 +11,8 @@ import {
 import { Address, PrivateKey } from "../../../lib";
 import Decimal from "decimal.js";
 import errors from "../../../lib/errors";
-import b58 = require("bs58check");
+import { Transaction, HttpCallOption } from "../../../..";
+const b58 = require("bs58check");
 
 const expect = chai.expect;
 chai.use(sinonChai);
