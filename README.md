@@ -80,3 +80,5 @@ spell.node.basic();
 ```
 
 ## Documentation
+
+See API Reference [here](https://ellcrys.github.io/spell)
