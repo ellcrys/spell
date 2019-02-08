@@ -1,3 +1,6 @@
+/**
+ * @module RPC
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 import { RpcMethod } from "../../..";

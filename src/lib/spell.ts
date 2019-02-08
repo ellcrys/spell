@@ -1,3 +1,7 @@
+/**
+ * @module Spell
+ */
+
 const jsonrpc = require("yo-jsonrpc2");
 import errors, { wrapErr } from "./errors";
 import State from "./namespaces/state";

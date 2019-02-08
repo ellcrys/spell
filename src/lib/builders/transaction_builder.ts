@@ -1,3 +1,6 @@
+/**
+ * @module TransactionBuilder
+ */
 import { Address } from "../key";
 import Decimal from "decimal.js";
 import RPCClient from "../rpcclient";
@@ -18,12 +21,14 @@ export const TxPayloadVersion = Buffer.from([95]);
  *
  * @class TxBuilder
  */
-export default class TxBuilder {
+class TxBuilder {
 	public balance: TxBalanceBuilder;
 	constructor(client: RPCClient) {
 		this.balance = new TxBalanceBuilder(client);
 	}
 }
+
+export default TxBuilder
 
 /**
  * TxBalanceBuilder provides the ability to

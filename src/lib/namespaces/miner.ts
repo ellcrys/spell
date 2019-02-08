@@ -1,3 +1,6 @@
+/**
+ * @module Miner
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 

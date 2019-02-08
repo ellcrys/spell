@@ -1,3 +1,6 @@
+/**
+ * @module TxUtility
+ */
 import msgpack = require("msgpack5");
 import { PrivateKey } from "..";
 import { Transaction } from "../../..";

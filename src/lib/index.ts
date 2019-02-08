@@ -1,3 +1,7 @@
+/**
+ * @module Index
+ */
+
 require("source-map-support").install();
 import Spell from "./spell";
 import { PrivateKey, PublicKey, Address, AddressVersion, PublicKeyVersion, PrivateKeyVersion } from "./key";

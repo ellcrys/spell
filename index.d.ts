@@ -1,7 +1,6 @@
 import Decimal from "decimal.js";
 
 
-
 export default class Spell {
 	/**
      * The RPC client

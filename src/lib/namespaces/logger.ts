@@ -1,3 +1,6 @@
+/**
+ * @module Logger
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 

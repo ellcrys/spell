@@ -1,3 +1,7 @@
+/**
+ * @module Errors
+ */
+
 const flaverr = require("flaverr");
 
 export function wrapErr(err: { message: string; code?: string }, msg: string) {

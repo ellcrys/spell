@@ -1,3 +1,7 @@
+/**
+ * @module RPCClient
+ */
+
 import errors from "./errors";
 import jwt = require("jsonwebtoken");
 import moment = require("moment");

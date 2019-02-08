@@ -1,3 +1,6 @@
+/**
+ * @module State
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 import { Block, Difficulty, Account, ReOrgInfo, Transaction, Branches, Chain } from "../../..";

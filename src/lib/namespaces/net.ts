@@ -1,3 +1,6 @@
+/**
+ * @module Net
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 import { ActivePeer, Peer, NetStat } from "../../..";

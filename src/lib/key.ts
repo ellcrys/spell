@@ -1,3 +1,7 @@
+/**
+ * @module Key
+ */
+
 import crypto = require("crypto");
 import ed25519 = require("ed25519");
 const {SHA3} = require("sha3");

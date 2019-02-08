@@ -1,3 +1,6 @@
+/**
+ * @module Pool
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
 import { PoolSize } from "../../..";

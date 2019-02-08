@@ -1,3 +1,6 @@
+/**
+ * @module Ell
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 import Decimal from "decimal.js";
