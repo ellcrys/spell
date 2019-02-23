@@ -74,6 +74,7 @@
 							<h3>Classes</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/key.address.html" class="tsd-kind-icon">Address</a></li>
+								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/key.hdkey.html" class="tsd-kind-icon">HDKey</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/key.privatekey.html" class="tsd-kind-icon">Private<wbr>Key</a></li>
 								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/key.publickey.html" class="tsd-kind-icon">Public<wbr>Key</a></li>
 							</ul>
@@ -82,11 +83,21 @@
 							<h3>Variables</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="key.html#addressversion" class="tsd-kind-icon">Address<wbr>Version</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#ed25519_curve" class="tsd-kind-icon">ED25519_<wbr>CURVE</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#hardened_offset" class="tsd-kind-icon">HARDENED_<wbr>OFFSET</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="key.html#privatekeyversion" class="tsd-kind-icon">Private<wbr>Key<wbr>Version</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="key.html#publickeyversion" class="tsd-kind-icon">Public<wbr>Key<wbr>Version</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#ripemd160" class="tsd-kind-icon">RIPEMD160</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#sha3" class="tsd-kind-icon">SHA3</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#b58" class="tsd-kind-icon">b58</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#pathregex" class="tsd-kind-icon">path<wbr>Regex</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="key.html#isvalidpath" class="tsd-kind-icon">is<wbr>Valid<wbr>Path</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="key.html#replacederive" class="tsd-kind-icon">replace<wbr>Derive</a></li>
 							</ul>
 						</section>
 					</div>
@@ -100,7 +111,27 @@
 					<div class="tsd-signature tsd-kind-icon">Address<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> =&nbsp;Buffer.from([92])</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L12">key.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L13">key.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="ed25519_curve" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> ED25519_<wbr>CURVE</h3>
+					<div class="tsd-signature tsd-kind-icon">ED25519_<wbr>CURVE<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"ed25519 seed"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;ed25519 seed&quot;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L18">key.ts:18</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="hardened_offset" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> HARDENED_<wbr>OFFSET</h3>
+					<div class="tsd-signature tsd-kind-icon">HARDENED_<wbr>OFFSET<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">2147483648</span><span class="tsd-signature-symbol"> =&nbsp;2147483648</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L17">key.ts:17</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -110,7 +141,7 @@
 					<div class="tsd-signature tsd-kind-icon">Private<wbr>Key<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> =&nbsp;Buffer.from([94])</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L14">key.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L15">key.ts:15</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -120,7 +151,7 @@
 					<div class="tsd-signature tsd-kind-icon">Public<wbr>Key<wbr>Version<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol"> =&nbsp;Buffer.from([93])</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L13">key.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L14">key.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -130,7 +161,7 @@
 					<div class="tsd-signature tsd-kind-icon">RIPEMD160<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&quot;ripemd160&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L8">key.ts:8</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L8">key.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -140,7 +171,7 @@
 					<div class="tsd-signature tsd-kind-icon">SHA3<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L7">key.ts:7</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L7">key.ts:7</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -150,9 +181,81 @@
 					<div class="tsd-signature tsd-kind-icon">b58<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> =&nbsp;require(&quot;bs58check&quot;)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/d9e5ee8/src/lib/key.ts#L9">key.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L9">key.ts:9</a></li>
 						</ul>
 					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="pathregex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> path<wbr>Regex</h3>
+					<div class="tsd-signature tsd-kind-icon">path<wbr>Regex<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">RegExp</span><span class="tsd-signature-symbol"> =&nbsp;new RegExp(&quot;^m(\\/[0-9]+&#x27;)+$&quot;)</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L19">key.ts:19</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
+					<a name="isvalidpath" class="tsd-anchor"></a>
+					<h3>is<wbr>Valid<wbr>Path</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<wbr>Path<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L392">key.ts:392</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks whether an HDKey path is
+									valid</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>export</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The path to check</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="replacederive" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> replace<wbr>Derive</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">replace<wbr>Derive<span class="tsd-signature-symbol">(</span>val<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L20">key.ts:20</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>val: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -221,6 +324,9 @@
 						<a href="../classes/key.address.html" class="tsd-kind-icon">Address</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="../classes/key.hdkey.html" class="tsd-kind-icon">HDKey</a>
+					</li>
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="../classes/key.privatekey.html" class="tsd-kind-icon">Private<wbr>Key</a>
 					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
@@ -228,6 +334,12 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="key.html#addressversion" class="tsd-kind-icon">Address<wbr>Version</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="key.html#ed25519_curve" class="tsd-kind-icon">ED25519_<wbr>CURVE</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="key.html#hardened_offset" class="tsd-kind-icon">HARDENED_<wbr>OFFSET</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
 						<a href="key.html#privatekeyversion" class="tsd-kind-icon">Private<wbr>Key<wbr>Version</a>
@@ -243,6 +355,15 @@
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
 						<a href="key.html#b58" class="tsd-kind-icon">b58</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="key.html#pathregex" class="tsd-kind-icon">path<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="key.html#isvalidpath" class="tsd-kind-icon">is<wbr>Valid<wbr>Path</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="key.html#replacederive" class="tsd-kind-icon">replace<wbr>Derive</a>
 					</li>
 				</ul>
 			</nav>

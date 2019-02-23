@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Address | Spell Documentation</title>
+	<title>HDKey | Spell Documentation</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -59,10 +59,10 @@
 					<a href="../modules/key.html">Key</a>
 				</li>
 				<li>
-					<a href="key.address.html">Address</a>
+					<a href="key.hdkey.html">HDKey</a>
 				</li>
 			</ul>
-			<h1>Class Address</h1>
+			<h1>Class HDKey</h1>
 		</div>
 	</div>
 </header>
@@ -72,13 +72,14 @@
 			<section class="tsd-panel tsd-comment">
 				<div class="tsd-comment tsd-typography">
 					<div class="lead">
-						<p>Address represents a compressed
-							equivalent of a public key used
-						as an address for transacting.</p>
+						<p>HDKey provides the ability to create
+						hierarchical deterministic keys.</p>
 					</div>
 					<dl class="tsd-comment-tags">
+						<dt>export</dt>
+						<dd></dd>
 						<dt>class</dt>
-						<dd><p>Address</p>
+						<dd><p>HDKey</p>
 						</dd>
 					</dl>
 				</div>
@@ -87,7 +88,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">Address</span>
+						<span class="target">HDKey</span>
 					</li>
 				</ul>
 			</section>
@@ -95,194 +96,306 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="key.hdkey.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
 						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="key.address.html#address" class="tsd-kind-icon">address</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="key.hdkey.html#mchaincode" class="tsd-kind-icon">m<wbr>Chain<wbr>Code</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="key.hdkey.html#mkey" class="tsd-kind-icon">m<wbr>Key</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.address.html#tostring" class="tsd-kind-icon">to<wbr>String</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="key.address.html#from" class="tsd-kind-icon">from</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="key.address.html#getvalidationerror" class="tsd-kind-icon">get<wbr>Validation<wbr>Error</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="key.address.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.hdkey.html#chaincode" class="tsd-kind-icon">chain<wbr>Code</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.hdkey.html#ckd" class="tsd-kind-icon">ckd</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.hdkey.html#derive" class="tsd-kind-icon">derive</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.hdkey.html#key" class="tsd-kind-icon">key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="key.hdkey.html#privatekey" class="tsd-kind-icon">private<wbr>Key</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="key.hdkey.html#frommasterseed" class="tsd-kind-icon">from<wbr>Master<wbr>Seed</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new HDKey<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, chainCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L429">key.ts:429</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Creates an instance of HDKey.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>HDKey</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>key: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Left half of the hmac digest</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>chainCode: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>Right half of the hmac digest</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="address" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> address</h3>
-					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<a name="mchaincode" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> m<wbr>Chain<wbr>Code</h3>
+					<div class="tsd-signature tsd-kind-icon">m<wbr>Chain<wbr>Code<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L372">key.ts:372</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L429">key.ts:429</a></li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<div class="lead">
-							<p>The loaded address</p>
-						</div>
-						<dl class="tsd-comment-tags">
-							<dt>type</dt>
-							<dd><p>{string}</p>
-							</dd>
-							<dt>memberof</dt>
-							<dd><p>Address</p>
-							</dd>
-						</dl>
-					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="mkey" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> m<wbr>Key</h3>
+					<div class="tsd-signature tsd-kind-icon">m<wbr>Key<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Buffer</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L428">key.ts:428</a></li>
+						</ul>
+					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="tostring" class="tsd-anchor"></a>
-					<h3>to<wbr>String</h3>
+					<a name="chaincode" class="tsd-anchor"></a>
+					<h3>chain<wbr>Code</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">to<wbr>String<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">chain<wbr>Code<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L379">key.ts:379</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L458">key.ts:458</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Return a string format of the address</p>
+									<p>Return the derived chain code</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>HDKey</p>
+									</dd>
+								</dl>
 							</div>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="from" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> from</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">from<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.address.html" class="tsd-signature-type">Address</a></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="ckd" class="tsd-anchor"></a>
+					<h3>ckd</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">ckd<span class="tsd-signature-symbol">(</span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, chainCode<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L357">key.ts:357</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L471">key.ts:471</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Instantiate an Address instance from
-									a given address string</p>
+									<p>Child key derivation function</p>
 								</div>
 								<dl class="tsd-comment-tags">
-									<dt>static</dt>
-									<dd></dd>
-									<dt>throws</dt>
-									<dd><p>InvalidAddress</p>
-									</dd>
 									<dt>memberof</dt>
-									<dd><p>Address</p>
+									<dd><p>HDKey</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="key.address.html" class="tsd-signature-type">Address</a></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="getvalidationerror" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> get<wbr>Validation<wbr>Error</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Validation<wbr>Error<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Error</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L332">key.ts:332</a></li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Check whether a given address is valid.
-										If not valid, the specific validation error
-										is returned. It returns null if the address
-									is valid.</p>
-								</div>
-								<dl class="tsd-comment-tags">
-									<dt>static</dt>
-									<dd></dd>
-									<dt>memberof</dt>
-									<dd><p>Address</p>
-									</dd>
-								</dl>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<h5>key: <span class="tsd-signature-type">Buffer</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The address to check</p>
+										<p>The parent key</p>
+									</div>
+								</li>
+								<li>
+									<h5>chainCode: <span class="tsd-signature-type">Buffer</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The parent chain code</p>
+									</div>
+								</li>
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The key index</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span>
-								<span class="tsd-signature-symbol"> | </span>
-								<span class="tsd-signature-type">Error</span>
-							</h4>
-							<p>InvalidAddressVersion |
-							InvalidAddressSize }| InvalidAddressFormat</p>
+							<h4 class="tsd-returns-title">Returns <a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></h4>
 						</li>
 					</ul>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
-					<a name="isvalid" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagStatic">Static</span> is<wbr>Valid</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
-						<li class="tsd-signature tsd-kind-icon">is<wbr>Valid<span class="tsd-signature-symbol">(</span>address<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="derive" class="tsd-anchor"></a>
+					<h3>derive</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">derive<span class="tsd-signature-symbol">(</span>path<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L308">key.ts:308</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L491">key.ts:491</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
-									<p>Check whether an address is valid</p>
+									<p>Given a path, derive a child key. Path
+									must contain only hardened indices</p>
 								</div>
 								<dl class="tsd-comment-tags">
-									<dt>static</dt>
-									<dd></dd>
 									<dt>memberof</dt>
-									<dd><p>Address</p>
+									<dd><p>HDKey</p>
 									</dd>
 								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>address: <span class="tsd-signature-type">string</span></h5>
+									<h5>path: <span class="tsd-signature-type">string</span></h5>
 									<div class="tsd-comment tsd-typography">
-										<p>The address to check</p>
+										<p>The derivation path</p>
 									</div>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="key" class="tsd-anchor"></a>
+					<h3>key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">key<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L448">key.ts:448</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the derived key</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>HDKey</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Buffer</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="privatekey" class="tsd-anchor"></a>
+					<h3>private<wbr>Key</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">private<wbr>Key<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.privatekey.html" class="tsd-signature-type">PrivateKey</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L518">key.ts:518</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the private key created using the
+									derived key</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>HDKey</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="key.privatekey.html" class="tsd-signature-type">PrivateKey</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="frommasterseed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> from<wbr>Master<wbr>Seed</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">from<wbr>Master<wbr>Seed<span class="tsd-signature-symbol">(</span>seed<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Buffer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/26f4e42/src/lib/key.ts#L420">key.ts:420</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create an HDKey from a seed.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>static</dt>
+									<dd></dd>
+									<dt>memberof</dt>
+									<dd><p>HDKey</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>seed: <span class="tsd-signature-type">Buffer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="key.hdkey.html" class="tsd-signature-type">HDKey</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -349,33 +462,45 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
+					<li class=" tsd-kind-class tsd-parent-kind-external-module">
+						<a href="key.address.html" class="tsd-kind-icon">Address</a>
+					</li>
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="key.address.html" class="tsd-kind-icon">Address</a>
+						<a href="key.hdkey.html" class="tsd-kind-icon">HDKey</a>
 						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="key.hdkey.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="key.address.html#address" class="tsd-kind-icon">address</a>
+								<a href="key.hdkey.html#mchaincode" class="tsd-kind-icon">m<wbr>Chain<wbr>Code</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="key.hdkey.html#mkey" class="tsd-kind-icon">m<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="key.address.html#tostring" class="tsd-kind-icon">to<wbr>String</a>
+								<a href="key.hdkey.html#chaincode" class="tsd-kind-icon">chain<wbr>Code</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="key.hdkey.html#ckd" class="tsd-kind-icon">ckd</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="key.hdkey.html#derive" class="tsd-kind-icon">derive</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="key.hdkey.html#key" class="tsd-kind-icon">key</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="key.hdkey.html#privatekey" class="tsd-kind-icon">private<wbr>Key</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="key.address.html#from" class="tsd-kind-icon">from</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="key.address.html#getvalidationerror" class="tsd-kind-icon">get<wbr>Validation<wbr>Error</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
-								<a href="key.address.html#isvalid" class="tsd-kind-icon">is<wbr>Valid</a>
+								<a href="key.hdkey.html#frommasterseed" class="tsd-kind-icon">from<wbr>Master<wbr>Seed</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="key.hdkey.html" class="tsd-kind-icon">HDKey</a>
-					</li>
 					<li class=" tsd-kind-class tsd-parent-kind-external-module">
 						<a href="key.privatekey.html" class="tsd-kind-icon">Private<wbr>Key</a>
 					</li>

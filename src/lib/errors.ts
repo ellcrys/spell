@@ -5,9 +5,9 @@
 const flaverr = require("flaverr");
 
 export function wrapErr(err: { message: string; code?: string }, msg: string) {
-	const e = flaverr(err.code, new Error(err.message));
-	e.message = e.message + ` -> ${msg}`;
-	return e;
+	const newErr = flaverr(err.code, new Error(err.message));
+	newErr.message = newErr.message + ` -> ${msg}`;
+	return newErr;
 }
 
 function e(msg: string) {
@@ -59,5 +59,8 @@ export default {
 		e("Public key has unexpected size"),
 	),
 	RequirePrivateKey: flaverr("PRIVATE_KEY_REQUIRED", e("Private key is required")),
-	UnknownSenderAccount: flaverr("UNKNOWN_SENDER_ACCOUNT", e("Sender account not found")),
+	UnknownSenderAccount: flaverr(
+		"UNKNOWN_SENDER_ACCOUNT",
+		e("Sender account not found"),
+	),
 };
