@@ -1,6 +1,7 @@
 import Namespace from "../namespace";
 import RPCClient from "../../rpcclient";
 import msgpack from "msgpack-lite";
+import { Block } from "../../../..";
 
 /**
  * Handles Block utilities

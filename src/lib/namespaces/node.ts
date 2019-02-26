@@ -3,7 +3,14 @@
  */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
-import { TxStatus, SyncStat, NodeInfo, NodeConfig, BasicNodeInfo } from "../../..";
+import {
+	TxStatus,
+	SyncStat,
+	NodeInfo,
+	NodeConfig,
+	BasicNodeInfo,
+	Transaction,
+} from "../../..";
 
 /**
  * Node accesses information about an Elld client

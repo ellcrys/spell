@@ -3,8 +3,8 @@
  */
 
 const jsonrpc = require("yo-jsonrpc2");
-import BlockUtil from "./namespaces/util/blockUtil";
 import { ConnectOptions } from "../..";
+import BlockUtil from "./namespaces/util/blockUtil";
 import errors, { wrapErr } from "./errors";
 import Auth from "./namespaces/auth";
 import Ell from "./namespaces/ell";
