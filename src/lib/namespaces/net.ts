@@ -1,5 +1,9 @@
+/**
+ * @module Net
+ */
 import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import { ActivePeer, Peer, NetStat } from "../../..";
 
 /**
  * Manage the network related activities of a Node
@@ -24,7 +28,7 @@ export default class Net extends Namespace {
 	 * getActivePeers get all the peers
 	 * that are connected to the node
 	 *
-	 * @returns {Promise<Peer[]>}
+	 * @returns {Promise<ActivePeer[]>}
 	 * @memberof Net
 	 */
 	public getActivePeers(): Promise<ActivePeer[]> {
@@ -83,7 +87,7 @@ export default class Net extends Namespace {
 	/**
 	 * Get the node's connection stats
 	 *
-	 * @returns {Promise<any>}
+	 * @returns {Promise<NetStat>}
 	 * @memberof Net
 	 */
 	public getStats(): Promise<NetStat> {

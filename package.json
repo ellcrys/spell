@@ -1,13 +1,14 @@
 {
 	"name": "@ellcrys/spell",
-	"version": "0.1.2-b",
+	"version": "0.1.7",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
-	"types": "lib/index.d.ts",
+	"types": "./index.d.ts",
 	"scripts": {
 		"ts-watch": "tsc -w",
-		"lint": "eslint ./src/**/*.js && tslint ./src/**/*.ts",
+		"lint": "tslint ./src/**/*.ts",
 		"test": "mocha test",
+		"gen-docs": "typedoc --out docs ./src --exclude \"**/test/**/*.ts,**/play/**/*.ts\" --hideGenerator --name \"Spell Documentation\"",
 		"cover": "nyc mocha test"
 	},
 	"repository": {
@@ -22,12 +23,14 @@
 	"homepage": "https://github.com/ellcrys/spell.js#readme",
 	"dependencies": {
 		"@types/bignum": "0.0.29",
+		"@types/create-hmac": "^1.1.0",
 		"@types/ed25519": "0.0.0",
 		"@types/msgpack-lite": "^0.1.6",
 		"@types/sha256": "^0.2.0",
 		"bignum": "^0.13.0",
 		"blake2": "^2.0.1",
 		"bs58check": "^2.1.2",
+		"create-hmac": "^1.1.7",
 		"decimal.js": "^10.0.2",
 		"ed25519": "0.0.4",
 		"flaverr": "^1.9.2",
@@ -41,6 +44,7 @@
 		"sha256": "^0.2.0",
 		"sha3": "^2.0.0",
 		"source-map-support": "^0.5.9",
+		"typedoc-plugin-external-module-name": "^2.0.0",
 		"yo-jsonrpc2": "^1.0.4"
 	},
 	"devDependencies": {
@@ -58,6 +62,7 @@
 		"sinon-chai": "^3.3.0",
 		"ts-node": "^7.0.1",
 		"tslint": "^5.12.0",
+		"typedoc": "^0.14.2",
 		"typescript": "^3.2.2"
 	},
 	"nyc": {
@@ -73,8 +78,14 @@
 		"test": "test"
 	},
 	"keywords": [
-		"Ellcrys",
-		"Blockchain",
-		"Cryptocurrency"
+		"ellcrys",
+		"blockchain",
+		"key",
+		"hdkey",
+		"api",
+		"client",
+		"rpc",
+		"json-rpc",
+		"web3"
 	]
 }

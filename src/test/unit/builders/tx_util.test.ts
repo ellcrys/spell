@@ -1,5 +1,6 @@
 import chai = require("chai");
 import { TxUtility, PrivateKey } from "../../../lib";
+import { Transaction } from "../../../..";
 const expect = chai.expect;
 
 describe("#TxUtility", () => {

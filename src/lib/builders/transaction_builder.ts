@@ -1,3 +1,6 @@
+/**
+ * @module TransactionBuilder
+ */
 import { Address } from "../key";
 import Decimal from "decimal.js";
 import RPCClient from "../rpcclient";
@@ -5,7 +8,8 @@ import errors from "../errors";
 import moment = require("moment");
 import TxUtility from "./tx_util";
 import { PrivateKey } from "..";
-import b58 = require("bs58check");
+import { Transaction, TxResult } from "../../..";
+const b58 = require("bs58check");
 
 export const NumDecimals = 18;
 export const TxPayloadVersion = Buffer.from([95]);
@@ -17,12 +21,14 @@ export const TxPayloadVersion = Buffer.from([95]);
  *
  * @class TxBuilder
  */
-export default class TxBuilder {
+class TxBuilder {
 	public balance: TxBalanceBuilder;
 	constructor(client: RPCClient) {
 		this.balance = new TxBalanceBuilder(client);
 	}
 }
+
+export default TxBuilder
 
 /**
  * TxBalanceBuilder provides the ability to

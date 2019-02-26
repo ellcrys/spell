@@ -3,6 +3,7 @@ import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
+import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 

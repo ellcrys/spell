@@ -1,7 +1,11 @@
+/**
+ * @module Ell
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 import Decimal from "decimal.js";
 import TxBuilder, { TxBalanceBuilder } from "../builders/transaction_builder";
+import { Transaction, TxResult } from "../../..";
 
 /**
  * Ell accesses information about an Elld client

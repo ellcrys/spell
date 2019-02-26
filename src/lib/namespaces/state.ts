@@ -1,5 +1,9 @@
+/**
+ * @module State
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
+import { Block, Difficulty, Account, ReOrgInfo, Transaction, Branches, Chain } from "../../..";
 
 /**
  * Read the state of the Ellcrys blockchain
@@ -64,7 +68,7 @@ export default class State extends Namespace {
 	 * Get the current difficulty and total difficulty
 	 * of the network.
 	 *
-	 * @returns
+	 * @returns {Promise<Difficulty>}
 	 * @memberof State
 	 */
 	public getDifficulty(): Promise<Difficulty> {
@@ -222,10 +226,10 @@ export default class State extends Namespace {
 	/**
 	 * Get orphan blocks on the node
 	 *
-	 * @returns {Promise<Block>}
+	 * @returns {Promise<Block[]>}
 	 * @memberof State
 	 */
-	public getOrphans(): Promise<Block> {
+	public getOrphans(): Promise<Block[]> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getOrphans", null)

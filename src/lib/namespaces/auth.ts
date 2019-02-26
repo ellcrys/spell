@@ -1,3 +1,6 @@
+/**
+ * @module Auth
+ */
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 

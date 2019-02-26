@@ -6,6 +6,7 @@ import Spell from "../../../lib/spell";
 import { PrivateKey } from "../../../lib";
 import Decimal from "decimal.js";
 import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
+import { Transaction, HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 

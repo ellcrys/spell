@@ -3,6 +3,7 @@ import sinon = require("sinon");
 import jwt = require("jsonwebtoken");
 import sinonChai = require("sinon-chai");
 import RPCClient from "../../lib/rpcclient";
+import { HttpCallOption } from "../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 

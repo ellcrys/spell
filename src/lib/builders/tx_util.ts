@@ -1,6 +1,10 @@
+/**
+ * @module TxUtility
+ */
 import msgpack = require("msgpack5");
 import { PrivateKey } from "..";
-import blake2 = require("blake2");
+import { Transaction } from "../../..";
+const blake2 = require("blake2");
 
 /**
  * TxUtility provides transaction
