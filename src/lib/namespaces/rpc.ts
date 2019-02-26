@@ -1,9 +1,9 @@
 /**
  * @module RPC
  */
-import Namespace from "./namespace";
-import RPCClient from "../rpcclient";
 import { RpcMethod } from "../../..";
+import RPCClient from "../rpcclient";
+import Namespace from "./namespace";
 
 /**
  * RPC is responsible for calling

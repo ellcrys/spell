@@ -1,10 +1,10 @@
 import chai = require("chai");
+import { describe } from "mocha";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { describe } from "mocha";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 

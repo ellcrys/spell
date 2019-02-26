@@ -1,9 +1,9 @@
 import chai = require("chai");
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -12,9 +12,7 @@ describe("#Node", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -40,10 +38,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, { status: "unknown" });
 			const result = await spell.node.getTransactionStatus(hash);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"node_getTransactionStatus",
-				hash,
-			);
+			expect(mock).to.have.been.calledWith("node_getTransactionStatus", hash);
 			expect(result).to.be.eq("unknown");
 		});
 
@@ -53,10 +48,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(new Error("bad hash"), null);
 			spell.node.getTransactionStatus(hash).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"node_getTransactionStatus",
-					hash,
-				);
+				expect(mock).to.have.been.calledWith("node_getTransactionStatus", hash);
 				expect(err.message).to.be.eq("bad hash");
 			});
 		});
@@ -64,7 +56,7 @@ describe("#Node", () => {
 
 	describe("#getSyncStat", () => {
 		it("should return sync state", async () => {
-			let expected = {
+			const expected = {
 				currentChainHeight: 100,
 				currentTotalDifficulty: 100,
 				progressPercent: 100,
@@ -90,7 +82,7 @@ describe("#Node", () => {
 
 	describe("#isSyncing", () => {
 		it("should return sync status", async () => {
-			let expected = false;
+			const expected = false;
 			const mock = makeClientStub(null, expected);
 			const result = await spell.node.isSyncing();
 			expect(mock).to.have.been.callCount(1);

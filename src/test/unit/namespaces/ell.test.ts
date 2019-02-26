@@ -1,12 +1,12 @@
 import chai = require("chai");
+import Decimal from "decimal.js";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption, Transaction } from "../../../..";
+import { PrivateKey } from "../../../lib";
+import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { PrivateKey } from "../../../lib";
-import Decimal from "decimal.js";
-import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
-import { Transaction, HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -17,9 +17,7 @@ describe("#Ell", () => {
 	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -37,7 +35,8 @@ describe("#Ell", () => {
 		};
 
 		pk = PrivateKey.from(
-			"wntaQsep5UAL3WAsThJx3jtJ2Ge79fjuzVvisKBhBrA4ps24ostkmKA9egwH3o7nUYxB37Kn9Ac23UEym8u81AmgUn6Zuq",
+			"wntaQsep5UAL3WAsThJx3jtJ2Ge79fjuzVvisKBhBrA4ps24ostkmKA9egw" +
+				"H3o7nUYxB37Kn9Ac23UEym8u81AmgUn6Zuq",
 		);
 		testTx = {
 			from: "e4hbAT45QeddPj3XpJiSHxb9APhuQHcMUW",
@@ -74,9 +73,7 @@ describe("#Ell", () => {
 	describe(".send", () => {
 		it("should call method ell_getBalance and return Decimal", async () => {
 			const mock = makeClientStub(null, "10.20");
-			const result = await spell.ell.getBalance(
-				pk.toAddress().toString(),
-			);
+			const result = await spell.ell.getBalance(pk.toAddress().toString());
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith(
 				"ell_getBalance",
@@ -87,16 +84,14 @@ describe("#Ell", () => {
 
 		it("should return 'error' when method returns error", async () => {
 			const mock = makeClientStub(new Error("bad method"), null);
-			spell.ell
-				.getBalance(pk.toAddress().toString())
-				.catch((err: Error) => {
-					expect(mock).to.have.been.callCount(1);
-					expect(mock).to.have.been.calledWith(
-						"ell_getBalance",
-						pk.toAddress().toString(),
-					);
-					expect(err.message).to.be.eq("bad method");
-				});
+			spell.ell.getBalance(pk.toAddress().toString()).catch((err: Error) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith(
+					"ell_getBalance",
+					pk.toAddress().toString(),
+				);
+				expect(err.message).to.be.eq("bad method");
+			});
 		});
 	});
 
