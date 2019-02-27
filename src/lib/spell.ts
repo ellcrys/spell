@@ -103,14 +103,6 @@ export default class Spell {
 	public rpc: RPC;
 
 	/**
-	 * Block utility module
-	 *
-	 * @type {BlockUtility}
-	 * @memberof Spell
-	 */
-	// public blockUtil: BlockUtil;
-
-	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell
 	 */
