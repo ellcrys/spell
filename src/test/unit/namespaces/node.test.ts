@@ -174,7 +174,7 @@ describe("#Node", () => {
 			const result = await spell.node.getTransactionFromPool(txHash);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith(
-				"node_getPoolTransaction",
+				"node_getTransactionFromPool",
 				txHash,
 			);
 			expect(result).to.be.deep.eq(expectedResult);
