@@ -5,6 +5,7 @@
 require("source-map-support").install();
 import { NumDecimals, TxPayloadVersion } from "./builders/transaction_builder";
 import TxUtility from "./builders/tx_util";
+
 import {
 	Address,
 	AddressVersion,

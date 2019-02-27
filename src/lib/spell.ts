@@ -4,7 +4,7 @@
 
 const jsonrpc = require("yo-jsonrpc2");
 import { ConnectOptions } from "../..";
-import BlockUtil from "./namespaces/util/blockUtil";
+// import BlockUtil from "./namespaces/util/blockUtil";
 import errors, { wrapErr } from "./errors";
 import Auth from "./namespaces/auth";
 import Ell from "./namespaces/ell";
@@ -109,7 +109,7 @@ export default class Spell {
 	 * @type {BlockUtility}
 	 * @memberof Spell
 	 */
-	public blockUtil: BlockUtil;
+	// public blockUtil: BlockUtil;
 
 	/**
 	 * Creates an instance of Spell.
@@ -126,7 +126,7 @@ export default class Spell {
 		this.logger = new Logger(this.rpcClient);
 		this.ell = new Ell(this.rpcClient);
 		this.rpc = new RPC(this.rpcClient);
-		this.blockUtil = new BlockUtil(this.rpcClient);
+		// this.blockUtil = new BlockUtil(this.rpcClient);
 	}
 
 	/**

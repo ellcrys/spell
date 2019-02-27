@@ -35,6 +35,7 @@
 		"ed25519": "0.0.4",
 		"flaverr": "^1.9.2",
 		"jsonwebtoken": "^8.4.0",
+		"messagepack": "^1.1.8",
 		"moment": "^2.23.0",
 		"msgpack-lite": "^0.1.26",
 		"msgpack5": "^4.2.1",
