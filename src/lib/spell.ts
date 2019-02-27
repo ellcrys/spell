@@ -117,7 +117,6 @@ export default class Spell {
 		this.logger = new Logger(this.rpcClient);
 		this.ell = new Ell(this.rpcClient);
 		this.rpc = new RPC(this.rpcClient);
-		// this.blockUtil = new BlockUtil(this.rpcClient);
 	}
 
 	/**
