@@ -165,7 +165,7 @@ export default class Node extends Namespace {
 	public getTransactionFromPool(txHash: string): Promise<Transaction> {
 		return new Promise((resolve, reject) => {
 			this.client
-				.call("node_getPoolTransaction", txHash)
+				.call("node_getTransactionFromPool", txHash)
 				.then((res) => {
 					return resolve(res);
 				})
