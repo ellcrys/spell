@@ -186,7 +186,7 @@ describe("#Node", () => {
 				expect(err.message).to.be.eq("unknown transaction");
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith(
-					"node_getPoolTransaction",
+					"node_getTransactionFromPool",
 					txHash,
 				);
 				done();
