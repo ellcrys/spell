@@ -2,10 +2,10 @@
  * @module RPCClient
  */
 
-import errors from "./errors";
 import jwt = require("jsonwebtoken");
 import moment = require("moment");
 import { JSONRPCCaller } from "../..";
+import errors from "./errors";
 
 /**
  * RPCClient connects to given host and port
@@ -87,7 +87,7 @@ export default class RPCClient {
 				this.clientOpts,
 				(err: any, res: any): any => {
 					if (err) {
-						if (err.statusCode == 401) {
+						if (err.statusCode === 401) {
 							return reject(errors.AuthRequired);
 						}
 						return reject(err);
@@ -104,7 +104,7 @@ export default class RPCClient {
 	 * @param {string} token
 	 * @memberof RPCClient
 	 */
-	setToken(token: string) {
+	public setToken(token: string) {
 		this.token = token;
 	}
 }

@@ -1,9 +1,9 @@
 /**
  * @module Net
  */
-import Namespace from "./namespace";
+import { ActivePeer, NetStat, Peer } from "../../..";
 import RPCClient from "../rpcclient";
-import { ActivePeer, Peer, NetStat } from "../../..";
+import Namespace from "./namespace";
 
 /**
  * Manage the network related activities of a Node
@@ -153,7 +153,7 @@ export default class Net extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
-	public join(peerAddress: Array<string>): Promise<boolean> {
+	public join(peerAddress: string[]): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("net_join", peerAddress)

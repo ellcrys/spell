@@ -1,8 +1,8 @@
 /**
  * @module Miner
  */
-import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import Namespace from "./namespace";
 
 /**
  * Miner handles mining operations
@@ -14,7 +14,7 @@ import RPCClient from "../rpcclient";
  */
 export default class Miner extends Namespace {
 	/**
-	 *Creates an instance of Miner.
+	 * Creates an instance of Miner.
 	 * @param {RPCClient} client
 	 * @memberof Miner
 	 */
@@ -29,7 +29,7 @@ export default class Miner extends Namespace {
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	public start(): Promise<Boolean> {
+	public start(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("miner_start", null)
@@ -48,7 +48,7 @@ export default class Miner extends Namespace {
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	public stop(): Promise<Boolean> {
+	public stop(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("miner_stop", null)
@@ -67,7 +67,7 @@ export default class Miner extends Namespace {
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	public isMining(): Promise<Boolean> {
+	public isMining(): Promise<boolean> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("miner_isMining", null)

@@ -1,10 +1,10 @@
 import chai = require("chai");
+import { describe } from "mocha";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { describe } from "mocha";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -13,9 +13,7 @@ describe("#Net", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -45,16 +43,10 @@ describe("#Net", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting active peers"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting active peers"), 1234);
 			spell.net.getActivePeers().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"net_getActivePeers",
-					null,
-				);
+				expect(mock).to.have.been.calledWith("net_getActivePeers", null);
 				expect(err.message).to.be.eq("error getting active peers");
 				done();
 			});
@@ -93,10 +85,7 @@ describe("#Net", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting broadcaster"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting broadcaster"), 1234);
 			spell.net.getBroadcasters().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("net_broadcasters", null);
@@ -142,10 +131,7 @@ describe("#Net", () => {
 			const mock = makeClientStub(new Error("error adding peer"), 1234);
 			spell.net.addPeer(peerAddress).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"net_addPeer",
-					peerAddress,
-				);
+				expect(mock).to.have.been.calledWith("net_addPeer", peerAddress);
 				expect(err.message).to.be.eq("error adding peer");
 				done();
 			});
@@ -174,7 +160,7 @@ describe("#Net", () => {
 	});
 
 	describe("#join", () => {
-		const peerAddr: Array<string> = ["ghdfjgkhlvjcvkb"];
+		const peerAddr: string[] = ["ghdfjgkhlvjcvkb"];
 		it("should return result on successful call", async () => {
 			const expectedResult: boolean = true;
 			const mock = makeClientStub(null, expectedResult);

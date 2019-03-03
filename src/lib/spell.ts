@@ -3,18 +3,18 @@
  */
 
 const jsonrpc = require("yo-jsonrpc2");
+import { ConnectOptions } from "../..";
 import errors, { wrapErr } from "./errors";
-import State from "./namespaces/state";
-import RPCClient from "./rpcclient";
-import Node from "./namespaces/node";
 import Auth from "./namespaces/auth";
-import Pool from "./namespaces/pool";
+import Ell from "./namespaces/ell";
+import Logger from "./namespaces/logger";
 import Miner from "./namespaces/miner";
 import Net from "./namespaces/net";
-import Logger from "./namespaces/logger";
-import Ell from "./namespaces/ell";
+import Node from "./namespaces/node";
+import Pool from "./namespaces/pool";
 import RPC from "./namespaces/rpc";
-import { ConnectOptions } from "../..";
+import State from "./namespaces/state";
+import RPCClient from "./rpcclient";
 
 /**
  * Spell provides access to a client
@@ -159,7 +159,7 @@ export default class Spell {
 	 * @returns {Promise<string>} A session token
 	 * @memberof Spell
 	 */
-	authenticate(username: string, password: string): Promise<string> {
+	public authenticate(username: string, password: string): Promise<string> {
 		return new Promise((resolve, reject) => {
 			this.auth
 				.authenticate(username, password)

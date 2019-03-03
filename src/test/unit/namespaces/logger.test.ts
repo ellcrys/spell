@@ -1,10 +1,10 @@
 import chai = require("chai");
+import { describe } from "mocha";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { describe } from "mocha";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -13,9 +13,7 @@ describe("#Logger", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -45,10 +43,7 @@ describe("#Logger", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error setting debug logger"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error setting debug logger"), 1234);
 
 			spell.logger.debugLogger().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
@@ -70,10 +65,7 @@ describe("#Logger", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error setting default logger"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error setting default logger"), 1234);
 
 			spell.logger.defaultLogger().catch((err) => {
 				expect(mock).to.have.been.callCount(1);

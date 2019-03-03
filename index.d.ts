@@ -137,6 +137,11 @@ export interface InvokeArgs {
 	param: { [key: string]: Buffer };
 }
 
+export interface CurveKeyPair {
+	publicKey: Buffer
+	privateKey: Buffer
+}
+
 export interface Transaction {
 	fee?: string;
 	from?: string;

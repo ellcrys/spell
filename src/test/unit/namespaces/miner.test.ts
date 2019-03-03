@@ -1,10 +1,10 @@
 import chai = require("chai");
+import { describe } from "mocha";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { describe } from "mocha";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -13,9 +13,7 @@ describe("#Miner", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -45,10 +43,7 @@ describe("#Miner", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error starting miner"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error starting miner"), 1234);
 			spell.miner.start().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("miner_start", null);
@@ -69,10 +64,7 @@ describe("#Miner", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error stopping miner"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error stopping miner"), 1234);
 			spell.miner.stop().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("miner_stop", null);
@@ -93,10 +85,7 @@ describe("#Miner", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting miner status"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting miner status"), 1234);
 			spell.miner.isMining().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("miner_isMining", null);
@@ -117,10 +106,7 @@ describe("#Miner", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting miner hashrate"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting miner hashrate"), 1234);
 			spell.miner.getHashrate().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("miner_getHashrate", null);
@@ -141,10 +127,7 @@ describe("#Miner", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error getting miner threads"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error getting miner threads"), 1234);
 			spell.miner.numThreads().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("miner_numThreads", null);
@@ -161,24 +144,15 @@ describe("#Miner", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.miner.setThreads(minerThreads);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"miner_setThreads",
-				minerThreads,
-			);
+			expect(mock).to.have.been.calledWith("miner_setThreads", minerThreads);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(
-				new Error("error setting miner threads"),
-				1234,
-			);
+			const mock = makeClientStub(new Error("error setting miner threads"), 1234);
 			spell.miner.setThreads(minerThreads).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"miner_setThreads",
-					minerThreads,
-				);
+				expect(mock).to.have.been.calledWith("miner_setThreads", minerThreads);
 				expect(err.message).to.be.eq("error setting miner threads");
 				done();
 			});

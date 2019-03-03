@@ -1,8 +1,8 @@
 /**
  * @module Logger
  */
-import Namespace from "./namespace";
 import RPCClient from "../rpcclient";
+import Namespace from "./namespace";
 
 /**
  * Manage the logger activities

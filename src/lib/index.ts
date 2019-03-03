@@ -3,10 +3,18 @@
  */
 
 require("source-map-support").install();
-import Spell from "./spell";
-import { PrivateKey, PublicKey, Address, AddressVersion, PublicKeyVersion, PrivateKeyVersion } from "./key";
-import TxUtility from "./builders/tx_util";
 import { NumDecimals, TxPayloadVersion } from "./builders/transaction_builder";
+import TxUtility from "./builders/tx_util";
+import {
+	Address,
+	AddressVersion,
+	HDKey,
+	PrivateKey,
+	PrivateKeyVersion,
+	PublicKey,
+	PublicKeyVersion,
+} from "./key";
+import Spell from "./spell";
 
 export {
 	PrivateKey,
@@ -18,6 +26,7 @@ export {
 	TxUtility,
 	NumDecimals,
 	TxPayloadVersion,
+	HDKey,
 };
 
 export default Spell;
