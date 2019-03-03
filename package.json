@@ -1,6 +1,6 @@
 {
 	"name": "@ellcrys/spell",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
 	"types": "./index.d.ts",
@@ -31,7 +31,6 @@
 		"bs58check": "^2.1.2",
 		"create-hmac": "^1.1.7",
 		"decimal.js": "^10.0.2",
-		"ed25519": "0.0.4",
 		"flaverr": "^1.9.2",
 		"jsonwebtoken": "^8.4.0",
 		"moment": "^2.23.0",
@@ -42,7 +41,7 @@
 		"sha256": "^0.2.0",
 		"sha3": "^2.0.0",
 		"source-map-support": "^0.5.9",
-		"typedoc-plugin-external-module-name": "^2.0.0",
+		"tweetnacl": "^1.0.1",
 		"yo-jsonrpc2": "^1.0.4"
 	},
 	"devDependencies": {
@@ -53,9 +52,11 @@
 		"@types/random-number": "0.0.0",
 		"@types/sinon-chai": "^3.2.2",
 		"chai": "^4.2.0",
+		"typedoc-plugin-external-module-name": "^2.0.0",
 		"eslint": "^5.12.0",
 		"mocha": "^5.2.0",
 		"nyc": "^13.1.0",
+		"prettier-tslint": "^0.4.2",
 		"sinon": "^7.2.2",
 		"sinon-chai": "^3.3.0",
 		"ts-node": "^7.0.1",
