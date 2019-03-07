@@ -26,12 +26,16 @@ describe("key.js", () => {
 				expect(pk).to.not.eq(undefined);
 			});
 
-			it("should instantiate 2 PrivateKeys with the same seed and get same PrivateKey", () => {
-				const seed = crypto.randomBytes(32);
-				const pk = new PrivateKey(seed);
-				const pk2 = new PrivateKey(seed);
-				expect(pk.toBuffer().equals(pk2.toBuffer())).to.be.true;
-			});
+			it(
+				"should instantiate 2 PrivateKeys with the same seed and " +
+					"get same PrivateKey",
+				() => {
+					const mSeed = crypto.randomBytes(32);
+					const pk = new PrivateKey(mSeed);
+					const pk2 = new PrivateKey(mSeed);
+					expect(pk.toBuffer().equals(pk2.toBuffer())).to.be.true;
+				},
+			);
 		});
 
 		describe(".sign", () => {
@@ -119,14 +123,16 @@ describe("key.js", () => {
 
 			it("should successfully return expected key", () => {
 				const key =
-					"wbAELmhPDqRg9dkdiyBgcN44bTZxSv4ysEPUcAPcCTQ7zF2HDF9k8rGcnddF9V9GJHmTrazYTMgYh3EK9wAWEJ3qvXixnd";
+					"wbAELmhPDqRg9dkdiyBgcN44bTZxSv4ysEPUcAPcCTQ7zF2HDF9k8rGcnddF9V9GJ" +
+					"HmTrazYTMgYh3EK9wAWEJ3qvXixnd";
 				const pk = PrivateKey.from(key);
 				expect(pk.toBase58()).to.eql(key);
 			});
 
 			it("should successfully return expected key", () => {
 				const key =
-					"wbAELmhPDqRg9dkdiyBgcN44bTZxSv4ysEPUcAPcCTQ7zF2HDF9k8rGcnddF9V9GJHmTrazYTMgYh3EK9wAWEJ3qvXixnd";
+					"wbAELmhPDqRg9dkdiyBgcN44bTZxSv4ysEPUcAPcCTQ7zF2HDF9k8rGcnddF9V9GJ" +
+					"HmTrazYTMgYh3EK9wAWEJ3qvXixnd";
 				const pk = PrivateKey.from(key);
 				expect(pk.toBase58()).to.eql(key);
 			});
@@ -237,12 +243,16 @@ describe("key.js", () => {
 		});
 
 		describe(".from", () => {
-			it("should throw InvalidPublicKeyChecksum when public key fail base58 checksum check", () => {
-				const invalid = "invalid_base58";
-				expect(() => {
-					PublicKey.from(invalid);
-				}).to.throw(errors.InvalidPublicKeyChecksum);
-			});
+			it(
+				"should throw InvalidPublicKeyChecksum when public key fail base58" +
+					" checksum check",
+				() => {
+					const invalid = "invalid_base58";
+					expect(() => {
+						PublicKey.from(invalid);
+					}).to.throw(errors.InvalidPublicKeyChecksum);
+				},
+			);
 
 			it("should throw InvalidPublicKeyVersion when public key version is missing", () => {
 				const invalid = b58.encode(Buffer.from("missing_version_prefix"));
@@ -275,11 +285,15 @@ describe("key.js", () => {
 					expect(valid).to.be.false;
 				});
 
-				it("should return false when the address does not have expected address version", () => {
-					const addr = b58.encode(Buffer.from("invalid"));
-					const valid = Address.isValid(addr);
-					expect(valid).to.be.false;
-				});
+				it(
+					"should return false when the address does not have expected " +
+						"address version",
+					() => {
+						const addr = b58.encode(Buffer.from("invalid"));
+						const valid = Address.isValid(addr);
+						expect(valid).to.be.false;
+					},
+				);
 
 				it("should return false when the address decoded size is not 21", () => {
 					const addr = b58.encode(
@@ -301,11 +315,15 @@ describe("key.js", () => {
 					expect(err).to.eql(errors.InvalidAddressFormat);
 				});
 
-				it("should return InvalidAddressVersion when the address does not have address version", () => {
-					const addr = b58.encode(Buffer.from("invalid"));
-					const err = Address.getValidationError(addr);
-					expect(err).to.eql(errors.InvalidAddressVersion);
-				});
+				it(
+					"should return InvalidAddressVersion when the address does not" +
+						" have address version",
+					() => {
+						const addr = b58.encode(Buffer.from("invalid"));
+						const err = Address.getValidationError(addr);
+						expect(err).to.eql(errors.InvalidAddressVersion);
+					},
+				);
 
 				it("should return InvalidAddressSize when the address decoded size is not 21", () => {
 					const addr = b58.encode(

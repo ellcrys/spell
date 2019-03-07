@@ -1,9 +1,9 @@
 /**
  * @module Pool
  */
-import Namespace from "./namespace";
-import RPCClient from "../rpcclient";
 import { PoolSize } from "../../..";
+import RPCClient from "../rpcclient";
+import Namespace from "./namespace";
 
 /**
  * Pool gets the information of transaction in the mempool

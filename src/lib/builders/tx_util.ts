@@ -24,7 +24,7 @@ export default class TxUtility {
 	 * @returns {Buffer}
 	 * @memberof TxUtility
 	 */
-	getBytesNoHashAndSig(tx: Transaction): Buffer {
+	public getBytesNoHashAndSig(tx: Transaction): Buffer {
 		const data = [
 			tx.fee,
 			tx.from,
@@ -49,9 +49,9 @@ export default class TxUtility {
 	 * @returns {string}
 	 * @memberof TxUtility
 	 */
-	hash(tx: Transaction, prefix = "0x"): string {
+	public hash(tx: Transaction, prefix = "0x"): string {
 		const data = this.getBytesNoHashAndSig(tx);
-		var h = blake2.createHash("blake2b", { digestLength: 32 });
+		const h = blake2.createHash("blake2b", { digestLength: 32 });
 		h.update(data);
 		return prefix + h.digest("hex");
 	}
@@ -66,7 +66,7 @@ export default class TxUtility {
 	 * @returns {string} An hex string
 	 * @memberof TxUtility
 	 */
-	sign(tx: Transaction, sk: PrivateKey, prefix = "0x"): string {
+	public sign(tx: Transaction, sk: PrivateKey, prefix = "0x"): string {
 		const data = this.getBytesNoHashAndSig(tx);
 		return prefix + sk.sign(data).toString("hex");
 	}

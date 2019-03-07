@@ -1,16 +1,16 @@
 /**
  * @module Node
  */
+import {
+	BasicNodeInfo,
+	NodeConfig,
+	NodeInfo,
+	SyncStat,
+	Transaction,
+	TxStatus,
+} from "../../..";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
-import {
-	TxStatus,
-	SyncStat,
-	NodeInfo,
-	NodeConfig,
-	BasicNodeInfo,
-	Transaction,
-} from "../../..";
 
 /**
  * Node accesses information about an Elld client

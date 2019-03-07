@@ -1,9 +1,9 @@
 import chai = require("chai");
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
+import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
-import { HttpCallOption } from "../../../..";
 const expect = chai.expect;
 chai.use(sinonChai);
 
@@ -12,9 +12,7 @@ describe("#State", () => {
 	let client: RPCClient;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon
-			.stub(client.client, "call" as never)
-			.callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
 	}
 
 	beforeEach((done) => {
@@ -50,10 +48,7 @@ describe("#State", () => {
 
 			spell.state.getBlock(blockNumber).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getBlock",
-					blockNumber,
-				);
+				expect(mock).to.have.been.calledWith("state_getBlock", blockNumber);
 
 				expect(err.message).to.be.eq("block unknown");
 				done();
@@ -70,10 +65,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.state.getBlockByHash(blockHash);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"state_getBlockByHash",
-				blockHash,
-			);
+			expect(mock).to.have.been.calledWith("state_getBlockByHash", blockHash);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
@@ -84,10 +76,7 @@ describe("#State", () => {
 				expect(err.message).to.be.eq("block unknown");
 
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getBlockByHash",
-					blockHash,
-				);
+				expect(mock).to.have.been.calledWith("state_getBlockByHash", blockHash);
 				done();
 			});
 		});
@@ -101,10 +90,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.state.getAccountNonce(address);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"state_getAccountNonce",
-				address,
-			);
+			expect(mock).to.have.been.calledWith("state_getAccountNonce", address);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
@@ -114,10 +100,7 @@ describe("#State", () => {
 
 			spell.state.getAccountNonce(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getAccountNonce",
-					address,
-				);
+				expect(mock).to.have.been.calledWith("state_getAccountNonce", address);
 				expect(err.message).to.be.eq(expectedResult);
 				done();
 			});
@@ -146,10 +129,7 @@ describe("#State", () => {
 			const mock = makeClientStub(new Error("account not found"), 1234);
 			spell.state.getAccount(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getAccount",
-					address,
-				);
+				expect(mock).to.have.been.calledWith("state_getAccount", address);
 				expect(err.message).to.be.eq("account not found");
 				done();
 			});
@@ -187,10 +167,7 @@ describe("#State", () => {
 
 			spell.state.getBestChain().then((res: any) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getBestChain",
-					null,
-				);
+				expect(mock).to.have.been.calledWith("state_getBestChain", null);
 				expect(res.header.height).to.be.eq("0x000");
 				expect(res.header.timestamp).to.be.eq("0x0000");
 				expect(res.header.totalDifficulty).to.be.eq("0x0000");
@@ -255,10 +232,7 @@ describe("#State", () => {
 			const mock = makeClientStub(new Error("invalid request"), 1234);
 			spell.state.getDifficulty().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getDifficulty",
-					null,
-				);
+				expect(mock).to.have.been.calledWith("state_getDifficulty", null);
 
 				expect(err.message).to.be.eq("invalid request");
 				done();
@@ -316,10 +290,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.getTransaction(txHash);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"state_getTransaction",
-				txHash,
-			);
+			expect(mock).to.have.been.calledWith("state_getTransaction", txHash);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
@@ -327,10 +298,7 @@ describe("#State", () => {
 			const mock = makeClientStub(new Error("error encountered"), 1234);
 			spell.state.getTransaction(txHash).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_getTransaction",
-					txHash,
-				);
+				expect(mock).to.have.been.calledWith("state_getTransaction", txHash);
 				expect(err.message).to.be.eq("error encountered");
 				done();
 			});
@@ -351,10 +319,7 @@ describe("#State", () => {
 			const mock = makeClientStub(new Error("error encountered"), 1234);
 			spell.state.listAccounts().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith(
-					"state_listAccounts",
-					null,
-				);
+				expect(mock).to.have.been.calledWith("state_listAccounts", null);
 				expect(err.message).to.be.eq("error encountered");
 				done();
 			});
@@ -368,10 +333,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result: any = await spell.state.listTopAccounts(numOfResult);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"state_listTopAccounts",
-				numOfResult,
-			);
+			expect(mock).to.have.been.calledWith("state_listTopAccounts", numOfResult);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 

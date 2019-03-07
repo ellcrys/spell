@@ -1,9 +1,17 @@
 /**
  * @module State
  */
+import {
+	Account,
+	Block,
+	Branches,
+	Chain,
+	Difficulty,
+	ReOrgInfo,
+	Transaction,
+} from "../../..";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
-import { Block, Difficulty, Account, ReOrgInfo, Transaction, Branches, Chain } from "../../..";
 
 /**
  * Read the state of the Ellcrys blockchain

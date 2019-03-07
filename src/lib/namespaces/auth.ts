@@ -31,7 +31,7 @@ export default class Auth extends Namespace {
 	 * @memberof Auth
 	 * @returns {Promise<string>} The session token
 	 */
-	authenticate(username: string, password: string): Promise<string> {
+	public authenticate(username: string, password: string): Promise<string> {
 		return new Promise((resolve, reject) => {
 			if (!username || !password) {
 				return reject(new Error("Username and password are required"));

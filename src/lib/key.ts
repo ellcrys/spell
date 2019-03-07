@@ -3,11 +3,12 @@
  */
 
 import crypto = require("crypto");
-import ed25519 = require("ed25519");
 const { SHA3 } = require("sha3");
 const RIPEMD160 = require("ripemd160");
 const b58 = require("bs58check");
 import createHmac from "create-hmac";
+import nacl from "tweetnacl";
+import { CurveKeyPair } from "../..";
 import errors from "./errors";
 
 export const AddressVersion = Buffer.from([92]);
@@ -97,11 +98,11 @@ export class PrivateKey {
 	 * @type {ed25519.CurveKeyPair}
 	 * @memberof PrivateKey
 	 */
-	private keypair: ed25519.CurveKeyPair;
+	private keypair: CurveKeyPair;
 
 	/**
 	 * Creates an instance of PrivateKey.
-	 * @param {Buffer} seed Random seed used to create the key
+	 * @param {Buffer} seed 32-byte seed used to create the key
 	 * @memberof PrivateKey
 	 */
 	constructor(seed?: Buffer) {
@@ -111,7 +112,11 @@ export class PrivateKey {
 			seed = crypto.randomBytes(32);
 		}
 
-		this.keypair = ed25519.MakeKeypair(seed);
+		const keypair = nacl.sign.keyPair.fromSeed(seed);
+		this.keypair = {
+			privateKey: Buffer.from(keypair.secretKey),
+			publicKey: Buffer.from(keypair.publicKey),
+		};
 	}
 
 	/**
@@ -122,7 +127,7 @@ export class PrivateKey {
 	 * @memberof PrivateKey
 	 */
 	public sign(data: Buffer): Buffer {
-		return ed25519.Sign(data, this.keypair);
+		return Buffer.from(nacl.sign.detached(data, this.keypair.privateKey));
 	}
 
 	/**
@@ -284,7 +289,7 @@ export class PublicKey {
 	 * @memberof PublicKey
 	 */
 	public verify(msg: Buffer, sig: Buffer): boolean {
-		return ed25519.Verify(msg, sig, this.pk);
+		return nacl.sign.detached.verify(msg, sig, this.pk);
 	}
 }
 

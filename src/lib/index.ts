@@ -10,6 +10,7 @@ import {
 	Address,
 	AddressVersion,
 	HDKey,
+	isValidPath,
 	PrivateKey,
 	PrivateKeyVersion,
 	PublicKey,
@@ -28,6 +29,7 @@ export {
 	NumDecimals,
 	TxPayloadVersion,
 	HDKey,
+	isValidPath,
 };
 
 export default Spell;

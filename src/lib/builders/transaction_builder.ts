@@ -1,14 +1,14 @@
 /**
  * @module TransactionBuilder
  */
-import { Address } from "../key";
 import Decimal from "decimal.js";
-import RPCClient from "../rpcclient";
-import errors from "../errors";
 import moment = require("moment");
-import TxUtility from "./tx_util";
 import { PrivateKey } from "..";
 import { Transaction, TxResult } from "../../..";
+import errors from "../errors";
+import { Address } from "../key";
+import RPCClient from "../rpcclient";
+import TxUtility from "./tx_util";
 const b58 = require("bs58check");
 
 export const NumDecimals = 18;
@@ -28,7 +28,7 @@ class TxBuilder {
 	}
 }
 
-export default TxBuilder
+export default TxBuilder;
 
 /**
  * TxBalanceBuilder provides the ability to
@@ -157,57 +157,6 @@ export class TxBalanceBuilder extends TxUtility {
 	}
 
 	/**
-	 * Performs final operations such  computing and
-	 * setting the transaction hash and signature as
-	 * well as setting the sender public key and time.
-	 *
-	 * @protected
-	 * @param {PrivateKey} sk The sender's private key
-	 * @returns {Promise<string>} Returns the transaction hash
-	 * @memberof TxBalanceBuilder
-	 */
-	protected finalize(sk?: PrivateKey): Promise<string> {
-		return new Promise(async (resolve, reject) => {
-			if (!sk) {
-				return reject(errors.RequirePrivateKey);
-			}
-
-			this.data.senderPubKey = sk.publicKey().toBase58();
-
-			// We need to determine the senders current nonce
-			// if it has not been manually set.
-			if (!this.data.nonce) {
-				if (!this.client) {
-					return reject(errors.ClientNotInitialized);
-				}
-				try {
-					const acct = await this.client.call(
-						"state_getAccount",
-						this.data.from,
-					);
-					this.data.nonce = acct.nonce + 1;
-				} catch (e) {
-					if (e.statusCode === 400) {
-						e.data = JSON.parse(e.data);
-						if (e.data.error.code === 30001) {
-							return reject(errors.UnknownSenderAccount);
-						}
-					}
-					return reject(e);
-				}
-			}
-
-			// Compute and set hash
-			this.data.hash = this.hash(this.data, "");
-
-			// Compute and set signature
-			this.data.sig = this.sign(this.data, sk, "");
-
-			return resolve(this.data.hash);
-		});
-	}
-
-	/**
 	 * Returns the transaction data without sending
 	 * it to the network. It will finalize the transaction
 	 * if the sender's private key is provided.
@@ -269,5 +218,56 @@ export class TxBalanceBuilder extends TxUtility {
 		await this.finalize(sk);
 		const txBytes = Buffer.from(JSON.stringify(this.data));
 		return Promise.resolve(b58.encode(Buffer.concat([TxPayloadVersion, txBytes])));
+	}
+
+	/**
+	 * Performs final operations such  computing and
+	 * setting the transaction hash and signature as
+	 * well as setting the sender public key and time.
+	 *
+	 * @protected
+	 * @param {PrivateKey} sk The sender's private key
+	 * @returns {Promise<string>} Returns the transaction hash
+	 * @memberof TxBalanceBuilder
+	 */
+	protected finalize(sk?: PrivateKey): Promise<string> {
+		return new Promise(async (resolve, reject) => {
+			if (!sk) {
+				return reject(errors.RequirePrivateKey);
+			}
+
+			this.data.senderPubKey = sk.publicKey().toBase58();
+
+			// We need to determine the senders current nonce
+			// if it has not been manually set.
+			if (!this.data.nonce) {
+				if (!this.client) {
+					return reject(errors.ClientNotInitialized);
+				}
+				try {
+					const acct = await this.client.call(
+						"state_getAccount",
+						this.data.from,
+					);
+					this.data.nonce = acct.nonce + 1;
+				} catch (e) {
+					if (e.statusCode === 400) {
+						e.data = JSON.parse(e.data);
+						if (e.data.error.code === 30001) {
+							return reject(errors.UnknownSenderAccount);
+						}
+					}
+					return reject(e);
+				}
+			}
+
+			// Compute and set hash
+			this.data.hash = this.hash(this.data, "");
+
+			// Compute and set signature
+			this.data.sig = this.sign(this.data, sk, "");
+
+			return resolve(this.data.hash);
+		});
 	}
 }

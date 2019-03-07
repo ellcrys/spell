@@ -7,58 +7,58 @@ export default class Spell {
 	 * @type {RPCClient}
 	 * @memberof Spell
 	 */
-	rpcClient: RPCClient;
+	public rpcClient: RPCClient;
 	/**
 	 * State module
 	 *
 	 * @type {State}
 	 * @memberof Spell
 	 */
-	state: State;
+	public state: State;
 	/**
 	 * Node module
 	 *
 	 * @type {Node}
 	 * @memberof Spell
 	 */
-	node: Node;
+	public node: Node;
 	/**
 	 * Authentication module
 	 *
 	 * @type {Auth}
 	 * @memberof Spell
 	 */
-	auth: Auth;
+	public auth: Auth;
 	/**
 	 * Mempool module
 	 *
 	 * @type {Pool}
 	 * @memberof Spell
 	 */
-	pool: Pool;
+	public pool: Pool;
 	/**
 	 * Miner module
 	 *
 	 * @type {Miner}
 	 * @memberof Spell
 	 */
-	miner: Miner;
+	public miner: Miner;
 	/**
 	 * Net Module
 	 *
 	 * @type {Net}
 	 * @memberof Spell
 	 */
-	net: Net;
-	ell: Ell;
+	public net: Net;
+	public ell: Ell;
 	/**
 	 * Logger Module
 	 *
 	 * @type {Logger}
 	 * @memberof Spell
 	 */
-	logger: Logger;
-	rpc: RPC;
+	public logger: Logger;
+	public rpc: RPC;
 	/**
 	 * Creates an instance of Spell
 	 * @memberof Spell
@@ -70,14 +70,14 @@ export default class Spell {
 	 * it will use the connection in future RPC
 	 * method calls.
 	 */
-	provideClient(options: ConnectOptions): Promise<RPCClient>;
+	public provideClient(options: ConnectOptions): Promise<RPCClient>;
 	/**
 	 * Request for a session token from the node.
 	 *
 	 * @returns
 	 * @memberof Spell
 	 */
-	authenticate(username: string, password: string): Promise<string>;
+	public authenticate(username: string, password: string): Promise<string>;
 }
 
 export const NumDecimals = 18;
@@ -117,25 +117,30 @@ export interface Block {
 	hash: string;
 	header: Header;
 	sig: string;
-	transactions: Array<Transaction>;
+	transactions: Transaction[];
 }
 
 export interface Header {
 	creatorPubKey: string;
 	difficulty: string;
 	extra: string;
-	nonce: string;
 	number: string;
 	parentHash: string;
 	stateRoot: string;
 	timestamp: string;
 	totalDifficulty: string;
-	transactionsRoot: string;
+	transactionRoot: string;
+	sig: string;
 }
 
 export interface InvokeArgs {
 	func: string;
 	param: { [key: string]: Buffer };
+}
+
+export interface CurveKeyPair {
+	publicKey: Buffer;
+	privateKey: Buffer;
 }
 
 export interface Transaction {
@@ -318,6 +323,28 @@ export enum TxType {
 
 export declare class PrivateKey {
 	/**
+	 * Instantiate a PrivateKey from a base58
+	 * encoded private key string
+	 *
+	 * @static
+	 * @param {string} str The base58 encoded private keys
+	 * @returns {PrivateKey}
+	 * @throws InvalidPrivateKeyChecksum|InvalidPrivateKeyVersion|InvalidPrivateKeySize
+	 * @memberof PrivateKey
+	 */
+	public static from(str: string): PrivateKey;
+	/**
+	 * Instantiate a PrivateKey from a buffer.
+	 * The buffer's 0th index must contain the
+	 * private key version.
+	 *
+	 * @static
+	 * @param {Buffer} buf
+	 * @returns {PrivateKey}
+	 * @memberof PrivateKey
+	 */
+	public static fromBuffer(buf: Buffer): PrivateKey;
+	/**
 	 * The ED25519 key material
 	 *
 	 * @private
@@ -338,7 +365,7 @@ export declare class PrivateKey {
 	 * @returns {Buffer}
 	 * @memberof PrivateKey
 	 */
-	sign(data: Buffer): Buffer;
+	public sign(data: Buffer): Buffer;
 	/**
 	 * Returns an address derived from
 	 * the private key
@@ -346,21 +373,21 @@ export declare class PrivateKey {
 	 * @returns {Address}
 	 * @memberof PrivateKey
 	 */
-	toAddress(): Address;
+	public toAddress(): Address;
 	/**
 	 * Returns the public key.
 	 *
 	 * @returns {PublicKey}
 	 * @memberof PrivateKey
 	 */
-	publicKey(): PublicKey;
+	public publicKey(): PublicKey;
 	/**
 	 * Returns base58 encode string of the private key
 	 *
 	 * @returns {string}
 	 * @memberof PrivateKey
 	 */
-	toBase58(): string;
+	public toBase58(): string;
 	/**
 	 * Returns the private key as a buffer.
 	 * The base58 version is added as the 0th
@@ -369,66 +396,10 @@ export declare class PrivateKey {
 	 * @returns {Buffer}
 	 * @memberof PrivateKey
 	 */
-	toBuffer(): Buffer;
-	/**
-	 * Instantiate a PrivateKey from a base58
-	 * encoded private key string
-	 *
-	 * @static
-	 * @param {string} str The base58 encoded private keys
-	 * @returns {PrivateKey}
-	 * @throws InvalidPrivateKeyChecksum|InvalidPrivateKeyVersion|InvalidPrivateKeySize
-	 * @memberof PrivateKey
-	 */
-	static from(str: string): PrivateKey;
-	/**
-	 * Instantiate a PrivateKey from a buffer.
-	 * The buffer's 0th index must contain the
-	 * private key version.
-	 *
-	 * @static
-	 * @param {Buffer} buf
-	 * @returns {PrivateKey}
-	 * @memberof PrivateKey
-	 */
-	static fromBuffer(buf: Buffer): PrivateKey;
+	public toBuffer(): Buffer;
 }
 
 export declare class PublicKey {
-	private pk;
-	/**
-	 * Returns base58 encode string of the public key
-	 *
-	 * @returns {string}
-	 * @memberof PublicKey
-	 */
-	toBase58(): string;
-	/**
-	 * Returns the public key as a buffer.
-	 * The public key version is added as the 0th
-	 * byte in the returned buffer
-	 *
-	 * @returns {Buffer}
-	 * @memberof PublicKey
-	 */
-	toBuffer(): Buffer;
-	/**
-	 * Returns an address derived from
-	 * the public key
-	 *
-	 * @returns {Address}
-	 * @memberof PublicKey
-	 */
-	toAddress(): Address;
-	/**
-	 * Verify a signature
-	 *
-	 * @param {Buffer} msg The message that was signed
-	 * @param {Buffer} sig The message's signature
-	 * @returns {boolean}
-	 * @memberof PublicKey
-	 */
-	verify(msg: Buffer, sig: Buffer): boolean;
 	/**
 	 * Instantiate a PublicKey from a buffer.
 	 * The buffer's 0th index must contain the
@@ -439,7 +410,7 @@ export declare class PublicKey {
 	 * @returns {PublicKey}
 	 * @memberof PublicKey
 	 */
-	static fromBuffer(buf: Buffer): PublicKey;
+	public static fromBuffer(buf: Buffer): PublicKey;
 	/**
 	 * Instantiate a PublicKey from a base58
 	 * encoded public key string
@@ -450,18 +421,44 @@ export declare class PublicKey {
 	 * @throws InvalidPublicKeyChecksum|InvalidPublicKeyVersion|InvalidPublicKeySize
 	 * @memberof PublicKey
 	 */
-	static from(str: string): PublicKey;
+	public static from(str: string): PublicKey;
+	private pk;
+	/**
+	 * Returns base58 encode string of the public key
+	 *
+	 * @returns {string}
+	 * @memberof PublicKey
+	 */
+	public toBase58(): string;
+	/**
+	 * Returns the public key as a buffer.
+	 * The public key version is added as the 0th
+	 * byte in the returned buffer
+	 *
+	 * @returns {Buffer}
+	 * @memberof PublicKey
+	 */
+	public toBuffer(): Buffer;
+	/**
+	 * Returns an address derived from
+	 * the public key
+	 *
+	 * @returns {Address}
+	 * @memberof PublicKey
+	 */
+	public toAddress(): Address;
+	/**
+	 * Verify a signature
+	 *
+	 * @param {Buffer} msg The message that was signed
+	 * @param {Buffer} sig The message's signature
+	 * @returns {boolean}
+	 * @memberof PublicKey
+	 */
+	public verify(msg: Buffer, sig: Buffer): boolean;
 }
 
 export declare class Address {
-	/**
-	 * The loaded address
-	 *
-	 * @private
-	 * @type {string}
-	 * @memberof Address
-	 */
-	private address;
 	/**
 	 * Check whether an address is valid
 	 *
@@ -470,7 +467,7 @@ export declare class Address {
 	 * @returns {boolean}
 	 * @memberof Address
 	 */
-	static isValid(address: string): boolean;
+	public static isValid(address: string): boolean;
 	/**
 	 * Check whether a given address is valid.
 	 * If not valid, the specific validation error
@@ -483,7 +480,7 @@ export declare class Address {
 	 * 			InvalidAddressSize }| InvalidAddressFormat
 	 * @memberof Address
 	 */
-	static getValidationError(address: string): null | Error;
+	public static getValidationError(address: string): null | Error;
 	/**
 	 * Instantiate an Address instance from
 	 * a given address string
@@ -494,17 +491,25 @@ export declare class Address {
 	 * @throws InvalidAddress
 	 * @memberof Address
 	 */
-	static from(address: string): Address;
+	public static from(address: string): Address;
 	/**
 	 * Return a string format of the address
 	 *
 	 * @memberof Address
 	 */
-	toString: () => string;
+	public toString: () => string;
+	/**
+	 * The loaded address
+	 *
+	 * @private
+	 * @type {string}
+	 * @memberof Address
+	 */
+	private address;
 }
 
 export declare class TxBuilder {
-	balance: TxBalanceBuilder;
+	public balance: TxBalanceBuilder;
 	constructor(client: RPCClient);
 }
 
@@ -519,7 +524,7 @@ export declare class TxUtility {
 	 * @returns {Buffer}
 	 * @memberof TxUtility
 	 */
-	getBytesNoHashAndSig(tx: Transaction): Buffer;
+	public getBytesNoHashAndSig(tx: Transaction): Buffer;
 	/**
 	 * Compute and return the hash of a transaction
 	 *
@@ -528,7 +533,7 @@ export declare class TxUtility {
 	 * @returns {string}
 	 * @memberof TxUtility
 	 */
-	hash(tx: Transaction, prefix?: string): string;
+	public hash(tx: Transaction, prefix?: string): string;
 	/**
 	 * Sign and return a signature of the
 	 * transaction.
@@ -539,7 +544,7 @@ export declare class TxUtility {
 	 * @returns {string} An hex string
 	 * @memberof TxUtility
 	 */
-	sign(tx: Transaction, sk: PrivateKey, prefix?: string): string;
+	public sign(tx: Transaction, sk: PrivateKey, prefix?: string): string;
 }
 
 export declare class TxBalanceBuilder extends TxUtility {
@@ -573,7 +578,7 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof TxBalanceBuilder
 	 */
-	from(address: string | Address): TxBalanceBuilder;
+	public from(address: string | Address): TxBalanceBuilder;
 	/**
 	 * Set the recipient address
 	 *
@@ -581,7 +586,7 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof TxBalanceBuilder
 	 */
-	to(address: string | Address): TxBalanceBuilder;
+	public to(address: string | Address): TxBalanceBuilder;
 	/**
 	 * The next nonce of the sending account
 	 *
@@ -589,7 +594,7 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof TxBalanceBuilder
 	 */
-	nonce(num: number): TxBalanceBuilder;
+	public nonce(num: number): TxBalanceBuilder;
 	/**
 	 * Set the amount to send from the
 	 * sender to the recipient
@@ -598,7 +603,7 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof TxBalanceBuilder
 	 */
-	value(value: string | Decimal): TxBalanceBuilder;
+	public value(value: string | Decimal): TxBalanceBuilder;
 	/**
 	 * Set the fee to be paid for this
 	 * transaction
@@ -607,13 +612,39 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof TxBalanceBuilder
 	 */
-	fee(fee: string | Decimal): TxBalanceBuilder;
+	public fee(fee: string | Decimal): TxBalanceBuilder;
 	/**
 	 * Reset the transaction builder
 	 *
 	 * @memberof TxBalanceBuilder
 	 */
-	reset(): void;
+	public reset(): void;
+	/**
+	 * Returns the transaction data without sending
+	 * it to the network. It will finalize the transaction
+	 * if the sender's private key is provided.
+	 *
+	 * @param {PrivateKey} [sk] The senders private key
+	 * @memberof TxBalanceBuilder
+	 */
+	public payload(sk?: PrivateKey): Promise<Transaction>;
+	/**
+	 * Send the transaction to the network
+	 *
+	 * @param {PrivateKey} sk The sender's private key
+	 * @returns {Promise<TxResult>}
+	 * @memberof TxBalanceBuilder
+	 */
+	public send(sk: PrivateKey): Promise<TxResult>;
+	/**
+	 * Returns a base58 serialized version of the
+	 * transaction.
+	 *
+	 * @param {PrivateKey} sk The sender's private key
+	 * @returns {string}
+	 * @memberof TxBalanceBuilder
+	 */
+	public packed(sk: PrivateKey): Promise<string>;
 	/**
 	 * Performs final operations such  computing and
 	 * setting the transaction hash and signature as
@@ -625,32 +656,6 @@ export declare class TxBalanceBuilder extends TxUtility {
 	 * @memberof TxBalanceBuilder
 	 */
 	protected finalize(sk?: PrivateKey): Promise<string>;
-	/**
-	 * Returns the transaction data without sending
-	 * it to the network. It will finalize the transaction
-	 * if the sender's private key is provided.
-	 *
-	 * @param {PrivateKey} [sk] The senders private key
-	 * @memberof TxBalanceBuilder
-	 */
-	payload(sk?: PrivateKey): Promise<Transaction>;
-	/**
-	 * Send the transaction to the network
-	 *
-	 * @param {PrivateKey} sk The sender's private key
-	 * @returns {Promise<TxResult>}
-	 * @memberof TxBalanceBuilder
-	 */
-	send(sk: PrivateKey): Promise<TxResult>;
-	/**
-	 * Returns a base58 serialized version of the
-	 * transaction.
-	 *
-	 * @param {PrivateKey} sk The sender's private key
-	 * @returns {string}
-	 * @memberof TxBalanceBuilder
-	 */
-	packed(sk: PrivateKey): Promise<string>;
 }
 
 export declare class Namespace {
@@ -664,7 +669,7 @@ export declare class RPCClient {
 	 * @type {JSONRPCCaller}
 	 * @memberof RPCClient
 	 */
-	client?: JSONRPCCaller;
+	public client?: JSONRPCCaller;
 	/**
 	 * clientOpts contains the options to pass
 	 * to the client call request
@@ -673,7 +678,7 @@ export declare class RPCClient {
 	 * @type {*}
 	 * @memberof RPCClient
 	 */
-	clientOpts: any;
+	public clientOpts: any;
 	/**
 	 * The session token to access
 	 * private endpoints
@@ -698,14 +703,14 @@ export declare class RPCClient {
 	 * @returns {Promise}
 	 * @memberof RPCClient
 	 */
-	call(method: string, params: any): Promise<any>;
+	public call(method: string, params: any): Promise<any>;
 	/**
 	 * Set the session token
 	 *
 	 * @param {string} token
 	 * @memberof RPCClient
 	 */
-	setToken(token: string): void;
+	public setToken(token: string): void;
 }
 
 export declare class State extends Namespace {
@@ -723,7 +728,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Block>}
 	 * @memberof State
 	 */
-	getBlock(num: number): Promise<Block>;
+	public getBlock(num: number): Promise<Block>;
 	/**
 	 * Get a block by block Hash
 	 *
@@ -731,7 +736,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Block>}
 	 * @memberof State
 	 */
-	getBlockByHash(blockHash: string): Promise<Block>;
+	public getBlockByHash(blockHash: string): Promise<Block>;
 	/**
 	 * Get the current difficulty and total difficulty
 	 * of the network.
@@ -740,14 +745,14 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Difficulty>}
 	 * @memberof State
 	 */
-	getDifficulty(): Promise<Difficulty>;
+	public getDifficulty(): Promise<Difficulty>;
 	/**
 	 * Get all the account on the network
 	 *
 	 * @returns {Promise<Account[]>}
 	 * @memberof State
 	 */
-	listAccounts(): Promise<Account[]>;
+	public listAccounts(): Promise<Account[]>;
 	/**
 	 * Get a list of re-organization events
 	 * that have occurred from the node's
@@ -756,7 +761,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<ReOrgInfo[]>}
 	 * @memberof State
 	 */
-	getReOrgs(): Promise<ReOrgInfo[]>;
+	public getReOrgs(): Promise<ReOrgInfo[]>;
 	/**
 	 * Get a list of top accounts on the network.
 	 *
@@ -764,7 +769,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Account[]>}
 	 * @memberof State
 	 */
-	listTopAccounts(limit: number): Promise<Account[]>;
+	public listTopAccounts(limit: number): Promise<Account[]>;
 	/**
 	 * Get a specific account on the network
 	 *
@@ -772,7 +777,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Account>}
 	 * @memberof State
 	 */
-	getAccount(address: string): Promise<Account>;
+	public getAccount(address: string): Promise<Account>;
 	/**
 	 * Get the nonce of a given address
 	 *
@@ -780,7 +785,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<number>}
 	 * @memberof State
 	 */
-	getAccountNonce(address: string): Promise<number>;
+	public getAccountNonce(address: string): Promise<number>;
 	/**
 	 * Get a transaction by its hash
 	 *
@@ -788,28 +793,28 @@ export declare class State extends Namespace {
 	 * @returns {Promise<Transaction>}
 	 * @memberof State
 	 */
-	getTransaction(txHash: string): Promise<Transaction>;
+	public getTransaction(txHash: string): Promise<Transaction>;
 	/**
 	 * Get all the known branches on the node
 	 *
 	 * @returns {Promise<Branches[]>}
 	 * @memberof State
 	 */
-	getBranches(): Promise<Branches[]>;
+	public getBranches(): Promise<Branches[]>;
 	/**
 	 * Get orphan blocks on the node
 	 *
 	 * @returns {Promise<Block>}
 	 * @memberof State
 	 */
-	getOrphans(): Promise<Block>;
+	public getOrphans(): Promise<Block>;
 	/**
 	 * Get the best chain on the node
 	 *
 	 * @returns {Promise<Chain>}
 	 * @memberof State
 	 */
-	getBestChain(): Promise<Chain>;
+	public getBestChain(): Promise<Chain>;
 	/**
 	 * Returns raw db objects (Debug only)
 	 *
@@ -817,7 +822,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<any>}
 	 * @memberof State
 	 */
-	getObjects(filter: JSON): Promise<any>;
+	public getObjects(filter: JSON): Promise<any>;
 }
 
 export declare class Node extends Namespace {
@@ -841,7 +846,7 @@ export declare class Node extends Namespace {
 	 * @returns {Promise<TxStatus>}
 	 * @memberof Node
 	 */
-	getTransactionStatus(hash: string): Promise<TxStatus>;
+	public getTransactionStatus(hash: string): Promise<TxStatus>;
 	/**
 	 * Get the current status of the node
 	 * block synchronization session. Returns
@@ -850,7 +855,7 @@ export declare class Node extends Namespace {
 	 * @returns {Promise<SyncStat | null>}
 	 * @memberof Node
 	 */
-	getSyncStat(): Promise<SyncStat | null>;
+	public getSyncStat(): Promise<SyncStat | null>;
 	/**
 	 * Check whether the node is currently
 	 * syncing blocks with a peer.
@@ -858,21 +863,21 @@ export declare class Node extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Node
 	 */
-	isSyncing(): Promise<boolean>;
+	public isSyncing(): Promise<boolean>;
 	/**
 	 * Get information about the node
 	 *
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node
 	 */
-	info(): Promise<NodeInfo>;
+	public info(): Promise<NodeInfo>;
 	/**
 	 * Get the node's configurations
 	 *
 	 * @returns {Promise<NodeInfo>}
 	 * @memberof Node
 	 */
-	config(): Promise<NodeConfig>;
+	public config(): Promise<NodeConfig>;
 	/**
 	 * Returns non-sensitive information about
 	 * a node.
@@ -880,7 +885,7 @@ export declare class Node extends Namespace {
 	 * @returns {Promise<BasicNodeInfo>}
 	 * @memberof Node
 	 */
-	basic(): Promise<BasicNodeInfo>;
+	public basic(): Promise<BasicNodeInfo>;
 }
 
 export declare class Auth extends Namespace {
@@ -900,7 +905,7 @@ export declare class Auth extends Namespace {
 	 * @memberof Auth
 	 * @returns {Promise<string>} The session token
 	 */
-	authenticate(username: string, password: string): Promise<string>;
+	public authenticate(username: string, password: string): Promise<string>;
 }
 
 export declare class Pool extends Namespace {
@@ -919,14 +924,14 @@ export declare class Pool extends Namespace {
 	 * @returns {Promise<PoolSize>}
 	 * @extends {Namespace}
 	 */
-	getSize(): Promise<PoolSize>;
+	public getSize(): Promise<PoolSize>;
 	/**
 	 * Get all transactions in the pool
 	 *
 	 * @returns {Promise<any>}
 	 * @memberof Pool
 	 */
-	getAll(): Promise<any>;
+	public getAll(): Promise<any>;
 }
 
 export declare class Miner extends Namespace {
@@ -942,35 +947,35 @@ export declare class Miner extends Namespace {
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	start(): Promise<Boolean>;
+	public start(): Promise<Boolean>;
 	/**
 	 * Stop the miner on the node
 	 *
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	stop(): Promise<Boolean>;
+	public stop(): Promise<Boolean>;
 	/**
 	 * Check whether the miner has is running
 	 *
 	 * @returns {Promise<Boolean>}
 	 * @memberof Miner
 	 */
-	isMining(): Promise<Boolean>;
+	public isMining(): Promise<Boolean>;
 	/**
 	 * Get the hashrate of the miner
 	 *
 	 * @returns {Promise<number>}
 	 * @memberof Miner
 	 */
-	getHashrate(): Promise<number>;
+	public getHashrate(): Promise<number>;
 	/**
 	 * Get the number of miner threads
 	 *
 	 * @returns {Promise<number>}
 	 * @memberof Miner
 	 */
-	numThreads(): Promise<number>;
+	public numThreads(): Promise<number>;
 	/**
 	 * Set the number of miner threads
 	 * to run.
@@ -979,7 +984,7 @@ export declare class Miner extends Namespace {
 	 * @returns {Promise<number>}
 	 * @memberof Miner
 	 */
-	setThreads(num: number): Promise<number>;
+	public setThreads(num: number): Promise<number>;
 }
 
 export declare class Net extends Namespace {
@@ -998,7 +1003,7 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<ActivePeer[]>}
 	 * @memberof Net
 	 */
-	getActivePeers(): Promise<ActivePeer[]>;
+	public getActivePeers(): Promise<ActivePeer[]>;
 	/**
 	 * Get all the peers that the peers
 	 * that is known to the node.
@@ -1006,7 +1011,7 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<Peer[]>}
 	 * @memberof Net
 	 */
-	getPeers(): Promise<Peer[]>;
+	public getPeers(): Promise<Peer[]>;
 	/**
 	 * Get the peers that the node will
 	 * regularly broadcast messages to.
@@ -1014,14 +1019,14 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<any>}
 	 * @memberof Net
 	 */
-	getBroadcasters(): Promise<any>;
+	public getBroadcasters(): Promise<any>;
 	/**
 	 * Get the node's connection stats
 	 *
 	 * @returns {Promise<NetStat>}
 	 * @memberof Net
 	 */
-	getStats(): Promise<NetStat>;
+	public getStats(): Promise<NetStat>;
 	/**
 	 * Add a peer address to a node.
 	 * The node will attempt to connect
@@ -1032,7 +1037,7 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
-	addPeer(peerAddress: string): Promise<boolean>;
+	public addPeer(peerAddress: string): Promise<boolean>;
 	/**
 	 * Delete all peers in memory and on disk
 	 *
@@ -1040,7 +1045,7 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
-	dumpPeers(): Promise<boolean>;
+	public dumpPeers(): Promise<boolean>;
 	/**
 	 * Connect to one or more addresses
 	 * immediately
@@ -1049,14 +1054,14 @@ export declare class Net extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
-	join(peerAddress: Array<string>): Promise<boolean>;
+	public join(peerAddress: string[]): Promise<boolean>;
 	/**
 	 * Prevents inbound or outbound connections by
 	 * shutting down the client's network function.
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
-	noNet(): Promise<boolean>;
+	public noNet(): Promise<boolean>;
 }
 
 export declare class Ell extends Namespace {
@@ -1074,7 +1079,7 @@ export declare class Ell extends Namespace {
 	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	send(txData: Transaction): Promise<TxResult>;
+	public send(txData: Transaction): Promise<TxResult>;
 	/**
 	 * Returns the balance of an account
 	 * using the given address
@@ -1083,7 +1088,7 @@ export declare class Ell extends Namespace {
 	 * @returns {Promise<string>}
 	 * @memberof Ell
 	 */
-	getBalance(address: string): Promise<Decimal>;
+	public getBalance(address: string): Promise<Decimal>;
 	/**
 	 * Returns a balance transaction builder for
 	 * creating and executing balance transactions.
@@ -1091,7 +1096,7 @@ export declare class Ell extends Namespace {
 	 * @returns {TxBalanceBuilder}
 	 * @memberof Ell
 	 */
-	balance(): TxBalanceBuilder;
+	public balance(): TxBalanceBuilder;
 	/**
 	 * Send a Base58 encoded transaction
 	 * to the node.
@@ -1100,7 +1105,7 @@ export declare class Ell extends Namespace {
 	 * @returns {Promise<TxResult>}
 	 * @memberof Ell
 	 */
-	sendRaw(encodedTx: string): Promise<TxResult>;
+	public sendRaw(encodedTx: string): Promise<TxResult>;
 }
 
 export declare class Logger extends Namespace {
@@ -1117,7 +1122,7 @@ export declare class Logger extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Logger
 	 */
-	debugLogger(): Promise<boolean>;
+	public debugLogger(): Promise<boolean>;
 	/**
 	 * Set the logger to default logger
 	 *
@@ -1125,7 +1130,7 @@ export declare class Logger extends Namespace {
 	 * @returns {Promise<boolean>}
 	 * @memberof Logger
 	 */
-	defaultLogger(): Promise<boolean>;
+	public defaultLogger(): Promise<boolean>;
 }
 
 export declare class RPC extends Namespace {
@@ -1142,7 +1147,7 @@ export declare class RPC extends Namespace {
 	 * @class RPC
 	 * @extends {Namespace}
 	 */
-	stop(): Promise<boolean>;
+	public stop(): Promise<boolean>;
 	/**
 	 * Test JSON-RPC 2.0 service by sending
 	 * messages that are echoed back.
@@ -1151,7 +1156,7 @@ export declare class RPC extends Namespace {
 	 * @class RPC
 	 * @extends {Namespace}
 	 */
-	echo(params?: any | null): Promise<any>;
+	public echo(params?: any | null): Promise<any>;
 	/**
 	 * Get all JSON-RPC 2.0 methods
 	 * supported by the service
@@ -1160,5 +1165,83 @@ export declare class RPC extends Namespace {
 	 * @class RPC
 	 * @extends {Namespace}
 	 */
-	methods(): Promise<RpcMethod[]>;
+	public methods(): Promise<RpcMethod[]>;
+}
+
+/**
+ * Checks whether an HDKey path is
+ * valid
+ *
+ * @export
+ * @param {string} path The path to check
+ * @returns {boolean}
+ */
+export declare function isValidPath(path: string): boolean;
+/**
+ * HDKey provides the ability to create
+ * hierarchical deterministic keys.
+ *
+ * @export
+ * @class HDKey
+ */
+export declare class HDKey {
+	/**
+	 * Create an HDKey from a seed.
+	 *
+	 * @static
+	 * @param {Buffer} seed
+	 * @returns {Node}
+	 * @memberof HDKey
+	 */
+	public static fromMasterSeed(seed: Buffer): HDKey;
+	private mKey;
+	private mChainCode;
+	/**
+	 * Creates an instance of HDKey.
+	 * @param {Buffer} key Left half of the hmac digest
+	 * @param {Buffer} chainCode Right half of the hmac digest
+	 * @memberof HDKey
+	 */
+	constructor(key: Buffer, chainCode: Buffer);
+	/**
+	 * Return the derived key
+	 *
+	 * @returns {Buffer}
+	 * @memberof HDKey
+	 */
+	public key(): Buffer;
+	/**
+	 * Return the derived chain code
+	 *
+	 * @returns {Buffer}
+	 * @memberof HDKey
+	 */
+	public chainCode(): Buffer;
+	/**
+	 * Child key derivation function
+	 *
+	 * @param {Buffer} key The parent key
+	 * @param {Buffer} chainCode The parent chain code
+	 * @param {number} index The key index
+	 * @returns {HDKey}
+	 * @memberof HDKey
+	 */
+	public ckd(key: Buffer, chainCode: Buffer, index: number): HDKey;
+	/**
+	 * Given a path, derive a child key. Path
+	 * must contain only hardened indices
+	 *
+	 * @param {string} path The derivation path
+	 * @returns {HDKey}
+	 * @memberof HDKey
+	 */
+	public derive(path: string): HDKey;
+	/**
+	 * Get the private key created using the
+	 * derived key
+	 *
+	 * @returns {PrivateKey}
+	 * @memberof HDKey
+	 */
+	public privateKey(): PrivateKey;
 }
