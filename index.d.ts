@@ -281,6 +281,7 @@ export interface PoolSize {
 }
 
 export interface ActivePeer {
+	name: string;
 	connected: boolean;
 	id: string;
 	isAcquainted: boolean;
@@ -290,6 +291,7 @@ export interface ActivePeer {
 }
 
 export interface Peer {
+	name: string;
 	banEndTime: string;
 	connected: boolean;
 	id: string;
