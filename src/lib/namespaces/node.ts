@@ -1,7 +1,14 @@
 /**
  * @module Node
  */
-import { BasicNodeInfo, NodeConfig, NodeInfo, SyncStat, TxStatus } from "../../..";
+import {
+	BasicNodeInfo,
+	NodeConfig,
+	NodeInfo,
+	SyncStat,
+	Transaction,
+	TxStatus,
+} from "../../..";
 import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 
@@ -139,6 +146,26 @@ export default class Node extends Namespace {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("node_basic", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Get transaction from the transaction pool
+	 *
+	 * @param {string} txHash hash of the tx to fetch from pool
+	 * @returns {Promise<Transaction>}
+	 * @memberof Node
+	 */
+	public getTransactionFromPool(txHash: string): Promise<Transaction> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_getTransactionFromPool", txHash)
 				.then((res) => {
 					return resolve(res);
 				})

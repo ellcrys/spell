@@ -222,6 +222,10 @@ export interface NodeInfo {
 	buildDate: string;
 	buildCommit: string;
 	goVersion: string;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 export interface BasicNodeInfo {
@@ -234,6 +238,10 @@ export interface BasicNodeInfo {
 	name: string;
 	netVersion: string;
 	syncing: boolean;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 export interface NodeConfig {
@@ -273,6 +281,7 @@ export interface PoolSize {
 }
 
 export interface ActivePeer {
+	name: string;
 	connected: boolean;
 	id: string;
 	isAcquainted: boolean;
@@ -282,6 +291,7 @@ export interface ActivePeer {
 }
 
 export interface Peer {
+	name: string;
 	banEndTime: string;
 	connected: boolean;
 	id: string;
