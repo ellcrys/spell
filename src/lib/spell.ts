@@ -17,7 +17,7 @@ import State from "./namespaces/state";
 import RPCClient from "./rpcclient";
 /**
  * Spell provides access to a client
- * RPC functionality.
+ * RPC functionalities.
  *
  * @export
  * @class Spell

@@ -290,7 +290,7 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get Tip of the Block on the node.
+	 * Return the block with the highest height or number on the node
 	 *
 	 * @returns {Promise<Block>}
 	 * @memberof State
