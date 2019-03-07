@@ -15,10 +15,9 @@ import Pool from "./namespaces/pool";
 import RPC from "./namespaces/rpc";
 import State from "./namespaces/state";
 import RPCClient from "./rpcclient";
-
 /**
  * Spell provides access to a client
- * RPC functionality.
+ * RPC functionalities.
  *
  * @export
  * @class Spell
@@ -95,7 +94,14 @@ export default class Spell {
 	 */
 	public logger: Logger;
 
+	/**
+	 * RPC Module
+	 *
+	 * @type {RPC}
+	 * @memberof Spell
+	 */
 	public rpc: RPC;
+
 	/**
 	 * Creates an instance of Spell.
 	 * @memberof Spell

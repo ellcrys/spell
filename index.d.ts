@@ -222,6 +222,10 @@ export interface NodeInfo {
 	buildDate: string;
 	buildCommit: string;
 	goVersion: string;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 export interface BasicNodeInfo {
@@ -234,6 +238,10 @@ export interface BasicNodeInfo {
 	name: string;
 	netVersion: string;
 	syncing: boolean;
+	tipBlockDifficulty: string;
+	tipBlockHash: string;
+	tipBlockHeight: string;
+	tipBlockTotalDifficulty: string;
 }
 
 export interface NodeConfig {
