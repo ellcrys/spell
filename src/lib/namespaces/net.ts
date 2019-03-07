@@ -6,7 +6,8 @@ import RPCClient from "../rpcclient";
 import Namespace from "./namespace";
 
 /**
- * Manage the network related activities of a Node
+ * Manage and access the nodes network related
+ * activities and resources.
  *
  * @export
  * @class Net
@@ -25,8 +26,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * getActivePeers get all the peers
-	 * that are connected to the node
+	 * getActivePeers returns the peers
+	 * that are connected to the node.
 	 *
 	 * @returns {Promise<ActivePeer[]>}
 	 * @memberof Net
@@ -45,8 +46,8 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Get all the peers that the peers
-	 * that is known to the node.
+	 * Get all peers known to the
+	 * client.
 	 *
 	 * @returns {Promise<Peer[]>}
 	 * @memberof Net
@@ -85,7 +86,7 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Get the node's connection stats
+	 * Get the node's connection statistics
 	 *
 	 * @returns {Promise<NetStat>}
 	 * @memberof Net
@@ -104,7 +105,7 @@ export default class Net extends Namespace {
 	}
 
 	/**
-	 * Add a peer address to a node.
+	 * Add an address to the node.
 	 * The node will attempt to connect
 	 * to this address when it needs more
 	 * connections.
@@ -126,7 +127,8 @@ export default class Net extends Namespace {
 		});
 	}
 	/**
-	 * Delete all peers in memory and on disk
+	 * Delete all known peer addresses
+	 * in memory and on disk.
 	 *
 	 * @param {string} peerAddress
 	 * @returns {Promise<boolean>}
@@ -147,7 +149,7 @@ export default class Net extends Namespace {
 
 	/**
 	 * Connect to one or more addresses
-	 * immediately
+	 * immediately.
 	 *
 	 * @param {Array<string>} peerAddress array of addresses to be connected to
 	 * @returns {Promise<boolean>}
@@ -169,6 +171,9 @@ export default class Net extends Namespace {
 	/**
 	 * Prevents inbound or outbound connections by
 	 * shutting down the client's network function.
+	 * Note that this does not affect RPC service
+	 * and connections.
+	 *
 	 * @returns {Promise<boolean>}
 	 * @memberof Net
 	 */
