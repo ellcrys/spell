@@ -118,6 +118,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#basic" class="tsd-kind-icon">basic</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#config" class="tsd-kind-icon">config</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#getsyncstat" class="tsd-kind-icon">get<wbr>Sync<wbr>Stat</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#gettransactionfrompool" class="tsd-kind-icon">get<wbr>Transaction<wbr>From<wbr>Pool</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#gettransactionstatus" class="tsd-kind-icon">get<wbr>Transaction<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#info" class="tsd-kind-icon">info</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#issyncing" class="tsd-kind-icon">is<wbr>Syncing</a></li>
@@ -138,7 +139,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L14">namespaces/node.ts:14</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L21">namespaces/node.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -171,7 +172,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="namespace.namespace-1.html">Namespace</a>.<a href="namespace.namespace-1.html#client">client</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/namespace.ts#L14">namespaces/namespace.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/namespace.ts#L14">namespaces/namespace.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -188,7 +189,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L138">namespaces/node.ts:138</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L145">namespaces/node.ts:145</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -216,7 +217,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L118">namespaces/node.ts:118</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L125">namespaces/node.ts:125</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -243,7 +244,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L60">namespaces/node.ts:60</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L67">namespaces/node.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -263,6 +264,42 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="gettransactionfrompool" class="tsd-anchor"></a>
+					<h3>get<wbr>Transaction<wbr>From<wbr>Pool</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Transaction<wbr>From<wbr>Pool<span class="tsd-signature-symbol">(</span>txHash<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Transaction</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L165">namespaces/node.ts:165</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get transaction from the transaction pool</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Node</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>txHash: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>hash of the tx to fetch from pool</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Transaction</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="gettransactionstatus" class="tsd-anchor"></a>
 					<h3>get<wbr>Transaction<wbr>Status</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -272,7 +309,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L39">namespaces/node.ts:39</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L46">namespaces/node.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -313,7 +350,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L99">namespaces/node.ts:99</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L106">namespaces/node.ts:106</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -340,7 +377,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/53381fe/src/lib/namespaces/node.ts#L80">namespaces/node.ts:80</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L87">namespaces/node.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -440,6 +477,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="node.node-1.html#getsyncstat" class="tsd-kind-icon">get<wbr>Sync<wbr>Stat</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="node.node-1.html#gettransactionfrompool" class="tsd-kind-icon">get<wbr>Transaction<wbr>From<wbr>Pool</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="node.node-1.html#gettransactionstatus" class="tsd-kind-icon">get<wbr>Transaction<wbr>Status</a>
