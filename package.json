@@ -10,7 +10,7 @@
 		"test": "mocha test",
 		"gen-docs": "typedoc --out docs ./src --exclude \"**/test/**/*.ts,**/play/**/*.ts\" --hideGenerator --name \"Spell Documentation\"",
 		"cover": "nyc mocha test"
-	},
+	},   
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ellcrys/spell.js.git"
