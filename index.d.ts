@@ -124,11 +124,13 @@ export interface Header {
 	creatorPubKey: string;
 	difficulty: string;
 	extra: string;
+	number: string;
 	parentHash: string;
 	stateRoot: string;
 	timestamp: string;
 	totalDifficulty: string;
 	transactionRoot: string;
+	sig: string;
 }
 
 export interface InvokeArgs {
