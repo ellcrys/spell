@@ -3,10 +3,12 @@
  */
 import {
 	Account,
+	ArgMindedBlock,
 	Block,
 	Branches,
 	Chain,
 	Difficulty,
+	MinedBlocksResult,
 	ReOrgInfo,
 	Transaction,
 } from "../../..";
@@ -53,7 +55,34 @@ export default class State extends Namespace {
 	}
 
 	/**
-	 * Get a block by block Hash
+	 * Fetch blocks mined by the node. It is possible to
+	 * limit the results by specifying opts.limit to
+	 * a desired number.
+	 *
+	 * To support pagination, set
+	 * opts.lastHash to get only results after a specified
+	 * block hash.
+	 *
+	 * Given the possibility that a node may mined blocks
+	 * using different coinbase (and public key), use
+	 * opts.creatorPubKey to return blocks mined by a
+	 * specific public key (or account).
+	 *
+	 * @param {ArgMindedBlock} [opts={}]
+	 * @returns {Promise<MinedBlocksResult>}
+	 * @memberof State
+	 */
+	public getMinedBlock(opts: ArgMindedBlock = {}): Promise<MinedBlocksResult> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("state_getMinedBlock", opts)
+				.then(resolve)
+				.catch(reject);
+		});
+	}
+
+	/**
+	 * Get a block by block Hash.
 	 *
 	 * @param {string} blockHash The hash of the block.
 	 * @returns {Promise<Block>}

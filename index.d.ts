@@ -120,6 +120,26 @@ export interface Block {
 	transactions: Transaction[];
 }
 
+export interface ArgMindedBlock {
+	limit?: number;
+	lastHash?: string;
+	creatorPubKey?: string;
+}
+
+export interface MinedBlock {
+	number: string;
+	hash: string;
+	timestamp: number;
+	totalFees: string;
+	txCount: string;
+	creatorPubKey: string;
+}
+
+export interface MinedBlocksResult {
+	blocks: MinedBlock[];
+	hasMore: boolean;
+}
+
 export interface Header {
 	creatorPubKey: string;
 	difficulty: string;
