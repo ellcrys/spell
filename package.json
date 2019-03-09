@@ -1,6 +1,6 @@
 {
 	"name": "@ellcrys/spell",
-	"version": "0.1.11",
+	"version": "0.1.12",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
 	"types": "./index.d.ts",
@@ -10,7 +10,7 @@
 		"test": "mocha test",
 		"gen-docs": "typedoc --out docs ./src --exclude \"**/test/**/*.ts,**/play/**/*.ts\" --hideGenerator --name \"Spell Documentation\"",
 		"cover": "nyc mocha test"
-	},   
+	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/ellcrys/spell.js.git"
