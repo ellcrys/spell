@@ -77,7 +77,7 @@ describe("#State", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.state.getMinedBlock({});
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith("state_getMinedBlock", {});
+			expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
@@ -85,7 +85,7 @@ describe("#State", () => {
 			const mock = makeClientStub(new Error("bad thing"), 1234);
 			spell.state.getMinedBlock({}).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
-				expect(mock).to.have.been.calledWith("state_getMinedBlock", {});
+				expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
 				expect(err.message).to.be.eq("bad thing");
 				done();
 			});

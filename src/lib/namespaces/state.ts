@@ -75,7 +75,7 @@ export default class State extends Namespace {
 	public getMinedBlock(opts: ArgMindedBlock = {}): Promise<MinedBlocksResult> {
 		return new Promise((resolve, reject) => {
 			this.client
-				.call("state_getMinedBlock", opts)
+				.call("state_getMinedBlocks", opts)
 				.then(resolve)
 				.catch(reject);
 		});
