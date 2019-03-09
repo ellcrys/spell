@@ -72,7 +72,7 @@ export default class State extends Namespace {
 	 * @returns {Promise<MinedBlocksResult>}
 	 * @memberof State
 	 */
-	public getMinedBlock(opts: ArgMindedBlock = {}): Promise<MinedBlocksResult> {
+	public getMinedBlocks(opts: ArgMindedBlock = {}): Promise<MinedBlocksResult> {
 		return new Promise((resolve, reject) => {
 			this.client
 				.call("state_getMinedBlocks", opts)

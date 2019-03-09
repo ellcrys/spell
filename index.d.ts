@@ -770,7 +770,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<MinedBlocksResult>}
 	 * @memberof State
 	 */
-	public getMinedBlock(opts: ArgMindedBlock): Promise<MinedBlocksResult>;
+	public getMinedBlocks(opts: ArgMindedBlock): Promise<MinedBlocksResult>;
 
 	/**
 	 * Get a block by block Hash
