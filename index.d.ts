@@ -907,6 +907,32 @@ export declare class Node extends Namespace {
 	 * @memberof Node
 	 */
 	public isSyncing(): Promise<boolean>;
+
+	/**
+	 * Enable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public enableSync(): Promise<boolean>;
+
+	/**
+	 * Disable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public disableSync(): Promise<boolean>;
+
+	/**
+	 * Checks whether block synchronization
+	 * is enabled on the node.
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public isSyncEnabled(): Promise<boolean>;
+
 	/**
 	 * Get information about the node
 	 *

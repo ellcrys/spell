@@ -98,6 +98,64 @@ export default class Node extends Namespace {
 	}
 
 	/**
+	 * Enable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public enableSync(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_enableSync", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Disable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public disableSync(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_disableSync", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
+	 * Checks whether block synchronization
+	 * is enabled on the node.
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public isSyncEnabled(): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("node_isSyncEnabled", null)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
 	 * Get information about the node
 	 *
 	 * @returns {Promise<NodeInfo>}
