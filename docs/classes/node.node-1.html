@@ -117,10 +117,13 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#basic" class="tsd-kind-icon">basic</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#config" class="tsd-kind-icon">config</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#disablesync" class="tsd-kind-icon">disable<wbr>Sync</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#enablesync" class="tsd-kind-icon">enable<wbr>Sync</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#getsyncstat" class="tsd-kind-icon">get<wbr>Sync<wbr>Stat</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#gettransactionfrompool" class="tsd-kind-icon">get<wbr>Transaction<wbr>From<wbr>Pool</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#gettransactionstatus" class="tsd-kind-icon">get<wbr>Transaction<wbr>Status</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#info" class="tsd-kind-icon">info</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#issyncenabled" class="tsd-kind-icon">is<wbr>Sync<wbr>Enabled</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="node.node-1.html#issyncing" class="tsd-kind-icon">is<wbr>Syncing</a></li>
 							</ul>
 						</section>
@@ -139,7 +142,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L21">namespaces/node.ts:21</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L21">namespaces/node.ts:21</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -172,7 +175,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="namespace.namespace-1.html">Namespace</a>.<a href="namespace.namespace-1.html#client">client</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/namespace.ts#L14">namespaces/namespace.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/namespace.ts#L14">namespaces/namespace.ts:14</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -189,7 +192,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L145">namespaces/node.ts:145</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L203">namespaces/node.ts:203</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +220,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L125">namespaces/node.ts:125</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L183">namespaces/node.ts:183</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -235,6 +238,60 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="disablesync" class="tsd-anchor"></a>
+					<h3>disable<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">disable<wbr>Sync<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L125">namespaces/node.ts:125</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Disable block synchronization on the node</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Node</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="enablesync" class="tsd-anchor"></a>
+					<h3>enable<wbr>Sync</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">enable<wbr>Sync<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L106">namespaces/node.ts:106</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Enable block synchronization on the node</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Node</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getsyncstat" class="tsd-anchor"></a>
 					<h3>get<wbr>Sync<wbr>Stat</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -244,7 +301,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L67">namespaces/node.ts:67</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L67">namespaces/node.ts:67</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -273,7 +330,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L165">namespaces/node.ts:165</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L223">namespaces/node.ts:223</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -309,7 +366,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L46">namespaces/node.ts:46</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L46">namespaces/node.ts:46</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -350,7 +407,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L106">namespaces/node.ts:106</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L164">namespaces/node.ts:164</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -368,6 +425,34 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="issyncenabled" class="tsd-anchor"></a>
+					<h3>is<wbr>Sync<wbr>Enabled</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">is<wbr>Sync<wbr>Enabled<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L145">namespaces/node.ts:145</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Checks whether block synchronization
+									is enabled on the node.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>memberof</dt>
+									<dd><p>Node</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="issyncing" class="tsd-anchor"></a>
 					<h3>is<wbr>Syncing</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -377,7 +462,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/3552d55/src/lib/namespaces/node.ts#L87">namespaces/node.ts:87</a></li>
+									<li>Defined in <a href="https://github.com/ellcrys/spell.js/blob/106af17/src/lib/namespaces/node.ts#L87">namespaces/node.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -476,6 +561,12 @@
 								<a href="node.node-1.html#config" class="tsd-kind-icon">config</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="node.node-1.html#disablesync" class="tsd-kind-icon">disable<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="node.node-1.html#enablesync" class="tsd-kind-icon">enable<wbr>Sync</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="node.node-1.html#getsyncstat" class="tsd-kind-icon">get<wbr>Sync<wbr>Stat</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -486,6 +577,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="node.node-1.html#info" class="tsd-kind-icon">info</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="node.node-1.html#issyncenabled" class="tsd-kind-icon">is<wbr>Sync<wbr>Enabled</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="node.node-1.html#issyncing" class="tsd-kind-icon">is<wbr>Syncing</a>
