@@ -170,7 +170,7 @@ export interface Transaction {
 	nonce?: number;
 	senderPubKey?: string;
 	sig?: string;
-	timestamp?: number;
+	timestamp?: number | string;
 	to?: string;
 	type?: number;
 	value?: string;
