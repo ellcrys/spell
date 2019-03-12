@@ -73,7 +73,7 @@ export default class RPCClient {
 				// Decode the token to check whether it has expired.
 				// If expired, return SessionTokenExpired error
 				const decoded = jwt.decode(this.token, { complete: true });
-				const expUtc = moment((decoded as any).payload.exp).utc();
+				const expUtc = moment.unix((decoded as any).payload.exp);
 				if (expUtc.isBefore(moment().utc())) {
 					return reject(errors.SessionTokenExpired);
 				}
