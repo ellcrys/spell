@@ -830,6 +830,14 @@ export declare class State extends Namespace {
 	 */
 	public getAccountNonce(address: string): Promise<number>;
 	/**
+	 * Get a suggestion about the next nonce of an account.
+	 *
+	 * @param {string} address The address of the account.
+	 * @returns {Promise<number>}
+	 * @memberof State
+	 */
+	public suggestNonce(address: string): Promise<number>
+	/**
 	 * Get a transaction by its hash
 	 *
 	 * @param {string} txHash The transaction's hash

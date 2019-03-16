@@ -143,6 +143,31 @@ describe("#State", () => {
 		});
 	});
 
+	describe("#suggestNonce", () => {
+		const address = "e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61";
+
+		it("should return result on successful call", async () => {
+			const expectedResult = { header: { number: 789 } };
+			const mock = makeClientStub(null, expectedResult);
+			const result = await spell.state.suggestNonce(address);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_suggestNonce", address);
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const expectedResult = "account not found";
+			const mock = makeClientStub(new Error("account not found"), 1234);
+
+			spell.state.suggestNonce(address).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("state_suggestNonce", address);
+				expect(err.message).to.be.eq(expectedResult);
+				done();
+			});
+		});
+	});
+
 	describe("#getAccount", () => {
 		const address = "e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61";
 		it("should return result on successful call", async () => {

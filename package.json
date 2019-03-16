@@ -1,6 +1,6 @@
 {
 	"name": "@ellcrys/spell",
-	"version": "0.1.17",
+	"version": "0.1.18",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
 	"types": "./index.d.ts",

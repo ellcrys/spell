@@ -222,6 +222,26 @@ export default class State extends Namespace {
 	}
 
 	/**
+	 * Get a suggestion about the next nonce of an account.
+	 *
+	 * @param {string} address The address of the account.
+	 * @returns {Promise<number>}
+	 * @memberof State
+	 */
+	public suggestNonce(address: string): Promise<number> {
+		return new Promise((resolve, reject) => {
+			this.client
+				.call("state_suggestNonce", address)
+				.then((res) => {
+					return resolve(res);
+				})
+				.catch((err) => {
+					return reject(err);
+				});
+		});
+	}
+
+	/**
 	 * Get a transaction by its hash
 	 *
 	 * @param {string} txHash The transaction's hash
