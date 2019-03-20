@@ -217,9 +217,7 @@ describe("#TransactionBuilder", () => {
 					);
 
 					it("should successfully call finalize()", async () => {
-						makeClientStub(null, {
-							nonce: 2,
-						});
+						makeClientStub(null, 2);
 
 						const b = new WrappedTxBalanceBuilder(client);
 						delete testTx.nonce;
@@ -229,7 +227,7 @@ describe("#TransactionBuilder", () => {
 
 						const data = b.getData();
 						expect(data.timestamp).to.not.be.undefined;
-						expect(data.nonce).to.eq(3);
+						expect(data.nonce).to.eq(2);
 						expect(data.hash).to.not.undefined;
 						expect(data.sig).to.not.undefined;
 						expect(data.hash).to.eq(hash);

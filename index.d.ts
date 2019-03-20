@@ -120,6 +120,26 @@ export interface Block {
 	transactions: Transaction[];
 }
 
+export interface ArgMindedBlock {
+	limit?: number;
+	lastHash?: string;
+	creatorPubKey?: string;
+}
+
+export interface MinedBlock {
+	number: string;
+	hash: string;
+	timestamp: number;
+	totalFees: string;
+	txCount: string;
+	creatorPubKey: string;
+}
+
+export interface MinedBlocksResult {
+	blocks: MinedBlock[];
+	hasMore: boolean;
+}
+
 export interface Header {
 	creatorPubKey: string;
 	difficulty: string;
@@ -150,7 +170,7 @@ export interface Transaction {
 	nonce?: number;
 	senderPubKey?: string;
 	sig?: string;
-	timestamp?: number;
+	timestamp?: number | string;
 	to?: string;
 	type?: number;
 	value?: string;
@@ -731,6 +751,27 @@ export declare class State extends Namespace {
 	 * @memberof State
 	 */
 	public getBlock(num: number): Promise<Block>;
+
+	/**
+	 * Fetch blocks mined by the node. It is possible to
+	 * limit the results by specifying opts.limit to
+	 * a desired number.
+	 *
+	 * To support pagination, set
+	 * opts.lastHash to get only results after a specified
+	 * block hash.
+	 *
+	 * Given the possibility that a node may mined blocks
+	 * using different coinbase (and public key), use
+	 * opts.creatorPubKey to return blocks mined by a
+	 * specific public key (or account).
+	 *
+	 * @param {ArgMindedBlock} [opts={}]
+	 * @returns {Promise<MinedBlocksResult>}
+	 * @memberof State
+	 */
+	public getMinedBlocks(opts: ArgMindedBlock): Promise<MinedBlocksResult>;
+
 	/**
 	 * Get a block by block Hash
 	 *
@@ -788,6 +829,14 @@ export declare class State extends Namespace {
 	 * @memberof State
 	 */
 	public getAccountNonce(address: string): Promise<number>;
+	/**
+	 * Get a suggestion about the next nonce of an account.
+	 *
+	 * @param {string} address The address of the account.
+	 * @returns {Promise<number>}
+	 * @memberof State
+	 */
+	public suggestNonce(address: string): Promise<number>
 	/**
 	 * Get a transaction by its hash
 	 *
@@ -866,6 +915,32 @@ export declare class Node extends Namespace {
 	 * @memberof Node
 	 */
 	public isSyncing(): Promise<boolean>;
+
+	/**
+	 * Enable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public enableSync(): Promise<boolean>;
+
+	/**
+	 * Disable block synchronization on the node
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public disableSync(): Promise<boolean>;
+
+	/**
+	 * Checks whether block synchronization
+	 * is enabled on the node.
+	 *
+	 * @returns {Promise<boolean>}
+	 * @memberof Node
+	 */
+	public isSyncEnabled(): Promise<boolean>;
+
 	/**
 	 * Get information about the node
 	 *

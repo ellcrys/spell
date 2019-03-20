@@ -245,11 +245,11 @@ export class TxBalanceBuilder extends TxUtility {
 					return reject(errors.ClientNotInitialized);
 				}
 				try {
-					const acct = await this.client.call(
-						"state_getAccount",
+					const nonce = await this.client.call(
+						"state_suggestNonce",
 						this.data.from,
 					);
-					this.data.nonce = acct.nonce + 1;
+					this.data.nonce = nonce;
 				} catch (e) {
 					if (e.statusCode === 400) {
 						e.data = JSON.parse(e.data);

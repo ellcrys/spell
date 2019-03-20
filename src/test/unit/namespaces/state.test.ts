@@ -56,6 +56,42 @@ describe("#State", () => {
 		});
 	});
 
+	describe("#getMinedBlocks", () => {
+		it("should return result on successful call", async () => {
+			const expectedResult = {
+				blocks: [
+					{
+						creatorPubKey:
+							"48jQzKSZ5U1eH7azq7fjqsYCuT129cBMhByrjUQcfQjTTknkE3v",
+						hash:
+							"0x8d51a2c86874744d5c690f1bc789b375d7671bf75a45e913339da16350574cba",
+						number: "0x9",
+						timestamp: 1552074221,
+						totalFees: "0",
+						txCount: 0,
+					},
+				],
+				hasMore: false,
+			};
+
+			const mock = makeClientStub(null, expectedResult);
+			const result = await spell.state.getMinedBlocks({});
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const mock = makeClientStub(new Error("bad thing"), 1234);
+			spell.state.getMinedBlocks({}).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
+				expect(err.message).to.be.eq("bad thing");
+				done();
+			});
+		});
+	});
+
 	describe("#getBlockByHash", () => {
 		const blockHash =
 			"0x96aa8888b1d78e55faed2e196d7383a5e37bcdb119fa5fb977be3970c2599c7a";
@@ -101,6 +137,31 @@ describe("#State", () => {
 			spell.state.getAccountNonce(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getAccountNonce", address);
+				expect(err.message).to.be.eq(expectedResult);
+				done();
+			});
+		});
+	});
+
+	describe("#suggestNonce", () => {
+		const address = "e9aJ9NGEgQFLmViSpAz5XVsevn3vwskZ61";
+
+		it("should return result on successful call", async () => {
+			const expectedResult = { header: { number: 789 } };
+			const mock = makeClientStub(null, expectedResult);
+			const result = await spell.state.suggestNonce(address);
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("state_suggestNonce", address);
+			expect(result).to.be.deep.eq(expectedResult);
+		});
+
+		it("should return error and data when call returns an error", (done) => {
+			const expectedResult = "account not found";
+			const mock = makeClientStub(new Error("account not found"), 1234);
+
+			spell.state.suggestNonce(address).catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("state_suggestNonce", address);
 				expect(err.message).to.be.eq(expectedResult);
 				done();
 			});

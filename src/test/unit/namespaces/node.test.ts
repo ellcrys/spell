@@ -100,6 +100,66 @@ describe("#Node", () => {
 		});
 	});
 
+	describe(".isSyncEnabled", () => {
+		it("should return sync status", async () => {
+			const expected = false;
+			const mock = makeClientStub(null, expected);
+			const result = await spell.node.isSyncEnabled();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_isSyncEnabled", null);
+			expect(result).to.be.deep.eq(expected);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.isSyncEnabled().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_isSyncEnabled", null);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe(".disableSync", () => {
+		it("should return sync status", async () => {
+			const expected = false;
+			const mock = makeClientStub(null, expected);
+			const result = await spell.node.disableSync();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_disableSync", null);
+			expect(result).to.be.deep.eq(expected);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.disableSync().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_disableSync", null);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
+	describe(".enableSync", () => {
+		it("should return sync status", async () => {
+			const expected = false;
+			const mock = makeClientStub(null, expected);
+			const result = await spell.node.enableSync();
+			expect(mock).to.have.been.callCount(1);
+			expect(mock).to.have.been.calledWith("node_enableSync", null);
+			expect(result).to.be.deep.eq(expected);
+		});
+
+		it("should return 'error' when method returns error", async () => {
+			const mock = makeClientStub(new Error("bad method"), null);
+			spell.node.enableSync().catch((err) => {
+				expect(mock).to.have.been.callCount(1);
+				expect(mock).to.have.been.calledWith("node_enableSync", null);
+				expect(err.message).to.be.eq("bad method");
+			});
+		});
+	});
+
 	describe("#info", () => {
 		it("should call method", async () => {
 			const mock = makeClientStub(null, {});
@@ -165,10 +225,7 @@ describe("#Node", () => {
 			const mock = makeClientStub(null, expectedResult);
 			const result = await spell.node.getTransactionFromPool(txHash);
 			expect(mock).to.have.been.callCount(1);
-			expect(mock).to.have.been.calledWith(
-				"node_getTransactionFromPool",
-				txHash,
-			);
+			expect(mock).to.have.been.calledWith("node_getTransactionFromPool", txHash);
 			expect(result).to.be.deep.eq(expectedResult);
 		});
 
