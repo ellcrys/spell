@@ -2,7 +2,6 @@
  * @module Spell
  */
 
-const jsonrpc = require("yo-jsonrpc2");
 import { ConnectOptions } from "../..";
 import errors, { wrapErr } from "./errors";
 import Auth from "./namespaces/auth";
@@ -14,7 +13,7 @@ import Node from "./namespaces/node";
 import Pool from "./namespaces/pool";
 import RPC from "./namespaces/rpc";
 import State from "./namespaces/state";
-import RPCClient from "./rpcclient";
+import RPCClient, { Client } from "./rpcclient";
 /**
  * Spell provides access to a client
  * RPC functionalities.
@@ -129,26 +128,21 @@ export default class Spell {
 	 * @returns {Promise<RPCClient>} An initialized client
 	 * @memberof Spell
 	 */
+	// prettier-ignore
 	public provideClient(options: ConnectOptions): Promise<RPCClient> {
 		return new Promise((resolve, reject) => {
-			const client = jsonrpc.Client.$create(options.port, options.host);
-			client.call("rpc_echo", "hi", options, (err: any, res: any) => {
-				if (err) {
-					return reject(errors.ClientConnect);
-				}
-
+			const client = Client.fromOptions(options);
+			client.call("rpc_echo", { msg: "hi" }, (err: any, res: any) => {
+				if (err) { return reject(errors.ClientConnect); }
 				this.rpcClient.client = client;
 				this.rpcClient.clientOpts = options;
 
 				// Attempt to request for a session token from the node
 				// if username and password are provided
 				if (options.username && options.password) {
-					this.authenticate(options.username, options.password)
-						.then(() => {
-							return resolve(this.rpcClient);
-						})
-						.catch(reject);
-					return;
+					return this.authenticate(options.username, options.password).then(() => {
+						return resolve(this.rpcClient);
+					}).catch(reject);
 				}
 
 				return resolve(this.rpcClient);
@@ -173,8 +167,11 @@ export default class Spell {
 					this.rpcClient.setToken(token);
 					return resolve(token);
 				})
-				.catch((err: Error) => {
-					return reject(wrapErr(errors.AuthError, err.message));
+				.catch((err: any) => {
+					const customErr = wrapErr(errors.AuthError, err.message);
+					customErr.data = err.data;
+					customErr.statusCode = err.statusCode;
+					return reject(customErr);
 				});
 		});
 	}

@@ -36,7 +36,6 @@ export default class Auth extends Namespace {
 			if (!username || !password) {
 				return reject(new Error("Username and password are required"));
 			}
-
 			this.client
 				.call("admin_auth", { username, password })
 				.then((token) => {

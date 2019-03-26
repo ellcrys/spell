@@ -2,7 +2,7 @@ import chai = require("chai");
 import Decimal from "decimal.js";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
-import { HttpCallOption, Transaction } from "../../../..";
+import { Transaction } from "../../../..";
 import { Address, PrivateKey } from "../../../lib";
 import {
 	NumDecimals,
@@ -24,7 +24,7 @@ describe("#TransactionBuilder", () => {
 	let testTx: Transaction;
 
 	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+		return sinon.stub(client.client, "call" as never).callsArgWith(2, err, resp);
 	}
 
 	class WrappedTxBalanceBuilder extends TxBalanceBuilder {
@@ -49,12 +49,7 @@ describe("#TransactionBuilder", () => {
 		spell = new Spell();
 		client = spell.rpcClient;
 		client.client = {
-			call: (
-				method: string,
-				params: any,
-				option: HttpCallOption,
-				cb: (err: any, res: any) => {},
-			): any => {
+			call: (method: string, params: any, cb: (err: any, res: any) => {}): any => {
 				cb(null, null);
 			},
 		};
