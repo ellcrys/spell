@@ -1,7 +1,6 @@
 import chai = require("chai");
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
-import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
 const expect = chai.expect;
@@ -11,20 +10,15 @@ describe("#State", () => {
 	let spell: Spell;
 	let client: RPCClient;
 
-	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+	function stubClient(err: Error | null, resp: any) {
+		return sinon.stub(client.client, "call" as never).callsArgWith(2, err, resp);
 	}
 
 	beforeEach((done) => {
 		spell = new Spell();
 		client = spell.rpcClient;
 		client.client = {
-			call: (
-				method: string,
-				params: any,
-				option: HttpCallOption,
-				cb: (err: any, res: any) => {},
-			): any => {
+			call: (method: string, params: any, cb: (err: any, res: any) => {}): any => {
 				cb(null, null);
 			},
 		};
@@ -35,7 +29,7 @@ describe("#State", () => {
 		it("should return result on successful call", async () => {
 			const blockNumber = 1;
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getBlock(blockNumber);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getBlock", blockNumber);
@@ -44,7 +38,7 @@ describe("#State", () => {
 
 		it("should return error and data when call returns an error", (done) => {
 			const blockNumber = 1;
-			const mock = makeClientStub(new Error("block unknown"), 1234);
+			const mock = stubClient(new Error("block unknown"), 1234);
 
 			spell.state.getBlock(blockNumber).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
@@ -74,7 +68,7 @@ describe("#State", () => {
 				hasMore: false,
 			};
 
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getMinedBlocks({});
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
@@ -82,7 +76,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("bad thing"), 1234);
+			const mock = stubClient(new Error("bad thing"), 1234);
 			spell.state.getMinedBlocks({}).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getMinedBlocks", {});
@@ -98,7 +92,7 @@ describe("#State", () => {
 
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getBlockByHash(blockHash);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getBlockByHash", blockHash);
@@ -106,7 +100,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("block unknown"), 1234);
+			const mock = stubClient(new Error("block unknown"), 1234);
 
 			spell.state.getBlockByHash(blockHash).catch((err) => {
 				expect(err.message).to.be.eq("block unknown");
@@ -123,7 +117,7 @@ describe("#State", () => {
 
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 789 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getAccountNonce(address);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getAccountNonce", address);
@@ -132,7 +126,7 @@ describe("#State", () => {
 
 		it("should return error and data when call returns an error", (done) => {
 			const expectedResult = "account not found";
-			const mock = makeClientStub(new Error("account not found"), 1234);
+			const mock = stubClient(new Error("account not found"), 1234);
 
 			spell.state.getAccountNonce(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
@@ -148,7 +142,7 @@ describe("#State", () => {
 
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 789 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.suggestNonce(address);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_suggestNonce", address);
@@ -157,7 +151,7 @@ describe("#State", () => {
 
 		it("should return error and data when call returns an error", (done) => {
 			const expectedResult = "account not found";
-			const mock = makeClientStub(new Error("account not found"), 1234);
+			const mock = stubClient(new Error("account not found"), 1234);
 
 			spell.state.suggestNonce(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
@@ -179,7 +173,7 @@ describe("#State", () => {
 					type: 0,
 				},
 			};
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getAccount(address);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getAccount", address);
@@ -187,7 +181,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("account not found"), 1234);
+			const mock = stubClient(new Error("account not found"), 1234);
 			spell.state.getAccount(address).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getAccount", address);
@@ -207,7 +201,7 @@ describe("#State", () => {
 					totalDifficulty: "0x13ce7c2312e",
 				},
 			};
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.state.getBestChain();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getBestChain", null);
@@ -224,7 +218,7 @@ describe("#State", () => {
 				},
 			};
 
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 
 			spell.state.getBestChain().then((res: any) => {
 				expect(mock).to.have.been.callCount(1);
@@ -251,7 +245,7 @@ describe("#State", () => {
 					},
 				],
 			};
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getBranches();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getBranches", null);
@@ -263,7 +257,7 @@ describe("#State", () => {
 				header: [],
 			};
 
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 
 			spell.state.getBranches().then((res: any) => {
 				expect(mock).to.have.been.calledWith("state_getBranches", null);
@@ -282,7 +276,7 @@ describe("#State", () => {
 					totalDifficulty: "0x13d06685d7b",
 				},
 			};
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getDifficulty();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getDifficulty", null);
@@ -290,7 +284,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("invalid request"), 1234);
+			const mock = stubClient(new Error("invalid request"), 1234);
 			spell.state.getDifficulty().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getDifficulty", null);
@@ -305,7 +299,7 @@ describe("#State", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
 
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getOrphans();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getOrphans", null);
@@ -313,7 +307,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.getOrphans().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getOrphans", null);
@@ -326,7 +320,7 @@ describe("#State", () => {
 	describe("#getReOrgs", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getReOrgs();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getReOrgs", null);
@@ -334,7 +328,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.getReOrgs().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getReOrgs", null);
@@ -348,7 +342,7 @@ describe("#State", () => {
 		const txHash = "eoxjdjdjdnd";
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getTransaction(txHash);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getTransaction", txHash);
@@ -356,7 +350,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.getTransaction(txHash).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getTransaction", txHash);
@@ -369,7 +363,7 @@ describe("#State", () => {
 	describe("#listAccounts", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.listAccounts();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_listAccounts", null);
@@ -377,7 +371,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.listAccounts().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_listAccounts", null);
@@ -391,7 +385,7 @@ describe("#State", () => {
 		const numOfResult = 2;
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.listTopAccounts(numOfResult);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_listTopAccounts", numOfResult);
@@ -399,7 +393,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.listTopAccounts(2).catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith(
@@ -415,7 +409,7 @@ describe("#State", () => {
 	describe("#getTipBlock", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult = { header: { number: 1 } };
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result: any = await spell.state.getTipBlock();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("state_getTipBlock", null);
@@ -423,7 +417,7 @@ describe("#State", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error encountered"), 1234);
+			const mock = stubClient(new Error("error encountered"), 1234);
 			spell.state.getTipBlock().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("state_getTipBlock", null);

@@ -2,7 +2,6 @@ import chai = require("chai");
 import { describe } from "mocha";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
-import { HttpCallOption } from "../../../..";
 import RPCClient from "../../../lib/rpcclient";
 import Spell from "../../../lib/spell";
 const expect = chai.expect;
@@ -12,20 +11,15 @@ describe("#Logger", () => {
 	let spell: Spell;
 	let client: RPCClient;
 
-	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+	function stubClient(err: Error | null, resp: any) {
+		return sinon.stub(client.client, "call" as never).callsArgWith(2, err, resp);
 	}
 
 	beforeEach((done) => {
 		spell = new Spell();
 		client = spell.rpcClient;
 		client.client = {
-			call: (
-				method: string,
-				params: any,
-				option: HttpCallOption,
-				cb: (err: any, res: any) => {},
-			): any => {
+			call: (method: string, params: any, cb: (err: any, res: any) => {}): any => {
 				cb(null, null);
 			},
 		};
@@ -35,7 +29,7 @@ describe("#Logger", () => {
 	describe("#debugLogger", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult: boolean = true;
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.logger.debugLogger();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("logger_debug", null);
@@ -43,7 +37,7 @@ describe("#Logger", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error setting debug logger"), 1234);
+			const mock = stubClient(new Error("error setting debug logger"), 1234);
 
 			spell.logger.debugLogger().catch((err) => {
 				expect(mock).to.have.been.callCount(1);
@@ -57,7 +51,7 @@ describe("#Logger", () => {
 	describe("#debugLogger", () => {
 		it("should return result on successful call", async () => {
 			const expectedResult: boolean = true;
-			const mock = makeClientStub(null, expectedResult);
+			const mock = stubClient(null, expectedResult);
 			const result = await spell.logger.defaultLogger();
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("logger_default", null);
@@ -65,7 +59,7 @@ describe("#Logger", () => {
 		});
 
 		it("should return error and data when call returns an error", (done) => {
-			const mock = makeClientStub(new Error("error setting default logger"), 1234);
+			const mock = stubClient(new Error("error setting default logger"), 1234);
 
 			spell.logger.defaultLogger().catch((err) => {
 				expect(mock).to.have.been.callCount(1);

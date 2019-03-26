@@ -2,7 +2,7 @@ import chai = require("chai");
 import Decimal from "decimal.js";
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
-import { HttpCallOption, Transaction } from "../../../..";
+import { Transaction } from "../../../..";
 import { PrivateKey } from "../../../lib";
 import { TxBalanceBuilder } from "../../../lib/builders/transaction_builder";
 import RPCClient from "../../../lib/rpcclient";
@@ -16,20 +16,15 @@ describe("#Ell", () => {
 	let pk: PrivateKey;
 	let testTx: Transaction;
 
-	function makeClientStub(err: Error | null, resp: any) {
-		return sinon.stub(client.client, "call" as never).callsArgWith(3, err, resp);
+	function stubClient(err: Error | null, resp: any) {
+		return sinon.stub(client.client, "call" as never).callsArgWith(2, err, resp);
 	}
 
 	beforeEach((done) => {
 		spell = new Spell();
 		client = spell.rpcClient;
 		client.client = {
-			call: (
-				method: string,
-				params: any,
-				option: HttpCallOption,
-				cb: (err: any, res: any) => {},
-			): any => {
+			call: (method: string, params: any, cb: (err: any, res: any) => {}): any => {
 				cb(null, null);
 			},
 		};
@@ -54,14 +49,14 @@ describe("#Ell", () => {
 
 	describe(".send", () => {
 		it("should call method ell_send", async () => {
-			const mock = makeClientStub(null, {});
+			const mock = stubClient(null, {});
 			await spell.ell.send(testTx);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("ell_send", testTx);
 		});
 
 		it("should return 'error' when method returns error", async () => {
-			const mock = makeClientStub(new Error("bad method"), null);
+			const mock = stubClient(new Error("bad method"), null);
 			spell.ell.send(testTx).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("ell_send", testTx);
@@ -72,7 +67,7 @@ describe("#Ell", () => {
 
 	describe(".send", () => {
 		it("should call method ell_getBalance and return Decimal", async () => {
-			const mock = makeClientStub(null, "10.20");
+			const mock = stubClient(null, "10.20");
 			const result = await spell.ell.getBalance(pk.toAddress().toString());
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith(
@@ -83,7 +78,7 @@ describe("#Ell", () => {
 		});
 
 		it("should return 'error' when method returns error", async () => {
-			const mock = makeClientStub(new Error("bad method"), null);
+			const mock = stubClient(new Error("bad method"), null);
 			spell.ell.getBalance(pk.toAddress().toString()).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith(
@@ -104,14 +99,14 @@ describe("#Ell", () => {
 	describe(".sendRaw", () => {
 		const encodedTx: string = "0xdsdhdjd";
 		it("should call method ell_send", async () => {
-			const mock = makeClientStub(null, "111");
+			const mock = stubClient(null, "111");
 			await spell.ell.sendRaw(encodedTx);
 			expect(mock).to.have.been.callCount(1);
 			expect(mock).to.have.been.calledWith("ell_sendRaw", encodedTx);
 		});
 
 		it("should return 'error' when method returns error", async () => {
-			const mock = makeClientStub(new Error("bad method"), null);
+			const mock = stubClient(new Error("bad method"), null);
 			spell.ell.sendRaw(encodedTx).catch((err: Error) => {
 				expect(mock).to.have.been.callCount(1);
 				expect(mock).to.have.been.calledWith("ell_sendRaw", encodedTx);

@@ -2,24 +2,22 @@ import chai = require("chai");
 import jwt = require("jsonwebtoken");
 import sinon = require("sinon");
 import sinonChai = require("sinon-chai");
-import { HttpCallOption } from "../../..";
 import RPCClient from "../../lib/rpcclient";
 const expect = chai.expect;
 chai.use(sinonChai);
 
 describe("#RPCClient", () => {
 	describe(".constructor", () => {
-		it("should set member:client to undefined when initialized with no client", () => {
+		it("should set `client` to undefined when initialized with no client", () => {
 			const c = new RPCClient();
 			expect(c.client).to.be.undefined;
 		});
 
-		it("should set member:client to the client argument passed", () => {
+		it("should set `client` to the client argument passed", () => {
 			const c = new RPCClient({
 				call: (
 					method: string,
 					params: any,
-					option: HttpCallOption,
 					cb: (err: any, res: any) => {},
 				): any => {
 					return null;
@@ -41,10 +39,10 @@ describe("#RPCClient", () => {
 		describe("with client", () => {
 			let client: RPCClient;
 
-			function makeClientStub(err: Error | null, resp: any) {
+			function stubClient(err: Error | null, resp: any) {
 				return sinon
 					.stub(client.client, "call" as never)
-					.callsArgWith(3, err, resp);
+					.callsArgWith(2, err, resp);
 			}
 
 			beforeEach((done) => {
@@ -53,7 +51,6 @@ describe("#RPCClient", () => {
 					call: (
 						method: string,
 						params: any,
-						option: HttpCallOption,
 						cb: (err: any, res: any) => {},
 					): any => {
 						cb(null, null);
@@ -73,7 +70,7 @@ describe("#RPCClient", () => {
 			});
 
 			it("should return error when rpc method call fails", (done) => {
-				makeClientStub(new Error("bad thing"), null);
+				stubClient(new Error("bad thing"), null);
 				client.call("", {}).catch((err) => {
 					expect(err.message).to.eq("bad thing");
 					done();
@@ -81,7 +78,7 @@ describe("#RPCClient", () => {
 			});
 
 			it("should return successfully when rpc method call succeeds", (done) => {
-				makeClientStub(null, { result: 2 });
+				stubClient(null, { result: 2 });
 				client.call("", {}).then((res) => {
 					expect(res).to.deep.eq({ result: 2 });
 					done();

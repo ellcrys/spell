@@ -95,13 +95,8 @@ export interface HttpCallOption {
 	id: number;
 }
 
-export interface JSONRPCCaller {
-	call(
-		method: string,
-		params: any,
-		option: HttpCallOption,
-		cb: (err: any, res: any) => {},
-	): any;
+export interface IClient {
+	call(method: string, params: any, cb?: (err: any, res: any) => void): any;
 }
 
 export interface ConnectOptions {
@@ -688,10 +683,10 @@ export declare class RPCClient {
 	/**
 	 * client references the JSON-RPC 2.0 client
 	 *
-	 * @type {JSONRPCCaller}
+	 * @type {IClient}
 	 * @memberof RPCClient
 	 */
-	public client?: JSONRPCCaller;
+	public client?: IClient;
 	/**
 	 * clientOpts contains the options to pass
 	 * to the client call request
@@ -716,7 +711,7 @@ export declare class RPCClient {
 	 * @param {*} client The underlying JSON-RPC 2.0 client
 	 * @memberof RPCClient
 	 */
-	constructor(client?: JSONRPCCaller);
+	constructor(client?: IClient);
 	/**
 	 * Call a RPC method
 	 *
@@ -836,7 +831,7 @@ export declare class State extends Namespace {
 	 * @returns {Promise<number>}
 	 * @memberof State
 	 */
-	public suggestNonce(address: string): Promise<number>
+	public suggestNonce(address: string): Promise<number>;
 	/**
 	 * Get a transaction by its hash
 	 *
@@ -1321,4 +1316,50 @@ export declare class HDKey {
 	 * @memberof HDKey
 	 */
 	public privateKey(): PrivateKey;
+}
+
+/**
+ * Client handles connection, authentication and
+ * invocation of methods of an RPC service
+ *
+ * @export
+ * @class Client
+ */
+export declare class Client {
+	/**
+	 * Create a Client from the given options
+	 *
+	 * @static
+	 * @param {ConnectOptions} opts
+	 * @returns {Client}
+	 * @memberof Client
+	 */
+	public static fromOptions(opts: ConnectOptions): Client;
+	/**
+	 * Connection options
+	 *
+	 * @private
+	 * @type {ConnectOptions}
+	 * @memberof Client
+	 */
+	private opts;
+	/**
+	 * Create JSON-RPC 2.0 request
+	 *
+	 * @private
+	 * @param {string} method
+	 * @param {string} id
+	 * @param {*} params
+	 * @memberof Client
+	 */
+	private makeRequest;
+	/**
+	 * Call an RPC method
+	 *
+	 * @param {string} method The method to be called
+	 * @param {any} params The parameter to pass to the method
+	 * @param {(err: any, result: any) => void} cb Callback to be invoked on success/failure
+	 * @memberof Client
+	 */
+	public call(method: string, params: any, cb: (err: any, result: any) => void): void;
 }
