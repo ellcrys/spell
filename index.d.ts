@@ -96,6 +96,7 @@ export interface HttpCallOption {
 }
 
 export interface IClient {
+	bearerToken?: string;
 	call(method: string, params: any, cb?: (err: any, res: any) => void): any;
 }
 
@@ -1335,6 +1336,15 @@ export declare class Client {
 	 * @memberof Client
 	 */
 	public static fromOptions(opts: ConnectOptions): Client;
+
+	/**
+	 * Bearer token to use
+	 *
+	 * @type {string}
+	 * @memberof Client
+	 */
+	public bearerToken: string;
+
 	/**
 	 * Connection options
 	 *

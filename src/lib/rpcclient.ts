@@ -79,18 +79,23 @@ export default class RPCClient {
 				if (expUtc.isBefore(moment().utc())) {
 					return reject(errors.SessionTokenExpired);
 				}
-
-				this.clientOpts.bearerToken = this.token;
 			}
 
 			// prettier-ignore
-			this.client.call(method, params, (err: any, res: any): any => {
-				if (err) {
-					if (err.statusCode === 401) { return reject(errors.AuthRequired); }
-					return reject(err);
-				}
-				return resolve(res);
-			});
+			this.client.bearerToken = this.token;
+			this.client.call(
+				method,
+				params,
+				(err: any, res: any): any => {
+					if (err) {
+						if (err.statusCode === 401) {
+							return reject(errors.AuthRequired);
+						}
+						return reject(err);
+					}
+					return resolve(res);
+				},
+			);
 		});
 	}
 
@@ -128,6 +133,14 @@ export class Client {
 	}
 
 	/**
+	 * Bearer token to use
+	 *
+	 * @type {string}
+	 * @memberof Client
+	 */
+	public bearerToken: string = "";
+
+	/**
 	 * Connection options
 	 *
 	 * @private
@@ -147,29 +160,39 @@ export class Client {
 	public call(method: string, params: any, cb: (err: any, result: any) => void) {
 		const id = uuidv4();
 		const obj = this.makeRequest(method, id, params);
-		// prettier-ignore
-		request({
-			method: "POST",
+		const opts: request.Options = {
 			uri: {
-				host: this.opts.host,
+				hostname: this.opts.host,
 				port: this.opts.port.toString(),
 				protocol: this.opts.https ? "https:" : "http:",
 				path: this.opts.path,
 			},
 			timeout: 15000,
 			json: obj,
-		}, (err, resp, body) => {
-			if (err) {
-				return cb(err, null);
-			} else if ( resp.statusCode !== 200) {
-				const msg = JSON.stringify(resp.body);
-				const customErr: any = new Error(msg);
-				customErr.data = msg;
-				customErr.statusCode = resp.statusCode;
-				return cb(customErr, null);
-			}
-			return cb(null, body.result);
-		});
+		};
+
+		// Use bearer token if provided
+		if (this.bearerToken) {
+			opts.auth = {
+				bearer: this.bearerToken,
+			};
+		}
+
+		// prettier-ignore
+		request.post(opts,
+			(err, resp, body) => {
+				if (err) {
+					return cb(err, null);
+				} else if (resp.statusCode !== 200) {
+					const msg = JSON.stringify(resp.body);
+					const customErr: any = new Error(msg);
+					customErr.data = msg;
+					customErr.statusCode = resp.statusCode;
+					return cb(customErr, null);
+				}
+				return cb(null, body.result);
+			},
+		);
 	}
 
 	/**
