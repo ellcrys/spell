@@ -133,7 +133,13 @@ export default class Spell {
 		return new Promise((resolve, reject) => {
 			const client = Client.fromOptions(options);
 			client.call("rpc_echo", { msg: "hi" }, (err: any, res: any) => {
-				if (err) { return reject(errors.ClientConnect); }
+				if (err) {
+					const customErr = wrapErr(errors.ClientConnect, err.message);
+					customErr.data = err.data;
+					customErr.statusCode = err.statusCode;
+					return reject(customErr);
+				}
+
 				this.rpcClient.client = client;
 				this.rpcClient.clientOpts = options;
 
@@ -152,7 +158,6 @@ export default class Spell {
 
 	/**
 	 * Request for a session token from the node.
-	 *
 	 *
 	 * @param {string} username The node's RPC username
 	 * @param {string} password The node's RPC password
