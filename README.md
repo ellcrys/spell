@@ -114,6 +114,6 @@ npm run test					// Runs all tests
 
 ## Useful Links
 
-[Discord Community](https://discord.gg/QH2n2hT)
-[Ellcrys Documentation](https://docs.ellcrys.org)
-[Gitter](https://gitter.im/ellnet)
+-   [Discord Community](https://discord.gg/QH2n2hT)
+-   [Gitter](https://gitter.im/ellnet)
+-   [Ellcrys Documentation](https://docs.ellcrys.org)
