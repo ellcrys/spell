@@ -49,7 +49,7 @@ Once `spell` has been initialized with a valid node connection information. You 
 
 ```javascript
 spell.ell.getBalance("e2763...").then((bal) => {
-	console.log(bal); // "20.00"
+    console.log(bal); // "20.00"
 });
 ```
 
