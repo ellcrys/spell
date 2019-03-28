@@ -1,84 +1,119 @@
-# Spell
+# Spell - Ellcrys Javascript API
 
-The official Node.js binding for the Elld JSON-RPC 2.0 Service! This library provides the ability to query or mutate the state and configuration an Ellcrys blockchain client.
+Spell is a Javascript API which provides access to the JSON-RPC 2.0 API service exposed by ELLD node. It allows a user to perform actions such as constructing and sending transactions, fetching transactions and blocks and managing a local or remote Ellcrys node. You need to have access to a running Ellcrys node to use this library.
+
+The full documentation can be found [here](https://ellcrys.github.io/spell)
 
 ## Installation
 
-```
+### Node
+
+```sh
 npm install @ellcrys/spell
 ```
 
-## Initialization
+### Yarn
 
-To begin using the client, you must first create a Spell instance and provide connection information that will enable the client connect to the JSON-RPC 2.0 service.
+```sh
+yarn add @ellcrys/spell
+```
 
-```js
+## Usage
+
+To begin using the library, you must first create a Spell instance and provide connection information that will enable the client connect to the JSON-RPC 2.0 service.
+
+```javascript
+import Spell from "@ellcrys/spell";
+
 // Create a Spell Instance
 const spell = new Spell();
 
-// Configure the client to be able
-// to make calls to a node's RPC service
-spell.provideClient({
-	// The RPC address of an Elld node
+// Provide connection options to a local or remote Ellcrys node
+const resp = spell.provideClient({
 	host: "127.0.0.1",
-	// The RPC port of an Elld node
 	port: 8999,
-	// Optional: RPC username to access private endpoints
-	username: "admin",
-	// Optional: RPC password to access private endpoints
-	password: "secret",
+	username: "admin", // optional
+	password: "secret", // optional
+});
+
+// spell.provideClient returns a promise that is resolved
+// when the node responds to an initial ping message.
+resp.then(async () => {
+	// do something with spell
+	const basic = await spell.node.basic();
+	console.log(basic);
+}).catch(console.error);
+```
+
+Once `spell` has been initialized with a valid node connection information. You can start accessing the RPC methods. You can get the balance of an account like this:
+
+```javascript
+spell.ell.getBalance("e2763...").then((bal) => {
+	console.log(bal); // "20.00"
 });
 ```
 
-`provideClient` will attempt to call `rpc_echo` to test the connection; It will return a rejected promise if it failed to successfully reach the node.
+## Calling RPC Methods
 
-## Calling An RPC Method
+Spell closely replicates the same namespace-based structure used to organize the JSON-RPC 2.0 methods of an Ellcrys node. For example, RPC methods are named and addressed in the following format:
 
-Spell closely replicates the same namespace-based structure used to organize the RPC methods in Elld. For example, RPC methods on Elld are named and addressed in the following format:
-
-```
+```txt
 {namespace}_{method}
-
 Where:
- - namespace: The group name a method belongs to
+ - namespace: The group name a method belongs to.
  - method: Is the name of the method.
 ```
 
-All supported namespaces can be accessed from the spell instance like this:
+A method `getBalance` of a namespace `ell` can be accessed like this:
 
-```js
-spell.namespace.method();
+```javascript
+spell.ell.getBalance(...)
 ```
 
-## Get A Node's Basic Information
+## TypeScript Support
 
-We will demonstrate how to call an RPC method by getting the basic information of the provisioned node.
+The library includes TypeScript types within it. You can use spell like this:
 
-```js
-// Get a node's basic information. The JSON-RPC 2.0 method is
-// `node_basic`
-spell.node.basic();
-
-// Output:
-/*
-{
-	buildCommit: '599bc716098869a0d2a15431447c65823c207e3f',
-	buildDate: '2019-01-19T21:57:50Z',
-	buildVersion: '0.1.6-alpha.2',
-	goVersion: 'go1.10.4',
-	id: '12D3KooWKAEhd4DXGPeN71FeSC1ih86Ym2izpoPueaCrME8xu8UM',
-	mode: 'production',
-	name: 'deeply-suitable-fowl',
-	netVersion: '0001',
-	syncing: false,
-	tipBlockDifficulty: '0x215915d',
-	tipBlockHash: '0x1cf3109273187d2c42ad077fc7b491eae8a4fd1878ef9ec74f0d12d4843a9168',
-	tipBlockHeight: '0x45d9',
-	tipBlockTotalDifficulty: '0xb60329599c'
-}
-*/
+```javascript
+import Spell from "@ellcrys/spell";
 ```
 
 ## Documentation
 
-See API Reference [here](https://ellcrys.github.io/spell)
+Find the complete documentation [here](https://ellcrys.github.io/spell)
+
+## Contributing
+
+We appreciate contributions. They help move us faster and improve the quality of the project. Please follow this steps to contribute:
+
+-   Fork this repository and clone it locally.
+    `git clone https://github.com/ellcrys/spell`
+-   Add the remote upstream
+    `git remote add upstream git://github.com/ellcrys/spell`
+-   Pull upstream changes
+    `git fetch upstream`
+-   Create a new branch to work on. Create your branch from `dev`.
+-   Add your changes, add or adapt tests, run linter and generate doc.
+-   Push your branch to your fork.
+-   Create a pull request targeting the `dev` branch.
+
+### Requirements
+
+-   [Node.js](https://nodejs.org/)
+-   npm
+-   Typescript
+
+### Commands
+
+```sh
+npm i   						// Install dependencies
+npm run ts-watch 			// Watch and compile TypeScript files into `lib`
+npm run gen-docs				// Re-generate documentation
+npm run test					// Runs all tests
+```
+
+## Useful Links
+
+[Discord Community](https://discord.gg/QH2n2hT)
+[Ellcrys Documentation](https://docs.ellcrys.org)
+[Gitter](https://gitter.im/ellnet)
