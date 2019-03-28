@@ -49,7 +49,7 @@ Once `spell` has been initialized with a valid node connection information. You 
 
 ```javascript
 spell.ell.getBalance("e2763...").then((bal) => {
-    console.log(bal); // "20.00"
+	console.log(bal); // "20.00"
 });
 ```
 
@@ -106,10 +106,10 @@ We appreciate contributions. They help move us faster and improve the quality of
 ### Commands
 
 ```sh
-npm i   						// Install dependencies
-npm run ts-watch 			// Watch and compile TypeScript files into `lib`
-npm run gen-docs				// Re-generate documentation
-npm run test					// Runs all tests
+npm i                 // Install dependencies
+npm run ts-watch      // Watch and compile TypeScript files into `lib`
+npm run gen-docs      // Re-generate documentation
+npm run test          // Runs all tests
 ```
 
 ## Useful Links
