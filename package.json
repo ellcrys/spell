@@ -1,6 +1,6 @@
 {
 	"name": "@ellcrys/spell",
-	"version": "0.1.22",
+	"version": "0.1.23",
 	"description": "The official JavaScript library for Ellcrys",
 	"main": "lib/index.js",
 	"types": "./index.d.ts",
@@ -37,7 +37,8 @@
 		"sha256": "^0.2.0",
 		"sha3": "^2.0.0",
 		"tweetnacl": "^1.0.1",
-		"uuid": "^3.3.2"
+		"uuid": "^3.3.2",
+		"js-yaml": ">=3.13.1"
 	},
 	"devDependencies": {
 		"@types/bignum": "0.0.29",
