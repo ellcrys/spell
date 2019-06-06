@@ -38,7 +38,8 @@
 		"sha3": "^2.0.0",
 		"tweetnacl": "^1.0.1",
 		"uuid": "^3.3.2",
-		"js-yaml": ">=3.13.1"
+		"js-yaml": ">=3.13.1",
+		"handlebars": ">=4.1.2"
 	},
 	"devDependencies": {
 		"@types/bignum": "0.0.29",
